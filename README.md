@@ -1,4 +1,4 @@
-# we-eat
+# Is This Vegan?: An Instant Guide to Ingredient Lists
 My dietary cross-platform mobile app!
 
 My vision is to provide mobile devices with an application that can determine if a product 
