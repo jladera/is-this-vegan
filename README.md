@@ -7,4 +7,4 @@ medical conditions or ethical beliefs.
 
 Link to Trello: https://trello.com/b/sT0WSCnP/is-this-vegan
 
-Copyright © 2020 jladera (SIS by JJLTech)
+Copyright © 2020 XLNS by jladera
