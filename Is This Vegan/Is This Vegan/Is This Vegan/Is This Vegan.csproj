@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -11,7 +11,55 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="SharedMedia\240 PX home.png" />
+    <None Remove="SharedMedia\logo icon 2.png" />
+    <None Remove="SharedMedia\logo icon 3.png" />
+    <None Remove="SharedMedia\logo icon.png" />
+    <None Remove="SharedMedia\Neon_Circle.png" />
+    <None Remove="SharedMedia\skinny-house.png" />
+    <None Remove="SharedMedia\Stylized-logo-V1.png" />
+    <None Remove="SharedMedia\thumbs down.png" />
+    <None Remove="SharedMedia\thumbs up.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="SharedMedia\240 PX home.png" />
+    <EmbeddedResource Include="SharedMedia\logo icon 2.png" />
+    <EmbeddedResource Include="SharedMedia\logo icon 3.png" />
+    <EmbeddedResource Include="SharedMedia\logo icon.png" />
+    <EmbeddedResource Include="SharedMedia\Neon_Circle.png" />
+    <EmbeddedResource Include="SharedMedia\skinny-house.png" />
+    <EmbeddedResource Include="SharedMedia\Stylized-logo-V1.png" />
+    <EmbeddedResource Include="SharedMedia\thumbs down.png" />
+    <EmbeddedResource Include="SharedMedia\thumbs up.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp" Version="1.68.1.1" />
+    <PackageReference Include="SkiaSharp.Views" Version="1.68.1.1" />
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.1.1" />
     <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Drawing.Common">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v1.0\Facades\System.Drawing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Windows.Foundation.UniversalApiContract">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Windows Kits\10\References\10.0.18362.0\Windows.Foundation.UniversalApiContract\8.0.0.0\Windows.Foundation.UniversalApiContract.winmd</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform.Android">
+      <HintPath>..\..\..\..\..\..\..\..\Microsoft\Xamarin\NuGet\xamarin.forms\4.4.0.991265\lib\MonoAndroid90\Xamarin.Forms.Platform.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform.UAP">
+      <HintPath>..\..\..\..\..\..\..\..\Microsoft\Xamarin\NuGet\xamarin.forms\4.4.0.991265\lib\uap10.0\Xamarin.Forms.Platform.UAP.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="BitmapDraggingPage.xaml.cs">
+      <DependentUpon>BitmapDraggingPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

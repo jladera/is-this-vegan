@@ -1,0 +1,28 @@
+﻿ Read From File and Read From Embedded Resource
+ 
+ public MainPage()
+        {
+            InitializeComponent();
+
+            string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "test.txt");
+
+            File.WriteAllText(fileName, "This is my new text that I read from a file!");
+        }
+
+        private void Change_Label_Clicked(object sender, EventArgs e)
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            string resourceName = assembly.GetManifestResourceNames()
+                .Single(str => str.EndsWith("TextFile1.txt"));
+
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                string result = reader.ReadToEnd();
+                testLabel.Text = result;
+            }
+            
+            //string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "TextFile1.txt");
+            //var txt = File.ReadAllText(fileName);
+            //testLabel.Text = result;
+        }

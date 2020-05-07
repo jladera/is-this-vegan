@@ -1,16 +1,201 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Is_This_Vegan.MainPage">
+             x:Class="Is_This_Vegan.MainPage"
+             xmlns:local="clr-namespace:Is_This_Vegan"
+             BackgroundColor="#1A1A1A">
 
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
-    </StackLayout>
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <!--LOGO SECTION-->
+                <Frame Grid.Row="0" 
+                       Grid.ColumnSpan="3"
+                       BackgroundColor="Transparent">
 
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" 
+                               Grid.Column="0"
+                               Text="LOGO"
+                               TextColor="#CEFFCE" 
+                               FontSize="Large"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+                        <Button Text="Drag Test Page" 
+                                Clicked="OnBitmapDraggingPageButtonClicked"/>
+                    </Grid>
+                </Frame>
+                
+                <!--VOTING SUGGESTIONS-->
+                <Frame BackgroundColor="Transparent" Grid.Row="1" Grid.ColumnSpan="3">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Are These Vegan?"
+                               TextColor="#CEFFCE"
+                               FontSize="Large"
+                               Grid.Row="0"
+                               Grid.Column="0" 
+                               Grid.ColumnSpan="3"
+                               HorizontalOptions="Center"/>
+                        
+                        <Image Source="{local:ImageResource Is This Vegan.SharedMedia.Neon_Circle.png}"
+                               Grid.Row="1"
+                               Grid.Column="0"
+                               Aspect="AspectFit"
+                               WidthRequest="75" />
+                        <Label Text="Ingredient 1"
+                               TextColor="#CEFFCE"
+                               Grid.Row="2"
+                               Grid.Column="0"
+                               HorizontalOptions="Center"
+                               VerticalOptions="End" />
+                        
+                        <Image Source="{local:ImageResource Is This Vegan.SharedMedia.Neon_Circle.png}" 
+                               Grid.Row="1"
+                               Grid.Column="1"
+                               Aspect="AspectFit"
+                               WidthRequest="75" />
+                        <Label Text="Ingredient 2"
+                               TextColor="#CEFFCE"
+                               Grid.Row="2"
+                               Grid.Column="1"
+                               HorizontalOptions="Center"
+                               VerticalOptions="End" />
+                        
+                        <Image Source="{local:ImageResource Is This Vegan.SharedMedia.Neon_Circle.png}"
+                               Grid.Row="1"
+                               Grid.Column="2"
+                               Aspect="AspectFit"
+                               WidthRequest="75" />
+                        <Label Text="Ingredient 3"
+                               TextColor="#CEFFCE"
+                               Grid.Row="2"
+                               Grid.Column="2"
+                               HorizontalOptions="Center"
+                               VerticalOptions="End" />
+                    </Grid>
+                </Frame>
+                
+                <!--SWIPE ACTIONS-->
+                <Frame BackgroundColor="Transparent" Grid.Row="2" Grid.ColumnSpan="3">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="{local:ImageResource Is This Vegan.SharedMedia.Neon_Circle.png}"
+                               Grid.Row="0"
+                               Grid.Column="0"
+                               Aspect="AspectFit"
+                               WidthRequest="200" 
+                               HorizontalOptions="Start"/>
+                        <Label Text="Vote" 
+                               TextColor="#CEFFCE"
+                               FontSize="Title"
+                               Grid.Column="0"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center"/>
+                        <Image Source="{local:ImageResource Is This Vegan.SharedMedia.Neon_Circle.png}"
+                               Grid.Row="1"
+                               Grid.Column="1"
+                               Aspect="AspectFit"
+                               WidthRequest="200" 
+                               HorizontalOptions="End"/>
+                        <Label Text="Scan" 
+                               TextColor="#CEFFCE"
+                               FontSize="Title"
+                               Grid.Row="1"
+                               Grid.Column="1"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center"/>
+                    </Grid>
+                </Frame>
+
+                <!--Test Section for Home Icon-->
+                <Frame BackgroundColor="Transparent" Grid.Row="3" Grid.ColumnSpan="3">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="{local:ImageResource Is This Vegan.SharedMedia.240 PX home.png}"
+                               Grid.Row="0"
+                               Grid.Column="0"
+                               Aspect="AspectFit"
+                               WidthRequest="50" 
+                               HorizontalOptions="Start"/>
+                        <Image Source="{local:ImageResource Is This Vegan.SharedMedia.skinny-house.png}"
+                               Grid.Row="0"
+                               Grid.Column="1"
+                               Aspect="AspectFit"
+                               WidthRequest="50" 
+                               HorizontalOptions="End"/>
+                    </Grid>
+                </Frame>
+
+            </Grid>
+            <!--<StackLayout x:Name="BgColor" BackgroundColor="#1A1A1A">
+
+                <Frame BackgroundColor="#1A1A1A" 
+                       BorderColor="#CEFFCE"
+                       CornerRadius="10"
+                       HasShadow="True">
+                    <Label Text="Example"
+                           TextColor="#CEFFCE"
+                           FontSize="60"/>
+                </Frame>
+                
+                <Label Text="Welcome to Xamarin.Forms!" 
+                    TextColor="#CEFFCE"
+                    HorizontalOptions="Center"
+                    VerticalOptions="CenterAndExpand"/>
+                <Image Source="{local:ImageResource Is This Vegan.Neon_Circle.png}" WidthRequest="50"/>
+                <Button Text="Black 000000" Clicked="Black_Clicked"/>
+                <Button Text="Dark Green 00281A" Clicked="Green_Clicked"/>
+                <Button Text="Dark Blue 040930" Clicked="Blue_Clicked"/>
+                <Button Text="Dark Grey 1a1a1a" Clicked="Grey_Clicked"/>
+                <Button Text="Dark Purple 1A1A1A" Clicked="Purple_Clicked"/>
+                <Button Text="Eggplant 18000F" Clicked="Eggplant_Clicked"/>
+            </StackLayout>-->
+        </ScrollView>
+    </ContentPage.Content>
+        
 </ContentPage>
