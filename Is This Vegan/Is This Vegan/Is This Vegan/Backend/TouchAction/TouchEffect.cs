@@ -5,7 +5,7 @@
 
 using Xamarin.Forms;
 
-namespace Is_This_Vegan
+namespace Is_This_Vegan.Backend
 {
     public class TouchEffect : RoutingEffect
     {

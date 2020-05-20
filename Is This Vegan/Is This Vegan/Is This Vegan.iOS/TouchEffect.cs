@@ -24,7 +24,7 @@ namespace Is_This_Vegan.iOS
             view = Control == null ? Container : Control;
 
             // Get access to the TouchEffect class in the .NET Standard library
-            Is_This_Vegan.TouchEffect effect = (Is_This_Vegan.TouchEffect)Element.Effects.FirstOrDefault(e => e is Is_This_Vegan.TouchEffect);
+            Is_This_Vegan.Backend.TouchEffect effect = (Is_This_Vegan.Backend.TouchEffect)Element.Effects.FirstOrDefault(e => e is Is_This_Vegan.Backend.TouchEffect);
 
             if (effect != null && view != null)
             {

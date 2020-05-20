@@ -1,6 +1,5 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using Xamarin.Forms;
+using Is_This_Vegan.Views;
 
 namespace Is_This_Vegan
 {
@@ -11,6 +10,10 @@ namespace Is_This_Vegan
             InitializeComponent();
 
             MainPage = new NavigationPage(new MainPage());
+            
+            // Make Navigation Bar align with our palette
+            ((NavigationPage)MainPage).BarBackgroundColor = Color.FromHex("#181818");
+            ((NavigationPage)MainPage).BarTextColor = Color.FromHex("#62b09e");
         }
 
         protected override void OnStart()

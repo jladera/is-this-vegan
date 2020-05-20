@@ -10,7 +10,7 @@ using System.Reflection;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Is_This_Vegan
+namespace Is_This_Vegan.Backend
 {
     [ContentProperty(nameof(Source))]
     public class ImageResourceExtension : IMarkupExtension

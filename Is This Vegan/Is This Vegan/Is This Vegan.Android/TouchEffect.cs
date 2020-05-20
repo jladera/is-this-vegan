@@ -9,6 +9,7 @@ using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Android.Views;
+using Is_This_Vegan.Backend;
 
 [assembly: ResolutionGroupName("XamarinDocs")]
 [assembly: ExportEffect(typeof(Is_This_Vegan.Droid.TouchEffect), "TouchEffect")]
@@ -19,7 +20,7 @@ namespace Is_This_Vegan.Droid
     {
         Android.Views.View view;
         Element formsElement;
-        Is_This_Vegan.TouchEffect libTouchEffect;
+        Is_This_Vegan.Backend.TouchEffect libTouchEffect;
         bool capture;
         Func<double, double> fromPixels;
         int[] twoIntArray = new int[2];
@@ -32,14 +33,15 @@ namespace Is_This_Vegan.Droid
 
         protected override void OnAttached()
         {
+            Console.WriteLine("In OnAttached");
             // Get the Android View corresponding to the Element that the effect is attached to
             view = Control == null ? Container : Control;
 
             // Get access to the TouchEffect class in the .NET Standard library
-            Is_This_Vegan.TouchEffect touchEffect =
-                (Is_This_Vegan.TouchEffect)Element.Effects.
-                    FirstOrDefault(e => e is Is_This_Vegan.TouchEffect);
-
+            Is_This_Vegan.Backend.TouchEffect touchEffect =
+                (Is_This_Vegan.Backend.TouchEffect)Element.Effects.
+                    FirstOrDefault(e => e is Is_This_Vegan.Backend.TouchEffect);
+            
             if (touchEffect != null && view != null)
             {
                 viewDictionary.Add(view, this);
@@ -58,6 +60,7 @@ namespace Is_This_Vegan.Droid
 
         protected override void OnDetached()
         {
+            Console.WriteLine("In OnDetached");
             if (viewDictionary.ContainsKey(view))
             {
                 viewDictionary.Remove(view);
@@ -90,8 +93,10 @@ namespace Is_This_Vegan.Droid
                 case MotionEventActions.PointerDown:
                     FireEvent(this, id, TouchActionType.Pressed, screenPointerCoords, true);
 
-                    idToEffectDictionary.Add(id, this);
-
+                    if (!idToEffectDictionary.ContainsKey(id))
+                    {
+                        idToEffectDictionary.Add(id, this);
+                    }
                     capture = libTouchEffect.Capture;
                     break;
 
@@ -120,6 +125,7 @@ namespace Is_This_Vegan.Droid
                             }
                         }
                     }
+                    idToEffectDictionary.Remove(id);
                     break;
 
                 case MotionEventActions.Up:
@@ -155,6 +161,14 @@ namespace Is_This_Vegan.Droid
                     idToEffectDictionary.Remove(id);
                     break;
             }
+
+            // Used to debug gesture types
+            //Console.WriteLine("Number of ids in idToEffectDictionary: ", idToEffectDictionary.Count);
+            //Console.WriteLine("Motion Event Type: {0}", args.Event.ActionMasked);
+            //foreach (var dictId in idToEffectDictionary)
+            //{
+            //    Console.WriteLine("ID: {0}\t Effect: {1}", dictId.Key, dictId.Value);
+            //}
         }
 
         void CheckForBoundaryHop(int id, Point pointerLocation)

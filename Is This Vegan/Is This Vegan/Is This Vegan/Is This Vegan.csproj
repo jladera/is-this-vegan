@@ -12,10 +12,15 @@
 
   <ItemGroup>
     <None Remove="SharedMedia\240 PX home.png" />
+    <None Remove="SharedMedia\Final Icons-circle.png" />
+    <None Remove="SharedMedia\Final Icons_vote.png" />
+    <None Remove="SharedMedia\Final Logo alone.png" />
+    <None Remove="SharedMedia\Final_Icons_logo.png" />
     <None Remove="SharedMedia\logo icon 2.png" />
     <None Remove="SharedMedia\logo icon 3.png" />
     <None Remove="SharedMedia\logo icon.png" />
     <None Remove="SharedMedia\Neon_Circle.png" />
+    <None Remove="SharedMedia\Scan.png" />
     <None Remove="SharedMedia\skinny-house.png" />
     <None Remove="SharedMedia\Stylized-logo-V1.png" />
     <None Remove="SharedMedia\thumbs down.png" />
@@ -24,10 +29,15 @@
 
   <ItemGroup>
     <EmbeddedResource Include="SharedMedia\240 PX home.png" />
+    <EmbeddedResource Include="SharedMedia\Final Icons-circle.png" />
+    <EmbeddedResource Include="SharedMedia\Final Icons_vote.png" />
+    <EmbeddedResource Include="SharedMedia\Final Logo alone.png" />
+    <EmbeddedResource Include="SharedMedia\Final_Icons_logo.png" />
     <EmbeddedResource Include="SharedMedia\logo icon 2.png" />
     <EmbeddedResource Include="SharedMedia\logo icon 3.png" />
     <EmbeddedResource Include="SharedMedia\logo icon.png" />
     <EmbeddedResource Include="SharedMedia\Neon_Circle.png" />
+    <EmbeddedResource Include="SharedMedia\Scan.png" />
     <EmbeddedResource Include="SharedMedia\skinny-house.png" />
     <EmbeddedResource Include="SharedMedia\Stylized-logo-V1.png" />
     <EmbeddedResource Include="SharedMedia\thumbs down.png" />
@@ -58,8 +68,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="BitmapDraggingPage.xaml.cs">
-      <DependentUpon>BitmapDraggingPage.xaml</DependentUpon>
+    <Compile Update="Views\SplashPage.xaml.cs">
+      <DependentUpon>SplashPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

@@ -10,6 +10,7 @@ using Xamarin.Forms;
 using CoreGraphics;
 using Foundation;
 using UIKit;
+using Is_This_Vegan.Backend;
 
 namespace Is_This_Vegan.iOS
 {
@@ -17,7 +18,7 @@ namespace Is_This_Vegan.iOS
     {
         Element element;        // Forms element for firing events
         UIView view;            // iOS UIView 
-        Is_This_Vegan.TouchEffect touchEffect;
+        Is_This_Vegan.Backend.TouchEffect touchEffect;
         bool capture;
 
         static Dictionary<UIView, TouchRecognizer> viewDictionary =
@@ -26,7 +27,7 @@ namespace Is_This_Vegan.iOS
         static Dictionary<long, TouchRecognizer> idToTouchDictionary =
             new Dictionary<long, TouchRecognizer>();
 
-        public TouchRecognizer(Element element, UIView view, Is_This_Vegan.TouchEffect touchEffect)
+        public TouchRecognizer(Element element, UIView view, Is_This_Vegan.Backend.TouchEffect touchEffect)
         {
             this.element = element;
             this.view = view;

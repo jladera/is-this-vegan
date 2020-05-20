@@ -1,0 +1,14 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Is_This_Vegan.Views.SplashPage"
+             xmlns:local="clr-namespace:Is_This_Vegan.Backend"
+             Title="Splash Page"
+             BackgroundColor="#1A1A1A">
+    <ContentPage.Content>
+        <ScrollView>
+            <Image Source="{local:ImageResource Is This Vegan.SharedMedia.Final_Icons_logo.png}"
+                               Aspect="AspectFit"
+                               WidthRequest="500"/>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
