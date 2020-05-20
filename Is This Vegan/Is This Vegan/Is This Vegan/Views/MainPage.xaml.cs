@@ -90,11 +90,12 @@ namespace Is_This_Vegan.Views
                 case TouchActionType.Released:
                 case TouchActionType.Cancelled:
                     result = TouchActionTypeReleasedOrCancelledHelper(args.Id, args.Type, point);
+                    var image = imageToTranslate;
+                    Reset();
                     if (result)
                     {
+                        Navigate(image);
                     }
-                    Reset();
-
                     break;
             }
         }
@@ -343,20 +344,20 @@ namespace Is_This_Vegan.Views
 
         }
 
-        public async void Navigate()
+        public async void Navigate(Image image)
         {
-            //if (imageToTranslate.Equals(VoteCircle))
-            //{
-            //    await Navigation.PushAsync(new BitmapDraggingPage(), true);
-            //}
-            //else if (imageToTranslate.Equals(ScanCircle))
-            //{
-            //    await Navigation.PushAsync(new BitmapDraggingPage(), true);
-            //}
-            //else
-            //{
-            //    return;
-            //}
+            if (image.Equals(ScanCircle))
+            {
+                await Navigation.PushAsync(new Scan(), true);
+            }
+            else if (image.Equals(VoteCircle))
+            {
+                await Navigation.PushAsync(new VoteDashboard(), true);
+            }
+            else
+            {
+                return;
+            }
         }
 
         /// <summary>
