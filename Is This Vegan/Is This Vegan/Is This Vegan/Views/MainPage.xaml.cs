@@ -1,12 +1,18 @@
-﻿using System;
+﻿/*
+ * Code by Jake Ladera
+ * 
+ * This code provides the user their view after they successfully login to their account.
+ * From here, the user can begin scanning ingredients, or vote on ingredients.
+ * We may decide to add a search feature to this view that will query our datastore.
+ */
+
+using System;
 using System.ComponentModel;
 using Xamarin.Forms;
 using Is_This_Vegan.Backend;
 
 namespace Is_This_Vegan.Views
 {
-    // Learn more about making custom code visible in the Xamarin.Forms previewer
-    // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
@@ -34,6 +40,9 @@ namespace Is_This_Vegan.Views
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Gets the coordinate for VoteCircle and ScanCircle on the users device.
+        /// </summary>
         public void InitializedImageCoords()
         {
             // Vote and Scan X,Y coordinates are relative to the frame, so to get their coordinates
@@ -49,7 +58,6 @@ namespace Is_This_Vegan.Views
             
             
             // Save inital Vote and Scan coordinates
-            var temp = swipeActionFrame.Y + relativeVoteCoord.Y;
             vote = new Point(
                 (swipeActionFrame.X + relativeVoteCoord.X),
                 (swipeActionFrame.Y + relativeVoteCoord.Y)
@@ -60,6 +68,11 @@ namespace Is_This_Vegan.Views
                 );
         }
 
+        /// <summary>
+        /// Touch action driver for presses within the SwipeActionFrame. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         void OnTouchEffectAction(object sender, TouchActionEventArgs args)
         {
             if (hasInitializedImageCoords is false)
@@ -251,6 +264,10 @@ namespace Is_This_Vegan.Views
             }
         }
 
+        /// <summary>
+        /// Determines if the user has pressed on an swipable object (VoteCircle or ScanCircle)
+        /// </summary>
+        /// <returns> True if class variable imageToTranslate is null, False otherwise </returns>
         public bool ImageToTranslateIsNull()
         {
             return imageToTranslate is null;
@@ -267,6 +284,11 @@ namespace Is_This_Vegan.Views
             return distanceTranslated;
         }
 
+        /// <summary>
+        /// Determines if navigation to VoteDashboard is necessary given the release point of the user's gesture.
+        /// </summary>
+        /// <param name="point"> Point object representing the point where the user lifted their finger from their device </param>
+        /// <returns> True if we should navigate away from MainPage, False otherwise </returns>
         public bool ShouldNavigateToVote(Point point)
         {
             double threshold = this.Width * ((double)2 / (double)3);
@@ -280,6 +302,11 @@ namespace Is_This_Vegan.Views
             return false;
         }
 
+        /// <summary>
+        /// Determines if navigation to Scan is necessary given the release point of the user's gesture.
+        /// </summary>
+        /// <param name="point"> Point object representing the point where the user lifted their finger from their device </param>
+        /// <returns> True if we should navigate away from MainPage, False otherwise </returns>
         public bool ShouldNavigateToScan(Point point)
         {
             double threshold = this.Width * ((double)1 / (double)3);
@@ -293,6 +320,10 @@ namespace Is_This_Vegan.Views
             return false;
         }
 
+        /// <summary>
+        /// Resets fields pertaining to the users ended gesture
+        /// </summary>
+        /// <returns> True if successfully resets all fields, False otherwise </returns>
         public bool Reset()
         {
             try
@@ -344,6 +375,13 @@ namespace Is_This_Vegan.Views
 
         }
 
+        /// <summary>
+        /// Navigates to either Scan or VoteDashboard views
+        /// </summary>
+        /// <param name="image"> 
+        /// Will either be VoteCircle, ScanCircle, or null (if the user pressed on neither 
+        /// VoteCircle nor ScanCircle
+        /// </param>
         public async void Navigate(Image image)
         {
             if (image.Equals(ScanCircle))
@@ -359,47 +397,6 @@ namespace Is_This_Vegan.Views
                 return;
             }
         }
-
-        /// <summary>
-        /// Calls appropriate bitmap's ProcessTouchEvent method
-        /// </summary>
-        /// <param name="id"> TouchActionEventArgs Id </param>
-        /// <param name="type"> TouchActionEventArgs Type </param>
-        /// <param name="point"> Coordinates where user has touched on their screen </param>
-        /// <param name="bitmap"> BitmapIdEnum indicates which bitmap was pressed.</param>
-        /// <returns> True if the user has pressed a bitmap that we recognize, false otherwise </returns>
-        //public bool ProcessTouchEventHelper(long id, TouchActionType type, Point point, Image image)
-        //{
-        //    // User touched scan icon
-        //    if (bitmap.Equals(BitmapIdsEnum.scan))
-        //    {
-        //        scan.ProcessTouchEvent(id, type, point);
-        //        return true;
-        //    }
-
-        //    // User touched vote icon
-        //    if (bitmap.Equals(BitmapIdsEnum.vote))
-        //    {
-        //        vote.ProcessTouchEvent(id, type, point);
-        //        return true;
-        //    }
-
-        //    return false;
-        //}
-
-        async void BitmapDraggingPage_Navigation_Event(object sender, EventArgs e)
-        {
-
-            // Page appearance not animated
-            //await Navigation.PushAsync(new BitmapDraggingPage(), true);
-        }
-
-        async void Splash_Clicked(object sender, EventArgs e)
-        {
-            // Page appearance not animated
-            await Navigation.PushAsync(new SplashPage(), true);
-        }
-
 
         //private void Black_Clicked(object sender, System.EventArgs e)
         //{
