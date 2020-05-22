@@ -398,6 +398,11 @@ namespace Is_This_Vegan.Views
             }
         }
 
+        private void ImageButton_Clicked(object sender, EventArgs e)
+        {
+            return;
+        }
+
         //private void Black_Clicked(object sender, System.EventArgs e)
         //{
         //    BgColor.BackgroundColor = Color.FromHex("#000000");
