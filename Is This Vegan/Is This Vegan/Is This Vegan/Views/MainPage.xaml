@@ -89,7 +89,7 @@
                                Aspect="AspectFit"
                                WidthRequest="75" 
                                BackgroundColor="Transparent"
-                               Clicked="BitmapDraggingPage_Navigation_Event"/>
+                               Clicked="ImageButton_Clicked"/>
                         <Label Text="Ingredient 1"
                                TextColor="#CEFFCE"
                                Grid.Row="2"
