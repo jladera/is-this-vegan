@@ -125,7 +125,6 @@ namespace Is_This_Vegan.Droid
                             }
                         }
                     }
-                    idToEffectDictionary.Remove(id);
                     break;
 
                 case MotionEventActions.Up:
