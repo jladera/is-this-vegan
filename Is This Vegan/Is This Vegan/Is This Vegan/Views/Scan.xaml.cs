@@ -5,7 +5,9 @@
  */
 
 using System;
+using System.IO;
 using Plugin.Media;
+using Plugin.Media.Abstractions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,6 +19,7 @@ namespace Is_This_Vegan.Views
         public Scan()
         {
             InitializeComponent();
+            Image embeddedImage = new Image { Source = ImageSource.FromResource("Is This Vegan.SharedMedia.Final Icons_vegan.png") };
             //takePhoto.Clicked += async (sender, args) =>
             //{
 
@@ -132,9 +135,32 @@ namespace Is_This_Vegan.Views
             image.Source = ImageSource.FromStream(() =>
             {
                 var stream = file.GetStream();
-                file.Dispose();
+                //file.Dispose();
                 return stream;
             });
+
+            //DeleteAllFilesInTempDirectory(file.Path);
+
+            NavigateToCropImage(file);
+        }
+
+        public async void NavigateToCropImage(MediaFile image)
+        {
+            await Navigation.PushAsync(new PhotoCroppingPage(image), true);
+        }
+
+        private void DeleteAllFilesInTempDirectory(string path)
+        {
+            //System.IO.DirectoryInfo di = new DirectoryInfo("/storage/emulated/0/Android/data/com.companyname.is_this_vegan/files/Pictures/Sample/");
+
+            //foreach (FileInfo file in di.GetFiles())
+            //{
+            //    file.Delete();
+            //}
+            //foreach (DirectoryInfo dir in di.GetDirectories())
+            //{
+            //    dir.Delete(true);
+            //}
         }
 
         public async void PickAPhotoButton_OnClicked(Object sender, EventArgs e)
