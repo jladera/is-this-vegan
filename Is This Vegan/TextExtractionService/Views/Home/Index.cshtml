@@ -4,16 +4,3 @@
     <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
     <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
-<div class="row">
-    @if (!(Model is null))
-    {
-        <p>Confidence: @Model.meanConfidenceLabel </p>
-        <p>Text:</p>
-        <br /><br />
-        <p>@Model.resultText</p>
-    }
-    else
-    {
-        <p>Sorry, there provided model was null</p>
-    }
-</div>
