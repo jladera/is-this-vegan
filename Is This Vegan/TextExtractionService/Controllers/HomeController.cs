@@ -30,15 +30,5 @@ namespace TextExtractionService.Controllers
 
             return View(engine.extraction);
         }
-
-        public string GetTessdataPath()
-        {
-            return Server.MapPath(@"tessdata");
-        }
-
-        public string GetMediaPath()
-        {
-            return Server.MapPath(@"Media");
-        }
     }
 }
