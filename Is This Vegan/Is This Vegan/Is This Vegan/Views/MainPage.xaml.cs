@@ -10,6 +10,7 @@ using System;
 using System.ComponentModel;
 using Xamarin.Forms;
 using Is_This_Vegan.Backend;
+using System.Linq;
 
 namespace Is_This_Vegan.Views
 {
@@ -35,38 +36,48 @@ namespace Is_This_Vegan.Views
         // The image (scan or vote) to translate
         Image imageToTranslate;
 
+        // Height of 'Are These Vegan?" Row
+        //double areTheseVeganRowHeight;
+
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
+            var g = Voting_Grid.Height;
+            var h = Are_These_Vegan_Row.Height;
         }
 
         /// <summary>
         /// Gets the coordinate for VoteCircle and ScanCircle on the users device.
         /// </summary>
         public void InitializedImageCoords()
-        {
-            // Vote and Scan X,Y coordinates are relative to the frame, so to get their coordinates
-            // relative to the user's device display, we must also get the coordinates and dimensions
-            // of the frame these images exist within
-            var relativeVoteCoord = new Point(VoteCircle.X, VoteCircle.Y);
-            var relativeScanCoord = new Point(ScanCircle.X, ScanCircle.Y);
+    {
+        // Vote and Scan X,Y coordinates are relative to the frame, so to get their coordinates
+        // relative to the user's device display, we must also get the coordinates and dimensions
+        // of the frame these images exist within
+        var relativeVoteCoord = new Point(VoteCircle.X, VoteCircle.Y);
+        var relativeScanCoord = new Point(ScanCircle.X, ScanCircle.Y);
 
-            // Gets frame size and coordinates
-            Point swipeActionFrame = new Point(SwipeActionFrame.X, SwipeActionFrame.Y);
-            double swipeActionFrameHeight = SwipeActionFrame.Height;
-            double swipeActionFrameWidth = SwipeActionFrame.Width;
+        // Gets frame size and coordinates
+        Point swipeActionFrame = new Point(SwipeActionFrame.X, SwipeActionFrame.Y);
+        double swipeActionFrameHeight = SwipeActionFrame.Height;
+        double swipeActionFrameWidth = SwipeActionFrame.Width;
             
             
-            // Save inital Vote and Scan coordinates
-            vote = new Point(
-                (swipeActionFrame.X + relativeVoteCoord.X),
-                (swipeActionFrame.Y + relativeVoteCoord.Y)
-                );
-            scan = new Point(
-                (swipeActionFrame.X + relativeScanCoord.X),
-                (swipeActionFrame.Y + relativeScanCoord.Y)
-                );
-        }
+        // Save inital Vote and Scan coordinates
+        vote = new Point(
+            (swipeActionFrame.X + relativeVoteCoord.X),
+            (swipeActionFrame.Y + relativeVoteCoord.Y)
+            );
+        scan = new Point(
+            (swipeActionFrame.X + relativeScanCoord.X),
+            (swipeActionFrame.Y + relativeScanCoord.Y)
+            );
+    }
 
         /// <summary>
         /// Touch action driver for presses within the SwipeActionFrame. 
