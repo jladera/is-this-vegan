@@ -12,8 +12,8 @@ namespace Is_This_Vegan
             MainPage = new NavigationPage(new MainPage());
             
             // Make Navigation Bar align with our palette
-            ((NavigationPage)MainPage).BarBackgroundColor = Color.FromHex("#181818");
-            ((NavigationPage)MainPage).BarTextColor = Color.FromHex("#62b09e");
+            ((NavigationPage)MainPage).BarBackgroundColor = Color.FromHex("#1A1A1A");//#292929
+            ((NavigationPage)MainPage).BarTextColor = Color.FromHex("#1F775C");
         }
 
         protected override void OnStart()
