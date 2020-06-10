@@ -12,15 +12,22 @@
 
   <ItemGroup>
     <None Remove="SharedMedia\240 PX home.png" />
-    <None Remove="SharedMedia\Final Icons-circle.png" />
-    <None Remove="SharedMedia\Final Icons_vegan.png" />
+    <None Remove="SharedMedia\are_these_vegan.png" />
+    <None Remove="SharedMedia\cancel.png" />
+    <None Remove="SharedMedia\checkmark.png" />
+    <None Remove="SharedMedia\circle.png" />
     <None Remove="SharedMedia\Final Icons_vote.png" />
-    <None Remove="SharedMedia\Final Logo alone.png" />
-    <None Remove="SharedMedia\Final_Icons_logo.png" />
+    <None Remove="SharedMedia\home.png" />
+    <None Remove="SharedMedia\is_this_vegan.png" />
+    <None Remove="SharedMedia\login.png" />
     <None Remove="SharedMedia\logo icon 2.png" />
     <None Remove="SharedMedia\logo icon 3.png" />
     <None Remove="SharedMedia\logo icon.png" />
+    <None Remove="SharedMedia\logo.png" />
+    <None Remove="SharedMedia\logo_circle.png" />
     <None Remove="SharedMedia\Neon_Circle.png" />
+    <None Remove="SharedMedia\not_sure.png" />
+    <None Remove="SharedMedia\not_vegan.png" />
     <None Remove="SharedMedia\Scan.png" />
     <None Remove="SharedMedia\skinny-house.png" />
     <None Remove="SharedMedia\Stylized-logo-V1.png" />
@@ -28,21 +35,28 @@
     <None Remove="SharedMedia\test_ingredient_list_full.jpg" />
     <None Remove="SharedMedia\thumbs down.png" />
     <None Remove="SharedMedia\thumbs up.png" />
+    <None Remove="SharedMedia\vegan.png" />
+    <None Remove="SharedMedia\vote.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Page Include="SharedMedia\240 PX home.png" />
-    <EmbeddedResource Include="SharedMedia\Final Icons-circle.png" />
-    <EmbeddedResource Include="SharedMedia\Final Icons_vegan.png" />
-    <EmbeddedResource Include="SharedMedia\Final Icons_vote.png" />
-    <EmbeddedResource Include="SharedMedia\Final Logo alone.png" />
-    <EmbeddedResource Include="SharedMedia\Final_Icons_logo.png" />
-    <EmbeddedResource Include="SharedMedia\Scan.png" />
-    <EmbeddedResource Include="SharedMedia\skinny-house.png" />
+    <EmbeddedResource Include="SharedMedia\240 PX home.png" />
+    <EmbeddedResource Include="SharedMedia\are_these_vegan.png" />
+    <EmbeddedResource Include="SharedMedia\cancel.png" />
+    <EmbeddedResource Include="SharedMedia\checkmark.png" />
+    <EmbeddedResource Include="SharedMedia\circle.png" />
+    <EmbeddedResource Include="SharedMedia\home.png" />
+    <EmbeddedResource Include="SharedMedia\is_this_vegan.png" />
+    <EmbeddedResource Include="SharedMedia\login.png" />
+    <EmbeddedResource Include="SharedMedia\logo_circle.png" />
+    <EmbeddedResource Include="SharedMedia\not_sure.png" />
+    <EmbeddedResource Include="SharedMedia\not_vegan.png" />
+    <EmbeddedResource Include="SharedMedia\scan.png" />
+    <EmbeddedResource Include="SharedMedia\vote.png" />
+    <EmbeddedResource Include="SharedMedia\vegan.png" />
+    <EmbeddedResource Include="SharedMedia\logo.png" />
     <EmbeddedResource Include="SharedMedia\test_ingredient_list_cropped.jpg" />
     <EmbeddedResource Include="SharedMedia\test_ingredient_list_full.jpg" />
-    <EmbeddedResource Include="SharedMedia\thumbs down.png" />
-    <EmbeddedResource Include="SharedMedia\thumbs up.png" />
   </ItemGroup>
 
   <ItemGroup>
