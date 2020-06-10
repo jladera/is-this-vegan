@@ -36,19 +36,11 @@ namespace Is_This_Vegan.Views
         // The image (scan or vote) to translate
         Image imageToTranslate;
 
-        // Height of 'Are These Vegan?" Row
-        //double areTheseVeganRowHeight;
-
         public MainPage()
         {
             InitializeComponent();
-        }
 
-        protected override void OnSizeAllocated(double width, double height)
-        {
-            base.OnSizeAllocated(width, height);
-            var g = Voting_Grid.Height;
-            var h = Are_These_Vegan_Row.Height;
+            var l = new Label();
         }
 
         /// <summary>
