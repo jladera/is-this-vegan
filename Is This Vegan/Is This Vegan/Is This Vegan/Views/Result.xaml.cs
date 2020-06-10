@@ -1,9 +1,9 @@
-﻿using Is_This_Vegan.Backend.Tesseract;
-using SkiaSharp;
+﻿using SkiaSharp;
 using System.Drawing;
 using Tesseract;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Is_This_Vegan.Backend.API;
 
 namespace Is_This_Vegan.Views
 {
@@ -16,7 +16,7 @@ namespace Is_This_Vegan.Views
         {
             InitializeComponent();
             textExtractor = new TextExtractor();
-            var response = textExtractor.ExtractFromImageTestAsync();
+            //var response = textExtractor.ExtractFromImageTestAsync();
             MyImage.Source = source;
             
         }
