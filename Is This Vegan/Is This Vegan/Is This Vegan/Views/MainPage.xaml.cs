@@ -11,6 +11,9 @@ using System.ComponentModel;
 using Xamarin.Forms;
 using Is_This_Vegan.Backend;
 using System.Linq;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
+using System.Threading.Tasks;
 
 namespace Is_This_Vegan.Views
 {
@@ -35,6 +38,8 @@ namespace Is_This_Vegan.Views
 
         // The image (scan or vote) to translate
         Image imageToTranslate;
+
+        MediaFile file;
 
         public MainPage()
         {
@@ -389,7 +394,10 @@ namespace Is_This_Vegan.Views
         {
             if (image.Equals(ScanCircle))
             {
-                await Navigation.PushAsync(new Scan(), true);
+                if (await TakeAPhoto())
+                {
+                    await Navigation.PushAsync(new PhotoCroppingPage(file), true);
+                }
             }
             else if (image.Equals(VoteCircle))
             {
@@ -404,6 +412,35 @@ namespace Is_This_Vegan.Views
         private void ImageButton_Clicked(object sender, EventArgs e)
         {
             return;
+        }
+
+        /// <summary>
+        /// Takes photo and saves file. 
+        /// 
+        /// Code provided by Xam.Plugin.Media sample
+        /// https://github.com/jamesmontemagno/MediaPlugin
+        /// </summary>
+        /// <returns> False if error, otherwise true </returns>
+        public async Task<bool> TakeAPhoto()
+        {
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            {
+                await DisplayAlert("No Camera", ":( No camera avaialble.", "OK");
+                return false;
+            }
+
+            file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+            {
+                DefaultCamera = CameraDevice.Rear,
+                PhotoSize = PhotoSize.Medium,
+                Directory = "Sample",
+                Name = "ingredients.jpg"
+            });
+
+            if (file == null)
+                return false;
+
+            return true;
         }
 
         //private void Black_Clicked(object sender, System.EventArgs e)
