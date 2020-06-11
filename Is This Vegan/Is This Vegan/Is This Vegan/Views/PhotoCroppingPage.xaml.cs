@@ -5,6 +5,8 @@ using SkiaSharp.Views.Forms;
 using Is_This_Vegan.Backend.Image;
 using System.Drawing;
 using Plugin.Media.Abstractions;
+using Is_This_Vegan.Backend.API;
+using System.Threading.Tasks;
 
 namespace Is_This_Vegan.Views
 {
@@ -13,10 +15,13 @@ namespace Is_This_Vegan.Views
         PhotoCropperCanvasView photoCropper;
         SKBitmap croppedBitmap;
 
+        public MediaFile image;
+
         public PhotoCroppingPage(MediaFile image)
         {
             InitializeComponent();
 
+            this.image = image;
             SKBitmap bitmap = SKBitmap.Decode(image.GetStream());
            
 
@@ -26,7 +31,7 @@ namespace Is_This_Vegan.Views
             canvasViewHost.Children.Add(photoCropper);
         }
 
-        void OnDoneButtonClicked(object sender, EventArgs args)
+        async void OnDoneButtonClicked(object sender, EventArgs args)
         {
             croppedBitmap = photoCropper.CroppedBitmap;
 
@@ -35,11 +40,11 @@ namespace Is_This_Vegan.Views
             var imageStream = sKDataImage.AsStream();
             // var bitmap = new Bitmap(imageStream); doesn't work, stop trying this lol
             ImageSource source = ImageSource.FromStream( () => imageStream);
-            
 
-            // Add text extracting functionality here
-            // 1) Determine necessary image type for tesseract to work
-            // 2) Convert SKBitmap to necessary image type
+            // Delete image from application folder
+            image.Dispose();
+
+            var x = await PostImageAsync(croppedBitmap);
 
             NavigateToResultPage(source, croppedBitmap);
         }
@@ -52,6 +57,14 @@ namespace Is_This_Vegan.Views
 
             canvas.Clear();
             canvas.DrawBitmap(croppedBitmap, info.Rect, BitmapStretch.Uniform);
+        }
+
+        public async Task<bool> PostImageAsync(SKBitmap croppedBitmap)
+        {
+            var textExtractor = new TextExtractor();
+
+            var response = await textExtractor.PostImageAsync();
+            return true;
         }
 
         public async void NavigateToResultPage(ImageSource source, SKBitmap croppedBitmap)
