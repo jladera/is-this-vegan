@@ -116,12 +116,11 @@
                            Grid.ColumnSpan="3"
                            HorizontalOptions="Center"/>
 
-                    <ImageButton Source="{local:ImageResource Is This Vegan.SharedMedia.circle.png}"
+                    <Image Source="{local:ImageResource Is This Vegan.SharedMedia.circle.png}"
                                  Grid.Row="1"
                                  Grid.Column="0"
                                  Aspect="AspectFit"
-                                 BackgroundColor="Transparent"
-                                 Clicked="ImageButton_Clicked"/>
+                                 BackgroundColor="Transparent"/>
                     <Label x:Name="Ingredient_1_Text"
                            Text="Ingredient 1"
                            TextColor="#CEFFCE"
