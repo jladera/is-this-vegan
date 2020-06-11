@@ -365,7 +365,7 @@ namespace Is_This_Vegan.Views
         }
 
         /// <summary>
-        /// Navigates to either Scan or VoteDashboard views
+        /// Navigates to either PhotoCroppingPage or VoteDashboard views
         /// </summary>
         /// <param name="image"> 
         /// Will either be VoteCircle, ScanCircle, or null (if the user pressed on neither 
