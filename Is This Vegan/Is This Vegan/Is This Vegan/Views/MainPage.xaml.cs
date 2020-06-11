@@ -44,8 +44,6 @@ namespace Is_This_Vegan.Views
         public MainPage()
         {
             InitializeComponent();
-
-            var l = new Label();
         }
 
         /// <summary>
@@ -61,8 +59,6 @@ namespace Is_This_Vegan.Views
 
         // Gets frame size and coordinates
         Point swipeActionFrame = new Point(SwipeActionFrame.X, SwipeActionFrame.Y);
-        double swipeActionFrameHeight = SwipeActionFrame.Height;
-        double swipeActionFrameWidth = SwipeActionFrame.Width;
             
             
         // Save inital Vote and Scan coordinates
@@ -135,8 +131,6 @@ namespace Is_This_Vegan.Views
             if (image is null)
             {
                 return false;
-                imageToTranslate = VoteCircle;
-                return true;
             }
             else if (image.Equals(ScanCircle))
             {
@@ -334,18 +328,10 @@ namespace Is_This_Vegan.Views
         /// <returns> True if successfully resets all fields, False otherwise </returns>
         public bool Reset()
         {
-            try
-            {
-                ResetCirclePosition();
-                press = null;
-                imageToTranslate = null;
-                return true;
-            }
-            catch (Exception e)
-            {
-                this.DisplayAlert("Reset Error", "There seems to have been an unusual error. We apologize for any inconvenience.", "Ok");
-                return false;
-            }
+            ResetCirclePosition();
+            press = null;
+            imageToTranslate = null;
+            return true;
         }
 
         /// <summary>
@@ -357,11 +343,6 @@ namespace Is_This_Vegan.Views
         /// </returns>
         public bool ResetCirclePosition()
         {
-            var scantmp = ScanCircle.X;
-            var scanoriginal = scan.X;
-            var translated = -distanceTranslated;
-            var width = SwipeActionFrame.Width;
-
             if (imageToTranslate is null) // If circle has not been pressed to begin with, do nothing
             {
                 return true;
@@ -409,11 +390,6 @@ namespace Is_This_Vegan.Views
             }
         }
 
-        private void ImageButton_Clicked(object sender, EventArgs e)
-        {
-            return;
-        }
-
         /// <summary>
         /// Takes photo and saves file. 
         /// 
@@ -442,37 +418,5 @@ namespace Is_This_Vegan.Views
 
             return true;
         }
-
-        //private void Black_Clicked(object sender, System.EventArgs e)
-        //{
-        //    BgColor.BackgroundColor = Color.FromHex("#000000");
-        //}
-
-        //private void Green_Clicked(object sender, System.EventArgs e)
-        //{
-        //    BgColor.BackgroundColor = Color.FromHex("00281A");
-        //}
-
-        //private void Blue_Clicked(object sender, System.EventArgs e)
-        //{
-        //    BgColor.BackgroundColor = Color.FromHex("040930");
-
-        //}
-
-        //private void Grey_Clicked(object sender, System.EventArgs e)
-        //{
-        //    BgColor.BackgroundColor = Color.FromHex("1a1a1a");
-
-        //}
-
-        //private void Purple_Clicked(object sender, System.EventArgs e)
-        //{
-        //    BgColor.BackgroundColor = Color.FromHex("16012B");
-        //}
-
-        //private void Eggplant_Clicked(object sender, System.EventArgs e)
-        //{
-        //    BgColor.BackgroundColor = Color.FromHex("18000F");
-        //}
     }
 }
