@@ -1,6 +1,5 @@
 ﻿using SkiaSharp;
 using System.Drawing;
-using Tesseract;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Is_This_Vegan.Backend.API;
