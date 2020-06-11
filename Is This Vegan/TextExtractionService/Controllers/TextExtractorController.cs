@@ -20,8 +20,8 @@ namespace TextExtractionService.Controllers
             //var controller = new HomeController();
             //tessdataPath = controller.GetTessdataPath();
             //mediaPath = controller.GetMediaPath();
-            tessdataPath = System.Web.Hosting.HostingEnvironment.MapPath("~/tessdata");
-            mediaPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Media");
+            tessdataPath = System.Web.HttpContext.Current.Request.MapPath("~\\tessdata");
+            mediaPath = System.Web.HttpContext.Current.Request.MapPath("~\\Media");
             engine = new TextExtractor(tessdataPath, mediaPath);
         }
 
@@ -56,9 +56,12 @@ namespace TextExtractionService.Controllers
                 return new string[] { 
                     "Error", 
                     String.Format(
-                        "{0}. Inner Exception: {1}.",
-                        engine.exception.Message,
-                        engine.exception.InnerException
+                        "{0}. \n" +
+                        "Inner Exception: {1}.\n" +
+                        "MediaPath: {2}",
+                        engine.exception.ToString(),
+                        engine.exception.InnerException,
+                        mediaPath
                     )
                 };
             }
@@ -70,9 +73,23 @@ namespace TextExtractionService.Controllers
             };
         }
 
-        // POST api/values
-        public void Post([FromBody]string value)
+        // POST api/textextractor/test
+        public HttpResponseMessage Post([FromBody]string image)
         {
+            //if (string.IsNullOrEmpty(image) ||
+            //    string.IsNullOrWhiteSpace(image))
+            //{
+            //    return new HttpResponseMessage()
+            //    {
+
+            //    };
+            //}
+            HttpResponseMessage response = null;
+
+            response = Request.CreateResponse(HttpStatusCode.OK);
+            response.Content = new StringContent("successful post!");
+
+            return response;
         }
 
         // PUT api/values/5
