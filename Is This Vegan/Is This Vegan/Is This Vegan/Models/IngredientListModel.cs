@@ -13,14 +13,14 @@ namespace Is_This_Vegan.Models
         /// 1) Convert SKBitmap to Bytes (use SKBitmap's Bytes property)
         /// 2)  Use Convert.ToBase64String({bytes from step 1}) to convert to string
         /// </summary>
-        string imageAsString { get; set; }
+        public string imageAsString { get; set; }
 
         /// <summary>
         /// Raw ingredient list blob. Becomes not-null when the webserver responds to mobile app's 
         /// text extraction request.
         /// </summary>
         [DisplayName("Ingredients")]
-        string ingredientListRaw { get; set; }
+        public string ingredientListRaw { get; set; }
 
         /// <summary>
         /// Cleaned ingredients list. Becomes not-null after removing non-English words,
@@ -29,6 +29,6 @@ namespace Is_This_Vegan.Models
         /// text extracted from image. 
         /// </summary>
         [DisplayName("Ingredients")]
-        List<string> ingredientListClean { get; set; }
+        public List<string> ingredientListClean { get; set; }
     }
 }
