@@ -226,8 +226,8 @@
                                HorizontalOptions="Start"/>
                     <Image x:Name="ScanCircle" 
                                Source="{local:ImageResource Is This Vegan.SharedMedia.scan.png}"
-                               Grid.RowSpan="2"
-                               Grid.ColumnSpan="2"
+                               Grid.Row="1"
+                               Grid.Column="1"
                                Aspect="AspectFit"
                                HorizontalOptions="End"/>
                 </Grid>
