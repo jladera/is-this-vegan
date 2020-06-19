@@ -34,46 +34,14 @@ namespace Is_This_Vegan.Backend.API
 
             var imageAsString = Convert.ToBase64String(image);
 
-            //var client = new HttpClient()
-            //{
-            //    BaseAddress = new Uri("https://is-this-vegan.azurewebsites.net/")
-            //};
-            //client.DefaultRequestHeaders.Accept.Clear();
-            //client.DefaultRequestHeaders.Accept.Add(
-            //    new MediaTypeWithQualityHeaderValue("application/json"));
-            //HttpResponseMessage response = await client.PostAsJsonAsync("api/textextractor/test", new Dictionary<string, string>() { { "image", "this"} });
-            //response.EnsureSuccessStatusCode();
-
-            //Post to API
-            //var client = new RestClient("https://is-this-vegan.azurewebsites.net/api/textextractor/test");
-            //client.Timeout = -1;
-            //var request = new RestRequest(Method.POST);
-            //request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            //request.AddHeader("Cookie", "ARRAffinity=71b93c87c96d66981ffadd5ddb8b4abd486df8e270e5aacfe623a6fb5887cbed");
-            ////req.AddParameter("application/x-www-form-urlencoded", body, ParameterType.RequestBody); maybe?
-            //var ingredientList = new IngredientListModel() { imageAsString = imageAsString };
-            //var serializedIngredientList = JsonConvert.SerializeObject(ingredientList);
-            //request.AddParameter("application/x-www-form-urlencoded", JsonConvert.SerializeObject(ingredient), ParameterType.RequestBody);            //request.AddParameter("text/json", JsonConvert.SerializeObject(ingredient) , ParameterType.RequestBody);
-            //var response = client.Execute(request);
-
-            var client = new HttpClient();
-            client.BaseAddress = new Uri("https://is-this-vegan.azurewebsites.net/");
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            var uri = new Uri("https://is-this-vegan.azurewebsites.net/api/textextractor/test");
-            var ingredientList = new IngredientListModel() { imageAsString = imageAsString };
-            var serializedIngredientList = JsonConvert.SerializeObject(ingredientList);
-            HttpContent contentPost = new StringContent(serializedIngredientList, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync(uri, contentPost);
-            if (response.IsSuccessStatusCode)
-            {
-                Console.WriteLine("Here");
-            }
-
-            var are_equal = string.Equals(response.Content, imageAsString);
-
-            //Save API response
-            //this.response = response.Content;
+            var client = new RestClient("https://is-this-vegan.azurewebsites.net/ingredientlist");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Content-Type", "application/json");
+            request.AddParameter("application/json", "{\"imageAsString\":\"John Doe\", \"ingredientListRaw\":\"18\", \"ingredientListClean\":[\"United\", \"States\", \"of\", \"America\"]}", ParameterType.RequestBody);
+            var response = client.Execute(request);
+            var jsonObject = JsonConvert.DeserializeObject(response.Content);
+            Console.WriteLine(response);
 
             return true;
 
