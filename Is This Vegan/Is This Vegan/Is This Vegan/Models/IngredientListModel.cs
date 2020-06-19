@@ -9,12 +9,6 @@ namespace Is_This_Vegan.Models
     public class IngredientListModel
     {   
         /// <summary>
-        /// Image as an SKBitmap (SkiaSharp Bitmap)
-        /// </summary>
-        [DisplayName("Photo")]
-        SKBitmap image { get; set; }
-
-        /// <summary>
         /// Stringified image. Process to stringify image is as follows:
         /// 1) Convert SKBitmap to Bytes (use SKBitmap's Bytes property)
         /// 2)  Use Convert.ToBase64String({bytes from step 1}) to convert to string

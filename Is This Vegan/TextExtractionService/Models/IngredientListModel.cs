@@ -1,19 +1,12 @@
-﻿using SkiaSharp;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
-namespace Is_This_Vegan.Models
+namespace TextExtractionService.Models
 {
     public class IngredientListModel
     {   
-        /// <summary>
-        /// Image as an SKBitmap (SkiaSharp Bitmap)
-        /// </summary>
-        [DisplayName("Photo")]
-        SKBitmap image { get; set; }
-
         /// <summary>
         /// Stringified image. Process to stringify image is as follows:
         /// 1) Convert SKBitmap to Bytes (use SKBitmap's Bytes property)
