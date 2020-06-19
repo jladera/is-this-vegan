@@ -4,8 +4,32 @@
              x:Class="Is_This_Vegan.Views.MainPage"
              xmlns:tt="clr-namespace:Is_This_Vegan.Backend"
              xmlns:local="clr-namespace:Is_This_Vegan.Backend"
-             Title="Home"
              BackgroundColor="#1A1A1A">
+    <NavigationPage.TitleView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <!-- v1 white_home_text1.png -->
+            <!-- v2 white-home-text.png -->
+            <!-- v3 home_text_green_inner.png -->
+            <!-- v4 home_text_outer_stroke.png choice!! -->
+            <Image Source="{local:ImageResource Is This Vegan.SharedMedia.home_text_outer_stroke.png}"
+                   Grid.Row="0" 
+                   Grid.Column="0"
+                   HorizontalOptions="Start"
+                   HeightRequest="30"/>
+
+            <Image Source="{local:ImageResource Is This Vegan.SharedMedia.increased-tracking-home-text.png}"
+                   Grid.Row="0" 
+                   Grid.Column="0"
+                   HorizontalOptions="End"
+                   HeightRequest="30"/>
+        </Grid>
+    </NavigationPage.TitleView>
 
     <ContentPage.Content>
         <Grid>
@@ -97,7 +121,7 @@
                 <Grid x:Name="Voting_Grid">
                     <Grid.RowDefinitions>
                         <RowDefinition x:Name="Are_These_Vegan_Row" 
-                                       Height=".75*" />
+                                       Height="1*" />
                         <RowDefinition x:Name="Circle_Icons_Row"
                                        Height="2*" />
                         <RowDefinition x:Name="Ingredients_Row" 
@@ -108,12 +132,11 @@
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
-                    <Label x:Name="Are_These_Vegan_Text"
-                           Text="Are These Vegan?"
-                           TextColor="#CEFFCE"
-                           FontSize="Large"
+                    <Image x:Name="Are_These_Vegan_Text"
+                           Source="{local:ImageResource Is This Vegan.SharedMedia.are_these_vegan.png}"
                            Grid.Row="0"
                            Grid.ColumnSpan="3"
+                           Aspect="AspectFit"
                            HorizontalOptions="Center"/>
 
                     <Image Source="{local:ImageResource Is This Vegan.SharedMedia.circle.png}"
@@ -147,7 +170,7 @@
                                Grid.Column="2"
                                Aspect="AspectFit"
                                BackgroundColor="Transparent"/>
-                    <Label x:Name="Ingredient_3_Text"
+                    <Label x:Name="Vote_Circle"
                            Text="Ingredient 3"
                                TextColor="#CEFFCE"
                                Grid.Row="2"
@@ -203,12 +226,34 @@
                                HorizontalOptions="Start"/>
                     <Image x:Name="ScanCircle" 
                                Source="{local:ImageResource Is This Vegan.SharedMedia.scan.png}"
-                               Grid.Row="1"
-                               Grid.Column="1"
+                               Grid.RowSpan="2"
+                               Grid.ColumnSpan="2"
                                Aspect="AspectFit"
                                HorizontalOptions="End"/>
                 </Grid>
             </Frame>
+
+            <!--SWIPE ACTIONS-->
+            <!--<Frame x:Name="TestFrame" 
+                       BackgroundColor="Transparent" 
+                       Grid.Row="6" 
+                       Grid.ColumnSpan="3">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Image x:Name="buttonGradients" 
+                               Source="{local:ImageResource Is This Vegan.SharedMedia.button-gradients.png}"
+                               Grid.Row="0"
+                               Grid.Column="0"
+                               Aspect="AspectFill"
+                               HorizontalOptions="Start"/>
+                </Grid>
+            </Frame>-->
 
         </Grid>
     </ContentPage.Content>

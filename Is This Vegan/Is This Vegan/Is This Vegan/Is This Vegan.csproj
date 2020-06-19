@@ -13,11 +13,15 @@
   <ItemGroup>
     <None Remove="SharedMedia\240 PX home.png" />
     <None Remove="SharedMedia\are_these_vegan.png" />
+    <None Remove="SharedMedia\button-gradients.png" />
     <None Remove="SharedMedia\cancel.png" />
     <None Remove="SharedMedia\checkmark.png" />
     <None Remove="SharedMedia\circle.png" />
     <None Remove="SharedMedia\Final Icons_vote.png" />
     <None Remove="SharedMedia\home.png" />
+    <None Remove="SharedMedia\home_text_green_inner.png" />
+    <None Remove="SharedMedia\home_text_outer_stroke.png" />
+    <None Remove="SharedMedia\increased-tracking-home-text.png" />
     <None Remove="SharedMedia\is_this_vegan.png" />
     <None Remove="SharedMedia\login.png" />
     <None Remove="SharedMedia\logo icon 2.png" />
@@ -35,32 +39,47 @@
     <None Remove="SharedMedia\test_ingredient_list_full.jpg" />
     <None Remove="SharedMedia\thumbs down.png" />
     <None Remove="SharedMedia\thumbs up.png" />
+    <None Remove="SharedMedia\transparent_vote_icon_gradient1.png" />
+    <None Remove="SharedMedia\transparent_vote_icon_gradient2.png" />
     <None Remove="SharedMedia\vegan.png" />
     <None Remove="SharedMedia\vote.png" />
+    <None Remove="SharedMedia\white-home-text.png" />
+    <None Remove="SharedMedia\white_home_text1.png" />
+    <None Remove="SharedMedia\white_scan_icon.png" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="SharedMedia\240 PX home.png" />
     <EmbeddedResource Include="SharedMedia\are_these_vegan.png" />
+    <EmbeddedResource Include="SharedMedia\button-gradients.png" />
     <EmbeddedResource Include="SharedMedia\cancel.png" />
     <EmbeddedResource Include="SharedMedia\checkmark.png" />
     <EmbeddedResource Include="SharedMedia\circle.png" />
     <EmbeddedResource Include="SharedMedia\home.png" />
+    <EmbeddedResource Include="SharedMedia\home_text_green_inner.png" />
+    <EmbeddedResource Include="SharedMedia\home_text_outer_stroke.png" />
+    <EmbeddedResource Include="SharedMedia\increased-tracking-home-text.png" />
     <EmbeddedResource Include="SharedMedia\is_this_vegan.png" />
     <EmbeddedResource Include="SharedMedia\login.png" />
     <EmbeddedResource Include="SharedMedia\logo_circle.png" />
     <EmbeddedResource Include="SharedMedia\not_sure.png" />
     <EmbeddedResource Include="SharedMedia\not_vegan.png" />
     <EmbeddedResource Include="SharedMedia\scan.png" />
+    <EmbeddedResource Include="SharedMedia\transparent_vote_icon_gradient1.png" />
+    <EmbeddedResource Include="SharedMedia\transparent_vote_icon_gradient2.png" />
     <EmbeddedResource Include="SharedMedia\vote.png" />
     <EmbeddedResource Include="SharedMedia\vegan.png" />
     <EmbeddedResource Include="SharedMedia\logo.png" />
     <EmbeddedResource Include="SharedMedia\test_ingredient_list_cropped.jpg" />
     <EmbeddedResource Include="SharedMedia\test_ingredient_list_full.jpg" />
+    <EmbeddedResource Include="SharedMedia\white-home-text.png" />
+    <EmbeddedResource Include="SharedMedia\white_home_text1.png" />
+    <EmbeddedResource Include="SharedMedia\white_scan_icon.png" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Grpc.Core" Version="2.29.0" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.10" />
     <PackageReference Include="RestSharp" Version="106.11.4" />
     <PackageReference Include="SkiaSharp" Version="1.68.3" />

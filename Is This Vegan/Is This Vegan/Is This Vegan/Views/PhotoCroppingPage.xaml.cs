@@ -7,6 +7,9 @@ using System.Drawing;
 using Plugin.Media.Abstractions;
 using Is_This_Vegan.Backend.API;
 using System.Threading.Tasks;
+using System.Net.Http;
+using System.Collections.Generic;
+using RestSharp;
 
 namespace Is_This_Vegan.Views
 {
@@ -62,6 +65,7 @@ namespace Is_This_Vegan.Views
         public async Task<bool> PostImageAsync(SKBitmap croppedBitmap)
         {
             var textExtractor = new TextExtractor();
+
 
             var response = await textExtractor.PostImageAsync();
             return true;
