@@ -5,5 +5,9 @@
     <RootNamespace>Is_This_Vegan___API</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Tesseract" Version="4.1.0-beta1" />
+  </ItemGroup>
+
 
 </Project>
