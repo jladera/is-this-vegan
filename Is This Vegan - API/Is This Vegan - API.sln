@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Is This Vegan - API", "Is This Vegan - API\Is This Vegan - API.csproj", "{DE7E1FFA-3705-4A9C-9595-2FDFDBA730D4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE7E1FFA-3705-4A9C-9595-2FDFDBA730D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE7E1FFA-3705-4A9C-9595-2FDFDBA730D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE7E1FFA-3705-4A9C-9595-2FDFDBA730D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE7E1FFA-3705-4A9C-9595-2FDFDBA730D4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9DB464F1-D465-4AB7-B535-9404D167FE72}
+	EndGlobalSection
+EndGlobal
