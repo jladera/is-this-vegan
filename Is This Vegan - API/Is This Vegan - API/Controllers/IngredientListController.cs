@@ -41,13 +41,9 @@ namespace Is_This_Vegan___API.Controllers
 
         // POST: /IngredientList
         [HttpPost]
-        public IngredientListModel PostIngredientList([Bind("imageAsString,ingredientListRaw,ingredientListClean")] IngredientListModel ingredientList)
+        public IActionResult PostIngredientList([Bind("imageAsString,ingredientListRaw,ingredientListClean")] IngredientListModel ingredientList)
         {
-            HttpResponseMessage response = null;
-
-            response = new HttpResponseMessage(HttpStatusCode.OK);
-            //response.Content = new StringContent(image);
-            return ingredientList;
+            return StatusCode(200, ingredientList);
         }
     }
 }
