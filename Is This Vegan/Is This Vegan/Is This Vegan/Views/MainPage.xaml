@@ -132,12 +132,16 @@
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
-                    <Image x:Name="Are_These_Vegan_Text"
-                           Source="{local:ImageResource Is This Vegan.SharedMedia.are_these_vegan.png}"
+                    <ImageButton x:Name="Are_These_Vegan_Text"
+                           Source="{local:ImageResource Is This Vegan.SharedMedia.Are these Vegan text.png}"
+                           Clicked="Are_These_Vegan_Text_Clicked"
                            Grid.Row="0"
                            Grid.ColumnSpan="3"
-                           Aspect="AspectFit"
-                           HorizontalOptions="Center"/>
+                           Aspect="Fill"
+                           HorizontalOptions="Center"
+                           BackgroundColor="Transparent"
+                           Margin="0, 0, 0, 0"
+                           Padding="0, 0, 0, 0"/>
 
                     <Image Source="{local:ImageResource Is This Vegan.SharedMedia.circle.png}"
                                  Grid.Row="1"
