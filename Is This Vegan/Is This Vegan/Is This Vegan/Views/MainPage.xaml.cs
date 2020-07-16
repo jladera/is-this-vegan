@@ -418,5 +418,10 @@ namespace Is_This_Vegan.Views
 
             return true;
         }
+
+        public async void Are_These_Vegan_Text_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new VoteDashboard(), true);
+        }
     }
 }
