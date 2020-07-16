@@ -34,14 +34,16 @@ namespace Is_This_Vegan.Backend.API
 
             var imageAsString = Convert.ToBase64String(image);
 
-            var client = new RestClient("https://is-this-vegan.azurewebsites.net/ingredientlist");
+            var ingredientListJson = JsonConvert.SerializeObject(new IngredientListModel() { imageAsString = imageAsString });
+
+            var client = new RestClient("http://is-this-vegan.azurewebsites.net/api/ingredientlist");
             client.Timeout = -1;
             var request = new RestRequest(Method.POST);
             request.AddHeader("Content-Type", "application/json");
-            request.AddParameter("application/json", "{\"imageAsString\":\"John Doe\", \"ingredientListRaw\":\"18\", \"ingredientListClean\":[\"United\", \"States\", \"of\", \"America\"]}", ParameterType.RequestBody);
-            var response = client.Execute(request);
-            var jsonObject = JsonConvert.DeserializeObject(response.Content);
-            Console.WriteLine(response);
+            request.AddHeader("Cookie", "ARRAffinity=96267d732e65ca0d29c035444c65e39a9da9a9cd4ec07e02900087916e850fb3");
+            request.AddParameter("application/json", ingredientListJson, ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+            Console.WriteLine(response.Content);
 
             return true;
 
