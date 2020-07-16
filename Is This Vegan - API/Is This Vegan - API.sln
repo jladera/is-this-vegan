@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Is This Vegan - API", "Is This Vegan - API\Is This Vegan - API.csproj", "{DE7E1FFA-3705-4A9C-9595-2FDFDBA730D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Is This Vegan - API", "Is This Vegan - API\Is This Vegan - API.csproj", "{DE7E1FFA-3705-4A9C-9595-2FDFDBA730D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Is This Vegan (Net)", "Is This Vegan (Net)\Is This Vegan (Net).csproj", "{B087611B-69BD-4DDB-98D0-8484BE5EED0E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{DE7E1FFA-3705-4A9C-9595-2FDFDBA730D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE7E1FFA-3705-4A9C-9595-2FDFDBA730D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE7E1FFA-3705-4A9C-9595-2FDFDBA730D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B087611B-69BD-4DDB-98D0-8484BE5EED0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B087611B-69BD-4DDB-98D0-8484BE5EED0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B087611B-69BD-4DDB-98D0-8484BE5EED0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B087611B-69BD-4DDB-98D0-8484BE5EED0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
