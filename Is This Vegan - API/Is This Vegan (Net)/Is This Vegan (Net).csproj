@@ -194,10 +194,13 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Backend\IngredientListBackend.cs" />
+    <Compile Include="Backend\Ingredient List\IngredientListBackend.cs" />
+    <Compile Include="Backend\Ingredient List\IngredientListHelper.cs" />
     <Compile Include="Controllers\IngredientListController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Enums\EnumExtensions.cs" />
+    <Compile Include="Enums\IngredientClassificationEnum.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
