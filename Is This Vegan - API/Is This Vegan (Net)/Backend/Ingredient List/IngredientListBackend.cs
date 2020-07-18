@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using Tesseract;
 
-namespace Is_This_Vegan__Net_.Backend
+namespace Is_This_Vegan__Net_.Backend.Ingredient_List
 {
     public class IngredientListBackend
     {
