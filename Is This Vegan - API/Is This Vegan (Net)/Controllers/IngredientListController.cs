@@ -1,14 +1,6 @@
-﻿using Is_This_Vegan__Net_.Backend;
+﻿using Is_This_Vegan__Net_.Backend.Ingredient_List;
 using Is_This_Vegan__Net_.Models;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using System.Web.Mvc;
 
 namespace Is_This_Vegan__Net_.Controllers
 {
