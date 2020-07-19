@@ -13,6 +13,7 @@
   <ItemGroup>
     <None Remove="SharedMedia\240 PX home.png" />
     <None Remove="SharedMedia\are_these_vegan.png" />
+    <None Remove="SharedMedia\are_these_vegan_title.png" />
     <None Remove="SharedMedia\button-gradients.png" />
     <None Remove="SharedMedia\cancel.png" />
     <None Remove="SharedMedia\checkmark.png" />
@@ -51,6 +52,7 @@
   <ItemGroup>
     <EmbeddedResource Include="SharedMedia\240 PX home.png" />
     <EmbeddedResource Include="SharedMedia\are_these_vegan.png" />
+    <EmbeddedResource Include="SharedMedia\are_these_vegan_title.png" />
     <EmbeddedResource Include="SharedMedia\button-gradients.png" />
     <EmbeddedResource Include="SharedMedia\cancel.png" />
     <EmbeddedResource Include="SharedMedia\checkmark.png" />
