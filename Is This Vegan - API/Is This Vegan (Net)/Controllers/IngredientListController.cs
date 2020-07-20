@@ -1,5 +1,6 @@
 ﻿using Is_This_Vegan__Net_.Backend.Ingredient_List;
 using Is_This_Vegan__Net_.Models;
+using Newtonsoft.Json;
 using System.Web.Http;
 
 namespace Is_This_Vegan__Net_.Controllers
@@ -51,7 +52,25 @@ namespace Is_This_Vegan__Net_.Controllers
         // POST api/values
         public IHttpActionResult Post([FromBody] IngredientListModel model)
         {
-            return Ok();
+            if (model is null)
+            {
+                return BadRequest("Post body cannot be null. Please create an object of type IngredientListModel.");
+            }
+
+            if (string.IsNullOrEmpty(model.imageAsString) ||
+                string.IsNullOrWhiteSpace(model.imageAsString))
+            {
+                return BadRequest("No image was provided. Please provide the string representation of an image within an IngredientListModel object.");
+            }
+
+            var result = backend.ExtractFromImage(model);
+
+            if (!result)
+            {
+                return BadRequest(backend.exception);
+            }
+
+            return Ok(backend.serializedList);
         }
 
         // PUT api/values/5

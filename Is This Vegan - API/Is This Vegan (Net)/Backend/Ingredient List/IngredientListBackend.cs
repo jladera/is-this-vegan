@@ -1,4 +1,5 @@
 ﻿using Is_This_Vegan__Net_.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -12,13 +13,31 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
     {
         private string tessdataPath;
         private string mediaPath;
+        public IngredientListModel list { get; private set; }
         public ExtractionModel extraction { get; private set; }
-        public Exception exception { get; private set; }
+        public string serializedList { get; private set; }
+        public string exception { get; private set; }
 
         public IngredientListBackend(string tessdataPath, string mediaPath)
         {
             this.tessdataPath = tessdataPath;
             this.mediaPath = mediaPath;
+        }
+
+        public bool ExtractFromImage(IngredientListModel list)
+        {
+            this.list = list;
+
+            var listImage = IngredientListHelper.StringToBitmap(list.imageAsString);
+
+            var result = ExtractFromImageTest(listImage);
+
+            if (result)
+            {
+                serializedList = JsonConvert.SerializeObject(this.list);
+            }
+
+            return result;
         }
 
         public bool ExtractFromImageTest(Bitmap image = null)
@@ -41,7 +60,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
                         {
                             var meanConfidenceLabel = String.Format("{0:P}", page.GetMeanConfidence());
                             var resultText = page.GetText();
-                            extraction = new ExtractionModel(meanConfidenceLabel, resultText);
+                            list.ingredientListRaw = resultText;
                             return true;
                         }
                     }
@@ -49,7 +68,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
             }
             catch (Exception e)
             {
-                exception = e;
+                exception = JsonConvert.SerializeObject(e);
                 return false;
             }
         }
