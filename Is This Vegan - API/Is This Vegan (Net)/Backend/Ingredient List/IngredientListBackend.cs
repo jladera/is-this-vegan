@@ -15,8 +15,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
         private string mediaPath;
         public IngredientListModel list { get; private set; }
         public ExtractionModel extraction { get; private set; }
-        public string serializedList { get; private set; }
-        public string exception { get; private set; }
+        public Exception exception { get; private set; }
 
         public IngredientListBackend(string tessdataPath, string mediaPath)
         {
@@ -31,11 +30,6 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
             var listImage = IngredientListHelper.StringToBitmap(list.imageAsString);
 
             var result = ExtractFromImageTest(listImage);
-
-            if (result)
-            {
-                serializedList = JsonConvert.SerializeObject(this.list);
-            }
 
             return result;
         }
@@ -68,7 +62,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
             }
             catch (Exception e)
             {
-                exception = JsonConvert.SerializeObject(e);
+                exception = e;
                 return false;
             }
         }

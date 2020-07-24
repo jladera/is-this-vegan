@@ -67,10 +67,10 @@ namespace Is_This_Vegan__Net_.Controllers
 
             if (!result)
             {
-                return BadRequest(backend.exception);
+                return BadRequest(backend.exception.ToString());
             }
 
-            return Ok(backend.serializedList);
+            return Ok(backend.list);
         }
 
         // PUT api/values/5
