@@ -40,16 +40,6 @@ namespace Is_This_Vegan__Net_.Controllers
             return "value";
         }
 
-        // POST: api/ingredientlist
-        //[System.Web.Http.HttpPost]
-        //public IngredientListModel PostIngredientList([FromBody] JToken postData, HttpRequestMessage request)
-        //{
-        //    var x = postData;
-        //    var y = request;
-        //    return new IngredientListModel();
-        //}
-
-        // POST api/values
         public IHttpActionResult Post([FromBody] IngredientListModel model)
         {
             if (model is null)
