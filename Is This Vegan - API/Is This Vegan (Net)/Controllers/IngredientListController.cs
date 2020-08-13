@@ -8,7 +8,6 @@ namespace Is_This_Vegan__Net_.Controllers
     public class IngredientListController : ApiController
     {
         public string tessdataPath { get; private set; }
-        public string mediaPath { get; private set; }
         private IngredientListBackend backend;
 
         public IngredientListController()
@@ -17,21 +16,20 @@ namespace Is_This_Vegan__Net_.Controllers
             //tessdataPath = controller.GetTessdataPath();
             //mediaPath = controller.GetMediaPath();
             tessdataPath = System.Web.HttpContext.Current.Request.MapPath("~\\tessdata");
-            mediaPath = System.Web.HttpContext.Current.Request.MapPath("~\\Media");
-            backend = new IngredientListBackend(tessdataPath, mediaPath);
+            backend = new IngredientListBackend(tessdataPath);
         }
 
         // GET api/values
-        public ExtractionModel Get()
+        public IHttpActionResult Get()
         { 
             var result = backend.ExtractFromImageTest();
 
             if (!result)
             {
-                return new ExtractionModel("0", "Error Occurred. Could not parse photo.");
+                return BadRequest("Error Occurred. Could not parse photo.");
             }
 
-            return backend.extraction;
+            return Ok(backend.list);
         }
 
         // GET api/values/5
