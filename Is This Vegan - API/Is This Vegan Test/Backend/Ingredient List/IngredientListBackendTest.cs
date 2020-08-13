@@ -15,7 +15,6 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
     [TestClass]
     public class IngredientListBackendTest
     {
-        string tessdataPath;
         string generalTestImagePath;
         IngredientListBackend backend;
         IngredientListHelper helper;
