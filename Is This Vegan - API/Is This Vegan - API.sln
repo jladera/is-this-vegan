@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Is This Vegan - API", "Is T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Is This Vegan (Net)", "Is This Vegan (Net)\Is This Vegan (Net).csproj", "{B087611B-69BD-4DDB-98D0-8484BE5EED0E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Is This Vegan Test", "Is This Vegan Test\Is This Vegan Test.csproj", "{3E1EFFDA-2B6D-4DF5-8841-0CA91D786765}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B087611B-69BD-4DDB-98D0-8484BE5EED0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B087611B-69BD-4DDB-98D0-8484BE5EED0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B087611B-69BD-4DDB-98D0-8484BE5EED0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E1EFFDA-2B6D-4DF5-8841-0CA91D786765}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E1EFFDA-2B6D-4DF5-8841-0CA91D786765}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E1EFFDA-2B6D-4DF5-8841-0CA91D786765}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E1EFFDA-2B6D-4DF5-8841-0CA91D786765}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
