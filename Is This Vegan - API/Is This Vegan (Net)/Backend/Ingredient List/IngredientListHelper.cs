@@ -14,7 +14,7 @@ using System.IO;
 
 namespace Is_This_Vegan__Net_.Backend.Ingredient_List
 {
-    public static class IngredientListHelper
+    public class IngredientListHelper
     {
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
         /// </summary>
         /// <param name="image"> The Ingredient List image received from the mobile client </param>
         /// <returns> The Ingredient List image represeted as  Bitmap </returns>
-        public static Bitmap StringToBitmap(string image)
+        public Bitmap StringToBitmap(string image)
         {
             Byte[] bytes = Convert.FromBase64String(image);
 
