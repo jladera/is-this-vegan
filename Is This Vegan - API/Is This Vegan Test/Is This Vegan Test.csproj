@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Backend\Ingredient List\IngredientListBackendTest.cs" />
+    <Compile Include="Backend\Ingredient List\SubingredientPipelineTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
