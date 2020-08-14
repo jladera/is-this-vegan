@@ -8,13 +8,15 @@
  *      - Convert image of an Ingredient List (received as string from mobile client) to a Bitmap
  */
 
+using Is_This_Vegan__Net_.Backend.Interfaces;
 using System;
 using System.Drawing;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Is_This_Vegan__Net_.Backend.Ingredient_List
 {
-    public class IngredientListHelper
+    public class IngredientListHelper:IPipeline
     {
 
         /// <summary>
@@ -31,6 +33,20 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
                 Bitmap bitmap = (Bitmap)Image.FromStream(ms);
                 return bitmap;
             }
+        }
+
+        /// <summary>
+        /// Executes text cleaning pipeline to remove unnecessary words, punctuation, and invalid characters.
+        /// </summary>
+        /// <param name="input"> Raw ingredient list text from Tesseract extraction </param>
+        /// <returns> True if executes without error, otherwise false</returns>
+        public bool Execute<T>(ref T input)
+        {
+            // replace ingredients that have sub-ingredients with their sub-ingredients
+            // remove initial unnecessary text (ex. 'Ingredients: ')
+            // split ingredients that have both a scientific and common name listed
+            // get each ingredient
+            return true;
         }
     }
 }

@@ -49,7 +49,6 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
                             var meanConfidenceLabel = String.Format("{0:P}", page.GetMeanConfidence());
                             var resultText = page.GetText();
                             list.ingredientListRaw = resultText;
-                            return true;
                         }
                     }
                 }
@@ -59,6 +58,9 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
                 exception = e;
                 return false;
             }
+            var input = list.ingredientListRaw;
+            var result = helper.Execute<string>(ref input);
+            return true;
         }
     }
 }
