@@ -12,6 +12,9 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
     /// </summary>
     public class SubingredientPipeline : IPipeline
     {
+        // Cleaned ingredient list. Populated upon Execute method's completion
+        public string cleanedList { get; set; }
+
         /// <summary>
         /// Pipeline driver
         /// 
@@ -25,7 +28,17 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
         /// <returns> True if executes without error, otherise false </returns>
         public bool Execute<T>(ref T input)
         {
-            //var ingredientsWithSubingredients = FindIngredientsWithSubingredients(input);
+            try
+            {
+                var toReplace = Find(input.ToString());
+                var subingredients = ExtractSubingredients(input.ToString());
+                cleanedList = Replace(input.ToString(), toReplace, subingredients);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            
             return true;
         }
 

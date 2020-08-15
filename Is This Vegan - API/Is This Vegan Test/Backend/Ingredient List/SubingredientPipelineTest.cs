@@ -38,6 +38,21 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
         }
 
         [TestMethod]
+        public void Execute_Belvita_Vanilla_Cookie_Should_Pass()
+        {
+            // arrange
+            var input = GetIngredientList("belvita_vanilla-cookie.jpg");
+            var expectedCleanedList = " \n\nwpe erera paresis\n\nINGREDIENTS: WHOLE GRAIN WHEAT FLOUR, WHEAT FLOUR, NIACIN, REDUCED IRON, THIAMIN MONONITRATE\n(VITAMIN B1), RIBOFLAVIN (VITAMIN B2), FOLIC ACID, SUGAR, CANOLA\nOIL, WHOLE GRAIN ROLLED OATS, WHOLE GRAIN RYE FLOUR, BAKING\nSODA, DISODIUM PYROPHOSPHATE, SALT, SOY LECITHIN, DATEM,\nNATURAL FLAVOR, FERRIC ORTHOPHOSPHATE (IRON), NIACINAMIDE,\n__ PYRIDOXINE HYDROCHLORIDE (VITAMIN B6), RIBOFLAVIN (VITAMIN B2),\n| THIAMIN MONONITRATE (VITAMIN B1).\n\n   \n";
+
+            // act
+            var result = pipeline.Execute(ref input);
+
+            // assert
+            Assert.IsTrue(result);
+            Assert.AreEqual(expectedCleanedList, pipeline.cleanedList);
+        }
+
+        [TestMethod]
         public void FindIngredientsWithSubingredients_Belvita_Vanilla_Cookie_Should_Pass()
         {
             // arrange
