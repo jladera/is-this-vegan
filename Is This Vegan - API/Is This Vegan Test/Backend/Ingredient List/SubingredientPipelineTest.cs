@@ -41,23 +41,14 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
         public void FindIngredientsWithSubingredients_Belvita_Vanilla_Cookie_Should_Pass()
         {
             // arrange
-            
-            var subingredientPipeline = new SubingredientPipeline();
             var input = GetIngredientList("belvita_vanilla-cookie.jpg");
-            var expected = new List<string>() {
-                "ENRICHED FLOUR\n[WHEAT FLOUR, NIACIN, REDUCED IRON, THIAMIN MONONITRATE\n(VITAMIN B1), RIBOFLAVIN (VITAMIN B2), FOLIC ACID}"
-            };
+            var expected = "ENRICHED FLOUR\n[WHEAT FLOUR, NIACIN, REDUCED IRON, THIAMIN MONONITRATE\n(VITAMIN B1), RIBOFLAVIN (VITAMIN B2), FOLIC ACID}";
 
             // act
-            var result = subingredientPipeline.FindIngredientsWithSubingredients(input);
+            var result = pipeline.FindIngredientsWithSubingredients(input)[0].Value;
 
             // assert
-            foreach(int index in Enumerable.Range(0, result.Count))
-            {
-                var resultValue = result[index].Value;
-                var expectedValue = expected[index];
-                Assert.AreEqual(resultValue, expectedValue);
-            }
+            Assert.AreEqual(result, expected);
         }
 
         [TestMethod]
