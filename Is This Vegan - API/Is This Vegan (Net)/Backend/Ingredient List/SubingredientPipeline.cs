@@ -37,8 +37,23 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
         public MatchCollection FindIngredientsWithSubingredients(string input)
         {
             var regex = new Regex(@"(?<=\s)(\w|\s)*(\[|\{)(\w*|\s|\,|\(|\))*(\]|\})");
-            MatchCollection matches = regex.Matches(input);
+            var matches = regex.Matches(input);
             return matches;
+        }
+
+        /// <summary>
+        /// Finds and returns all lists of subingredients.
+        /// 
+        /// example:
+        ///     extracts: WHEAT FLOUR, NIACIN, REDUCED IRON, THIAMIN MONONITRATE (VITAMIN B1), RIBOFLAVIN (VITAMIN B2), FOLIC ACID
+        ///     from: ENRICHED FLOUR [WHEAT FLOUR, NIACIN, REDUCED IRON, THIAMIN MONONITRATE (VITAMIN B1), RIBOFLAVIN (VITAMIN B2), FOLIC ACID}
+        /// </summary>
+        /// <param name="input"> Raw ingredient list</param>
+        /// <returns></returns>
+        public MatchCollection ExtractSubingredients(string input)
+        {
+            var subingredients = Regex.Matches(input, @"(?<=\[|\{)(\w*|\s|\,|\(|\))*(?=\}|\])");
+            return subingredients;
         }
     }
 }

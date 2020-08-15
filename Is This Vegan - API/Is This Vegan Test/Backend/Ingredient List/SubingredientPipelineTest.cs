@@ -15,6 +15,7 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
     {
         string mediaFolderPath;
         IngredientListBackend backend;
+        SubingredientPipeline pipeline;
 
         public SubingredientPipelineTest()
         {
@@ -33,6 +34,7 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
 
 
             backend = new IngredientListBackend(tessdataPath);
+            pipeline = new SubingredientPipeline();
         }
 
         [TestMethod]
@@ -58,12 +60,26 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
             }
         }
 
-        /// <summary>
-        /// Performs text extraction through the use of IngredientListBackend
-        /// </summary>
-        /// <param name="filename"> Test image filename in Media folder ex. "belvita_vanilla-cookie.jpg" </param>
-        /// <returns> Extracted text from </returns>
-        public string GetIngredientList(string filename)
+        [TestMethod]
+        public void ExtractSubingredients_Belvita_Vanilla_Cookie_Should_Pass()
+        {
+            // arrange
+            var input = GetIngredientList("belvita_vanilla-cookie.jpg");
+            var expected = "WHEAT FLOUR, NIACIN, REDUCED IRON, THIAMIN MONONITRATE\n(VITAMIN B1), RIBOFLAVIN (VITAMIN B2), FOLIC ACID";
+
+            // act
+            var result = pipeline.ExtractSubingredients(input)[0].Value;
+
+            //assert
+            Assert.AreEqual(result, expected);
+        }
+
+            /// <summary>
+            /// Performs text extraction through the use of IngredientListBackend
+            /// </summary>
+            /// <param name="filename"> Test image filename in Media folder ex. "belvita_vanilla-cookie.jpg" </param>
+            /// <returns> Extracted text from </returns>
+            public string GetIngredientList(string filename)
         {
             // extract text
             backend.list = new IngredientListModel();
