@@ -34,10 +34,9 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
         /// </summary>
         /// <param name="input"> Raw ingredient list </param>
         /// <returns> Ingredients that have sub-ingredients </returns>
-        public MatchCollection FindIngredientsWithSubingredients(string input)
+        public MatchCollection Find(string input)
         {
-            var regex = new Regex(@"(?<=\s)(\w|\s)*(\[|\{)(\w*|\s|\,|\(|\))*(\]|\})");
-            var matches = regex.Matches(input);
+            var matches = Regex.Matches(input, @"(?<=\s)(\w|\s)*(\[|\{)(\w*|\s|\,|\(|\))*(\]|\})");
             return matches;
         }
 

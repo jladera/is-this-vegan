@@ -45,7 +45,7 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
             var expected = "ENRICHED FLOUR\n[WHEAT FLOUR, NIACIN, REDUCED IRON, THIAMIN MONONITRATE\n(VITAMIN B1), RIBOFLAVIN (VITAMIN B2), FOLIC ACID}";
 
             // act
-            var result = pipeline.FindIngredientsWithSubingredients(input)[0].Value;
+            var result = pipeline.Find(input)[0].Value;
 
             // assert
             Assert.AreEqual(result, expected);
