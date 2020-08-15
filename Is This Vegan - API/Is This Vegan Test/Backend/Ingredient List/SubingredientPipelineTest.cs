@@ -2,11 +2,9 @@
 using Is_This_Vegan__Net_.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace Is_This_Vegan_Test.Backend.Ingredient_List
 {

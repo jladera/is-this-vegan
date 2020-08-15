@@ -1,9 +1,7 @@
 ﻿using Is_This_Vegan__Net_.Backend.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Web;
 
 namespace Is_This_Vegan__Net_.Backend.Ingredient_List
 {
