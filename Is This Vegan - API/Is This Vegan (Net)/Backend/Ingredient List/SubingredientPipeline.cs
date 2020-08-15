@@ -54,5 +54,28 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
             var subingredients = Regex.Matches(input, @"(?<=\[|\{)(\w*|\s|\,|\(|\))*(?=\}|\])");
             return subingredients;
         }
+
+        /// <summary>
+        /// Replaces ingredients that contain subingredients with only the subingredients.
+        /// 
+        /// example:
+        ///     replaces: ENRICHED FLOUR [WHEAT FLOUR, NIACIN, REDUCED IRON, THIAMIN MONONITRATE (VITAMIN B1), RIBOFLAVIN (VITAMIN B2), FOLIC ACID}
+        ///     with: WHEAT FLOUR, NIACIN, REDUCED IRON, THIAMIN MONONITRATE (VITAMIN B1), RIBOFLAVIN (VITAMIN B2), FOLIC ACID
+        /// </summary>
+        /// <param name="rawList"> Raw ingredient list </param>
+        /// <param name="toReplace"> List of ingredient sections to replace (return result from Find method) </param>
+        /// <param name="subingredients"> List of subingredients (return result from ExtractSubingredientsMethod) </param>
+        /// <returns> The full ingredient list where ingredients that contain subingredients have been replaced </returns>
+        public string Replace(string rawList, MatchCollection toReplace, MatchCollection subingredients)
+        {
+            string result = rawList;
+
+            foreach(var index in Enumerable.Range(0, toReplace.Count))
+            {
+                result = result.Replace(toReplace[index].Value, subingredients[index].Value);
+            }
+
+            return result;
+        }
     }
 }
