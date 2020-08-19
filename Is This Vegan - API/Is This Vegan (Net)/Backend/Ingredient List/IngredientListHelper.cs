@@ -10,6 +10,7 @@
 
 using Is_This_Vegan__Net_.Backend.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -47,6 +48,33 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
             // split ingredients that have both a scientific and common name listed
             // get each ingredient
             return true;
+        }
+
+        /// <summary>
+        /// Removes unnecessary characters, newlines, etc. from an ingredient list.
+        /// </summary>
+        /// <param name="rawList"> Raw ingredient list (done after text extraction) </param>
+        /// <returns> The ingredient list without invalid characters </returns>
+        public string Remove(string rawList)
+        {
+            // Key = text to remove
+            // Value = replacement text
+            var toRemoveList = new List<KeyValuePair<string, string>>()
+            {
+                new KeyValuePair<string, string>("\n", " "),
+                new KeyValuePair<string, string>("\t", " "),
+                new KeyValuePair<string, string>("_", ""),
+                new KeyValuePair<string, string>("|", "")
+            };
+
+            foreach (var toRemove in toRemoveList)
+            {
+                rawList = rawList.Replace(toRemove.Key, toRemove.Value);
+            }
+
+            rawList = rawList.Trim();
+
+            return rawList;
         }
     }
 }
