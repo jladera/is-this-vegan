@@ -13,12 +13,20 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 
 namespace Is_This_Vegan__Net_.Backend.Ingredient_List
 {
     public class IngredientListHelper:IPipeline
     {
+        // Pipeline object that cleans ingredients that have subingredients
+        SubingredientPipeline pipeline;
+
+        public IngredientListHelper()
+        {
+            pipeline = new SubingredientPipeline();
+        }
 
         /// <summary>
         /// Converts image received from mobile client (which is represented as a string) into a Bitmap
@@ -43,8 +51,15 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
         /// <returns> True if executes without error, otherwise false</returns>
         public bool Execute<T>(ref T input)
         {
+            // remove initial unnecessary text (ex. \n, \t, _, |, etc)
+            var removalResult = Remove(input.ToString());
+
+            // convert to lowecase
+            var lowerResult = removalResult.ToLower();
+
             // replace ingredients that have sub-ingredients with their sub-ingredients
-            // remove initial unnecessary text (ex. 'Ingredients: ')
+            var subingredientPipelineResult = pipeline.Execute(ref lowerResult);
+
             // split ingredients that have both a scientific and common name listed
             // get each ingredient
             return true;
@@ -64,7 +79,9 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
                 new KeyValuePair<string, string>("\n", " "),
                 new KeyValuePair<string, string>("\t", " "),
                 new KeyValuePair<string, string>("_", ""),
-                new KeyValuePair<string, string>("|", "")
+                new KeyValuePair<string, string>("|", ""),
+                new KeyValuePair<string, string>("(", ","),
+                new KeyValuePair<string, string>(")", "")
             };
 
             foreach (var toRemove in toRemoveList)
