@@ -48,7 +48,7 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
                         "datem",
                         "natural flavor",
                         "ferric orthophosphate (iron)",
-                        "niacinimide",
+                        "niacinamide",
                         "pyridoxine hydrochloride (vitamin b6)"
                     }
                 )   
