@@ -21,11 +21,13 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
     public class IngredientListHelper:IPipeline
     {
         // Pipeline object that cleans ingredients that have subingredients
-        SubingredientPipeline pipeline;
+        public SubingredientPipeline pipeline;
+        public List<string> cleanedList { get; set; }
 
         public IngredientListHelper()
         {
             pipeline = new SubingredientPipeline();
+            cleanedList = new List<string>();
         }
 
         /// <summary>
@@ -60,9 +62,14 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
             // replace ingredients that have sub-ingredients with their sub-ingredients
             var subingredientPipelineResult = pipeline.Execute(ref lowerResult);
 
-            // split ingredients that have both a scientific and common name listed
-            // get each ingredient
-            return true;
+            if (subingredientPipelineResult)
+            {
+                // get each ingredient
+                cleanedList = ToList(pipeline.cleanedList);
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -79,9 +86,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
                 new KeyValuePair<string, string>("\n", " "),
                 new KeyValuePair<string, string>("\t", " "),
                 new KeyValuePair<string, string>("_", ""),
-                new KeyValuePair<string, string>("|", ""),
-                new KeyValuePair<string, string>("(", ","),
-                new KeyValuePair<string, string>(")", "")
+                new KeyValuePair<string, string>("|", "")
             };
 
             foreach (var toRemove in toRemoveList)
@@ -92,6 +97,34 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
             rawList = rawList.Trim();
 
             return rawList;
+        }
+
+        /// <summary>
+        /// Converts a cleaned list string into a list of ingredients as strings
+        /// </summary>
+        /// <param name="cleanedList"> 
+        ///     Ingredients list after removing invalid characters, breaking compound 
+        ///     ingredients to base ingredients, and converting list to lowercase.
+        /// </param>
+        /// <returns> 
+        ///     A list of ingredients. If there are no ingredients, then returns
+        ///     an empty list.
+        /// </returns>
+        public List<string> ToList(string cleanedList)
+        {
+            var result = new List<string>();
+            var matches = Regex.Matches(cleanedList, @"(?<=,)[^,]+|(?<=:)[^,]+(?=,)");
+
+            foreach (Match match in matches)
+            {
+                var ingredient = match.Value.Trim();
+                if (!result.Contains(ingredient))
+                {
+                    result.Add(match.Value.Trim());
+                }
+            }
+
+            return result;
         }
     }
 }

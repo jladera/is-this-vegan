@@ -2,6 +2,7 @@
 using Is_This_Vegan__Net_.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -36,11 +37,35 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
         }
 
         [TestMethod]
+        public void Execute_Belvita_Vanilla_Cookie_Should_Pass()
+        {
+            // arrange
+            var expected = new IngredientListCollection();
+            var testPhoto = "belvita_vanilla-cookie.jpg";
+            var expectedList = expected.ingredientLists.Where(list => string.Equals(list.Key, testPhoto)).ToList()[0].Value;
+            var rawlist = GetIngredientList(testPhoto);
+
+            // act
+            var result = helper.Execute(ref rawlist);
+
+            var re = string.Join(", ", helper.cleanedList);
+
+            // assert
+            Assert.IsTrue(result);
+            Assert.AreEqual(expectedList.Count, helper.cleanedList.Count);
+            foreach (var ingredient in expectedList)
+            {
+                Assert.IsTrue(helper.cleanedList.Contains(ingredient));
+            }
+
+        }
+
+        [TestMethod]
         public void Remove_Belvita_Vanilla_Cookie_Should_Pass()
         {
             // arrange
             var rawlist = GetIngredientList("belvita_vanilla-cookie.jpg");
-            var expected = "wpe erera paresis  INGREDIENTS: WHOLE GRAIN WHEAT FLOUR, ENRICHED FLOUR [WHEAT FLOUR, NIACIN, REDUCED IRON, THIAMIN MONONITRATE ,VITAMIN B1, RIBOFLAVIN ,VITAMIN B2, FOLIC ACID}, SUGAR, CANOLA OIL, WHOLE GRAIN ROLLED OATS, WHOLE GRAIN RYE FLOUR, BAKING SODA, DISODIUM PYROPHOSPHATE, SALT, SOY LECITHIN, DATEM, NATURAL FLAVOR, FERRIC ORTHOPHOSPHATE ,IRON, NIACINAMIDE,  PYRIDOXINE HYDROCHLORIDE ,VITAMIN B6, RIBOFLAVIN ,VITAMIN B2,  THIAMIN MONONITRATE ,VITAMIN B1.";
+            var expected = "wpe erera paresis  INGREDIENTS: WHOLE GRAIN WHEAT FLOUR, ENRICHED FLOUR [WHEAT FLOUR, NIACIN, REDUCED IRON, THIAMIN MONONITRATE (VITAMIN B1), RIBOFLAVIN (VITAMIN B2), FOLIC ACID}, SUGAR, CANOLA OIL, WHOLE GRAIN ROLLED OATS, WHOLE GRAIN RYE FLOUR, BAKING SODA, DISODIUM PYROPHOSPHATE, SALT, SOY LECITHIN, DATEM, NATURAL FLAVOR, FERRIC ORTHOPHOSPHATE (IRON), NIACINAMIDE,  PYRIDOXINE HYDROCHLORIDE (VITAMIN B6), RIBOFLAVIN (VITAMIN B2),  THIAMIN MONONITRATE (VITAMIN B1).";
 
             // act
             var result = helper.Remove(rawlist);

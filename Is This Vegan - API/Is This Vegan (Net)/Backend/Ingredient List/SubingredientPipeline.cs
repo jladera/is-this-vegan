@@ -1,5 +1,6 @@
 ﻿using Is_This_Vegan__Net_.Backend.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -28,16 +29,32 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
         {
             try
             {
+                var savedIngredients = ExtractAndSave(input.ToString());
                 var toReplace = Find(input.ToString());
                 var subingredients = ExtractSubingredients(input.ToString());
-                cleanedList = Replace(input.ToString(), toReplace, subingredients);
+                cleanedList = Reinsert(
+                                savedIngredients,
+                                Replace(input.ToString(), toReplace, subingredients)
+                              );
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
             
             return true;
+        }
+
+        /// <summary>
+        /// Extracts igredients with common and scientific names to be reinserted
+        /// after replacing base ingredients with their subingredients
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public MatchCollection ExtractAndSave(string list)
+        {
+            var matches = Regex.Matches(list, @"[A-Za-z\s]*\((\w|\s)*\)*");
+            return matches;
         }
 
         /// <summary>
@@ -86,6 +103,18 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
                 result = result.Replace(toReplace[index].Value, subingredients[index].Value);
             }
 
+            return result;
+        }
+
+        public string Reinsert(MatchCollection savedIngredients, string list)
+        {
+            var savedIngredientsList = new List<string>();
+            foreach (Match match in savedIngredients)
+            {
+                savedIngredientsList.Append(match.Value);
+            }
+            var result = list + string.Join(", ", savedIngredientsList);
+            result = result.TrimEnd('.');
             return result;
         }
     }
