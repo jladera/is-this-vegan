@@ -19,14 +19,16 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
         // The list of ingredient lists. Each KeyValuePair will be in the format:
         //  Key = test photo file name
         //  Value = a list of strings representing the ingredients for the product. 
-        public List<KeyValuePair<string, List<string>>> ingredientLists { get; set; }
+        public List<KeyValuePair<string, List<string>>> validIngredientLists { get; set; }
+        public List<string> invalidIngredientLists { get; set; }
 
         public IngredientListCollection()
         {
-            ingredientLists = new List<KeyValuePair<string, List<string>>>();
+            // valid ingredients
+            validIngredientLists = new List<KeyValuePair<string, List<string>>>();
 
             // belvita_vanilla-cookie.jpg
-            ingredientLists.Add(
+            validIngredientLists.Add(
                 new KeyValuePair<string, List<string>>("belvita_vanilla-cookie.jpg",
                     new List<string>()
                     {
@@ -54,53 +56,8 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
                 )   
             );
 
-            // glam-glow_glow-lace-sheet-mask.jpg
-            ingredientLists.Add(
-                new KeyValuePair<string, List<string>>("glam-glow_glow-lace-sheet-mask.jpg",
-                    new List<string>()
-                    {
-                        "water\\aqua\\eau",
-                        "butylene glycol",
-                        "methylpropanediol",
-                        "1,2-hexanediol",
-                        "sodium hyaluranate",
-                        "camellia sinensis (green tea) leaf extract",
-                        "caffeine",
-                        "coffea arabica (coffee) seed extract",
-                        "glycerin",
-                        "trehalose",
-                        "panthenol",
-                        "arginine",
-                        "dipotassium glycyrrhizate",
-                        "ethylhexylglycerine",
-                        "dimethicone",
-                        "dimethicone/peg-10/15 crosspolymer",
-                        "glycereth-26",
-                        "epigallocatechin gallate",
-                        "tocophersolan",
-                        "xanthan gum",
-                        "decyl clucoside",
-                        "trideceth-6",
-                        "carbomer",
-                        "poloxamer 235",
-                        "poloxamer 338",
-                        "dipropylene glycol",
-                        "propanediol",
-                        "ethylhexyl stearate",
-                        "sodium polyacrylate",
-                        "ammonium acryloyldimethyltaurate/vp coopolymer",
-                        "peg-40 hydrogenated castor oil",
-                        "fragrance",
-                        "parfum",
-                        "hexyl cinnamal",
-                        "disodium edta",
-                        "phenoxyethanol <ILN46462>"
-                    }
-                )
-            );
-
             // jin_ramen.jpg
-            ingredientLists.Add(
+            validIngredientLists.Add(
                 new KeyValuePair<string, List<string>>("jin_ramen.jpg",
                     new List<string>()
                     {
@@ -143,31 +100,8 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
                 )
             );
 
-            // kate-sommerville_uncomplikated-spf-50.jpg
-            ingredientLists.Add(
-                new KeyValuePair<string, List<string>>("kate-sommerville_uncomplikated-spf-50.jpg",
-                    new List<string>()
-                    {
-                        "alocohol denat",
-                        "isobutane",
-                        "propane",
-                        "isododecane",
-                        "ethylhexyl methoxycrylene",
-                        "pvp",
-                        "methyl dihydroabietate",
-                        "hydrolyzed hyaluronic acid",
-                        "rhodiola rosea root extract",
-                        "water/aqua/eau",
-                        "lavandula angustifolia (lavender) oil",
-                        "silica",
-                        "silylate",
-                        "pentylene glycol"
-                    }
-                )
-            );
-
             // lightlife_smart-bacon.jpg
-            ingredientLists.Add(
+            validIngredientLists.Add(
                 new KeyValuePair<string, List<string>>("lightlife_smart-bacon.jpg",
                     new List<string>()
                     {
@@ -193,54 +127,8 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
                 )
             );
 
-            // moroccanoil_blonde-perfecting-purple-shampoo.jpg
-            ingredientLists.Add(
-                new KeyValuePair<string, List<string>>("moroccanoil_blonde-perfecting-purple-shampoo.jpg",
-                    new List<string>()
-                    {
-                        "aqua/water/eau",
-                        "sodium c14-16 olefin sulfonate",
-                        "cocamidopropyl betaine",
-                        "cocamidopropylamine oxide",
-                        "parfum/fragrance",
-                        "guar hydroxypropyltrimonium chloride",
-                        "argania spinosa (argan) kernel oil",
-                        "peg-40 hydrogenated castor oil",
-                        "acrylates copolymer",
-                        "peg-150 distearate",
-                        "glycol stearate",
-                        "hydroxyacetophenone",
-                        "algin",
-                        "glycerin",
-                        "chitosan",
-                        "trideceth-9",
-                        "c12-13 pareth-9",
-                        "c11-15 pareth-7",
-                        "c12-16 pareth-9",
-                        "silica dimethyl silylate",
-                        "isopropyl alcohol",
-                        "trideceth-12",
-                        "citric acid",
-                        "coconut acid",
-                        "cocamidopropyl dimethylamine",
-                        "caprylyl glycol",
-                        "cetrimonium chloride",
-                        "sodium glycolate",
-                        "ci 60730 (ext. violet no. 2)",
-                        "trimethylsiloxyamodimethicone",
-                        "caprylic/capric triglyceride",
-                        "phenoxyethanol",
-                        "chlorphenesin",
-                        "potassium sorbate",
-                        "sodium benzoate",
-                        "alpha-isomethyl ionone",
-                        "linalool. mopps02"
-                    }
-                )
-            );
-
             // omorovicza_thermal-cleansing-balm.png
-            ingredientLists.Add(
+            validIngredientLists.Add(
                 new KeyValuePair<string, List<string>>("omorovicza_thermal-cleansing-balm.png",
                     new List<string>()
                     {
@@ -273,7 +161,7 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
             );
 
             // too-faced_better-than-sex-mascara.jpg
-            ingredientLists.Add(
+            validIngredientLists.Add(
                 new KeyValuePair<string, List<string>>("too-faced_better-than-sex-mascara.jpg",
                     new List<string>()
                     {
@@ -313,7 +201,20 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
                     }
                 )
             );
-        }
 
+
+            // invalid ingredient lists
+            invalidIngredientLists = new List<string>();
+
+            // glam-glow_glow-lace-sheet-mask.jpg
+            invalidIngredientLists.Add("glam-glow_glow-lace-sheet-mask.jpg");
+
+            // kate-sommerville_uncomplikated-spf-50.jpg
+            invalidIngredientLists.Add("kate-sommerville_uncomplikated-spf-50.jpg");
+
+            // moroccanoil_blonde-perfecting-purple-shampoo.jpg
+            invalidIngredientLists.Add("moroccanoil_blonde-perfecting-purple-shampoo.jpg");
+            );
+        }
     }
 }
