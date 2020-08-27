@@ -214,7 +214,6 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
 
             // moroccanoil_blonde-perfecting-purple-shampoo.jpg
             invalidIngredientLists.Add("moroccanoil_blonde-perfecting-purple-shampoo.jpg");
-            );
         }
     }
 }
