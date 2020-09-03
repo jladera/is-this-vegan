@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Is_This_Vegan__Net_.Enums;
+using Is_This_Vegan__Net_.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Is_This_Vegan__Net_.Backend.Interfaces
 {
-    interface IPipeline
+    public interface IPipeline
     {
-        bool Execute<T>(ref T input);
+        PipelineResultModel Execute<T>(ref T input, DataCleanEnum? type);
     }
 }

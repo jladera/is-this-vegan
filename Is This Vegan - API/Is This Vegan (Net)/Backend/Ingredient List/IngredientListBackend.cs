@@ -1,4 +1,5 @@
-﻿using Is_This_Vegan__Net_.Models;
+﻿using Is_This_Vegan__Net_.Enums;
+using Is_This_Vegan__Net_.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -58,8 +59,8 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
                 exception = e;
                 return false;
             }
-            var input = list.ingredientListRaw;
-            var result = helper.Execute<string>(ref input);
+            var input = list;
+            var result = helper.Execute(ref input, DataCleanEnum.ListPrimary);
             return true;
         }
     }

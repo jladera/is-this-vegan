@@ -1,4 +1,6 @@
 ﻿using Is_This_Vegan__Net_.Backend.Interfaces;
+using Is_This_Vegan__Net_.Enums;
+using Is_This_Vegan__Net_.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
     /// <summary>
     /// Replaces ingredients that have sub-ingredients with their sub-ingredients.
     /// </summary>
-    public class SubingredientPipeline : IPipeline
+    public class SecondaryCleanPipeline : IPipeline
     {
         // Cleaned ingredient list. Populated upon Execute method's completion
         public string cleanedList { get; set; }
@@ -23,26 +25,44 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
         /// example output:
         /// [WHEAT FLOUR, NIACIN, REDUCED IRON, THIAMIN MONONITRATE (VITAMIN B1), RIBOFLAVIN (VITAMIN B2), FOLIC ACID]
         /// </summary>
-        /// <param name="input"> Raw ingredient list </param>
+        /// <param name="input"> Ingredient list after being validated by user </param>
+        /// <param name="type"> Type of data cleaning; Is ignored in pipeline </param>
         /// <returns> True if executes without error, otherise false </returns>
-        public bool Execute<T>(ref T input)
+        public PipelineResultModel Execute<T>(ref T input, DataCleanEnum? type)
         {
+            var list = input.ToString();
+            var result = new PipelineResultModel();
             try
             {
-                var savedIngredients = ExtractAndSave(input.ToString());
-                var toReplace = Find(input.ToString());
-                var subingredients = ExtractSubingredients(input.ToString());
+                result = IsValid(list);
+                var savedIngredients = ExtractAndSave(list);
+                var toReplace = Find(list);
+                var subingredients = ExtractSubingredients(list);
                 cleanedList = Reinsert(
                                 savedIngredients,
-                                Replace(input.ToString(), toReplace, subingredients)
+                                Replace(list, toReplace, subingredients)
                               );
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return false;
+                result.isSuccessful = false;
+                result.result = e.ToString();
             }
             
-            return true;
+            return result;
+        }
+
+        /// <summary>
+        /// TODO:
+        /// Determines if the initial ingredient list is valid. And ingredient list
+        /// is considered invalid if the ingredient list contains 0 or 1 characters after
+        /// removing invalid characters.
+        /// </summary>
+        /// <param name="list"> Ingredient List in paragraph form</param>
+        /// <returns> True if valid, false otherwise </returns>
+        public PipelineResultModel IsValid(string list)
+        {
+            return new PipelineResultModel() { isSuccessful = true, result = "Temp Value" };
         }
 
         /// <summary>

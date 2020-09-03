@@ -9,6 +9,8 @@
  */
 
 using Is_This_Vegan__Net_.Backend.Interfaces;
+using Is_This_Vegan__Net_.Enums;
+using Is_This_Vegan__Net_.Models;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -21,12 +23,12 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
     public class IngredientListHelper:IPipeline
     {
         // Pipeline object that cleans ingredients that have subingredients
-        public SubingredientPipeline pipeline;
+        public SecondaryCleanPipeline pipeline;
         public List<string> cleanedList { get; set; }
 
         public IngredientListHelper()
         {
-            pipeline = new SubingredientPipeline();
+            pipeline = new SecondaryCleanPipeline();
             cleanedList = new List<string>();
         }
 
@@ -46,31 +48,38 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
             }
         }
 
+        public PipelineResultModel Execute<T>(ref T input, DataCleanEnum? type)
+        {
+            var dataCleanFacade = new DataCleanFacade(type);
+            var result = dataCleanFacade.Clean(ref input);
+            return result;
+        }
+
         /// <summary>
         /// Executes text cleaning pipeline to remove unnecessary words, punctuation, and invalid characters.
         /// </summary>
         /// <param name="input"> Raw ingredient list text from Tesseract extraction </param>
         /// <returns> True if executes without error, otherwise false</returns>
-        public bool Execute<T>(ref T input)
-        {
-            // remove initial unnecessary text (ex. \n, \t, _, |, etc)
-            var removalResult = Remove(input.ToString());
+        //public bool Execute<T>(ref T input)
+        //{
+        //    // remove initial unnecessary text (ex. \n, \t, _, |, etc)
+        //    var removalResult = Remove(input.ToString());
 
-            // convert to lowecase
-            var lowerResult = removalResult.ToLower();
+        //    // convert to lowecase
+        //    var lowerResult = removalResult.ToLower();
 
-            // replace ingredients that have sub-ingredients with their sub-ingredients
-            var subingredientPipelineResult = pipeline.Execute(ref lowerResult);
+        //    // replace ingredients that have sub-ingredients with their sub-ingredients
+        //    var subingredientPipelineResult = pipeline.Execute(ref lowerResult);
 
-            if (subingredientPipelineResult)
-            {
-                // get each ingredient
-                cleanedList = ToList(pipeline.cleanedList);
-                return true;
-            }
+        //    if (subingredientPipelineResult)
+        //    {
+        //        // get each ingredient
+        //        cleanedList = ToList(pipeline.cleanedList);
+        //        return true;
+        //    }
 
-            return false;
-        }
+        //    return false;
+        //}
 
         /// <summary>
         /// Removes unnecessary characters, newlines, etc. from an ingredient list.
