@@ -19,11 +19,13 @@ namespace Is_This_Vegan__Net_.Models
 
         /// <summary>
         /// If isSuccessful is true:
-        ///     result will be the output of the pipeline
+        ///     result will be the output of the pipeline. If the result needs to be casted
+        ///     (ex. if the result of the pipeling is a list), IT IS UP TO THE APPLICATION
+        ///     PROGRAMMER to cast the value.
         /// If isSuccessful is false:
         ///     result will be an error message explaining 
         ///     why execute did not run successfully
         /// </summary>
-        public string result { get; set; }
+        public Object result { get; set; }
     }
 }
