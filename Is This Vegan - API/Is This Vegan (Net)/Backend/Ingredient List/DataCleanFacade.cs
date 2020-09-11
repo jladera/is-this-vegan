@@ -37,7 +37,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
 
         public PipelineResultModel Clean<T>(ref T input)
         {
-            var result = pipeline.Execute(ref input, null);
+            var result = pipeline.Execute(ref input, null, null);
             return result;
         }
     }

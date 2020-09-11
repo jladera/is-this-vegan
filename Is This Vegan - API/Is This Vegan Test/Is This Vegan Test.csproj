@@ -66,7 +66,9 @@
     <Compile Include="Backend\Ingredient List\IngredientListBackendTest.cs" />
     <Compile Include="Backend\Ingredient List\IngredientListCollection.cs" />
     <Compile Include="Backend\Ingredient List\IngredientListHelperTest.cs" />
+    <Compile Include="Backend\Ingredient List\IngredientListTestingFascade.cs" />
     <Compile Include="Backend\Ingredient List\SubingredientPipelineTest.cs" />
+    <Compile Include="Backend\Ingredient List\UserValidatedListCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

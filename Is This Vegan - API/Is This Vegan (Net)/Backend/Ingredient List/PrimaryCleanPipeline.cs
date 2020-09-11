@@ -24,18 +24,19 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
         /// <param name="input"> Ingredient list extracted from photo using Tesseract </param>
         /// <param name="type"> Type of data cleaning; Is ignored in pipeline </param>
         /// <returns> A PipelineResult object indicating if the method completed successfully and its result </returns>
-        public PipelineResultModel Execute<T>(ref T input, DataCleanEnum? type)
+        public PipelineResultModel Execute<T>(ref T input, DataCleanEnum? type, double? meanConfidence)
         {
             var list = input.ToString();
-            var result = new PipelineResultModel();
+            PipelineResultModel result;
             try
             {
-                result = IsValid(list);
                 list = PrimaryCleanPipeline.Remove(list);
+                result = IsValid(list, meanConfidence);
                 result.result = list.ToLower();
             }
             catch (Exception e)
             {
+                result = new PipelineResultModel();
                 result.isSuccessful = false;
                 result.result = e.ToString();
             }
@@ -48,12 +49,25 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
         /// Determines if the initial ingredient list is valid. And ingredient list
         /// is considered invalid if the ingredient list contains 0 or 1 characters after
         /// removing invalid characters.
+        /// 
+        /// It is worth noting that 
         /// </summary>
         /// <param name="list"> Ingredient List in paragraph form</param>
         /// <returns> True if valid, false otherwise </returns>
-        public PipelineResultModel IsValid(string list)
+        public PipelineResultModel IsValid(string list, double? meanConfidence)
         {
-            return new PipelineResultModel() { isSuccessful = true, result = "Temp Value" };
+            if (meanConfidence <= 70.00) 
+            {
+                return new PipelineResultModel() { isSuccessful = false };
+            }
+            else if (list.Length <= 1)
+            {
+                return new PipelineResultModel() { isSuccessful = false };
+            }
+            else
+            {
+                return new PipelineResultModel() { isSuccessful = true};
+            }
         }
 
         /// <summary>

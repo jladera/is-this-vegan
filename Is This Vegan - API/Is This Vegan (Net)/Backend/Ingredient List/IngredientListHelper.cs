@@ -48,7 +48,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
             }
         }
 
-        public PipelineResultModel Execute<T>(ref T input, DataCleanEnum? type)
+        public PipelineResultModel Execute<T>(ref T input, DataCleanEnum? type, double? meanConfidence)
         {
             var dataCleanFacade = new DataCleanFacade(type);
             var result = dataCleanFacade.Clean(ref input);

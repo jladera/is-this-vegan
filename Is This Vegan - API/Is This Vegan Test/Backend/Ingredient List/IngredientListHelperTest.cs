@@ -1,4 +1,5 @@
 ﻿using Is_This_Vegan__Net_.Backend.Ingredient_List;
+using Is_This_Vegan__Net_.Enums;
 using Is_This_Vegan__Net_.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -37,27 +38,23 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
         }
 
         [TestMethod]
-        public void Execute_Belvita_Vanilla_Cookie_Should_Pass()
+        public void Execute_Should_Pass()
         {
             // arrange
             var expected = new IngredientListCollection();
-            var testPhoto = "belvita_vanilla-cookie.jpg";
-            var expectedList = expected.ingredientLists.Where(list => string.Equals(list.Key, testPhoto)).ToList()[0].Value;
-            var rawlist = GetIngredientList(testPhoto);
 
-            // act
-            var result = helper.Execute(ref rawlist);
-
-            var re = string.Join(", ", helper.cleanedList);
-
-            // assert
-            Assert.IsTrue(result);
-            Assert.AreEqual(expectedList.Count, helper.cleanedList.Count);
-            foreach (var ingredient in expectedList)
+            foreach(var list in expected.pcpExpected)
             {
-                Assert.IsTrue(helper.cleanedList.Contains(ingredient));
-            }
+                var testPhoto = list.Key;
+                var rawlist = GetIngredientList(testPhoto);
 
+                // act
+                var result = helper.Execute(ref rawlist, DataCleanEnum.ListPrimary, 100.00); // assume all extraction confidences are 100%
+
+                // assert
+                Assert.AreEqual(result.isSuccessful, list.Value.isSuccessful);
+                Assert.AreEqual(result.result, list.Value.result);
+            }
         }
 
         [TestMethod]
