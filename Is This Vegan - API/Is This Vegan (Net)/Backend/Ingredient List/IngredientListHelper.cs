@@ -48,38 +48,12 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
             }
         }
 
-        public PipelineResultModel Execute<T>(ref T input, DataCleanEnum? type, double? meanConfidence)
+        public PipelineResultModel Execute<T>(ref T input, DataCleanEnum? type, float? meanConfidence)
         {
             var dataCleanFacade = new DataCleanFacade(type);
             var result = dataCleanFacade.Clean(ref input);
             return result;
         }
-
-        /// <summary>
-        /// Executes text cleaning pipeline to remove unnecessary words, punctuation, and invalid characters.
-        /// </summary>
-        /// <param name="input"> Raw ingredient list text from Tesseract extraction </param>
-        /// <returns> True if executes without error, otherwise false</returns>
-        //public bool Execute<T>(ref T input)
-        //{
-        //    // remove initial unnecessary text (ex. \n, \t, _, |, etc)
-        //    var removalResult = Remove(input.ToString());
-
-        //    // convert to lowecase
-        //    var lowerResult = removalResult.ToLower();
-
-        //    // replace ingredients that have sub-ingredients with their sub-ingredients
-        //    var subingredientPipelineResult = pipeline.Execute(ref lowerResult);
-
-        //    if (subingredientPipelineResult)
-        //    {
-        //        // get each ingredient
-        //        cleanedList = ToList(pipeline.cleanedList);
-        //        return true;
-        //    }
-
-        //    return false;
-        //}
 
         /// <summary>
         /// Removes unnecessary characters, newlines, etc. from an ingredient list.
