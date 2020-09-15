@@ -37,7 +37,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
 
         public bool ExtractFromImageTest(Bitmap image = null)
         {
-            string meanConfidence;
+            float meanConfidence;
             try
             {
                 using (var engine = new TesseractEngine(tessdataPath, "eng", EngineMode.Default))
@@ -48,7 +48,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
                     {
                         using (var page = engine.Process(pix))
                         {
-                            meanConfidence = String.Format("{0:P}", page.GetMeanConfidence()).Replace("%", "");
+                            meanConfidence = page.GetMeanConfidence();
                             var resultText = page.GetText();
                             list.ingredientListRaw = resultText;
                         }
@@ -61,7 +61,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
                 return false;
             }
             var input = list;
-            var result = helper.Execute(ref input, DataCleanEnum.ListPrimary, double.Parse(meanConfidence));
+            var result = helper.Execute(ref input, DataCleanEnum.ListPrimary, meanConfidence);
             return true;
         }
     }
