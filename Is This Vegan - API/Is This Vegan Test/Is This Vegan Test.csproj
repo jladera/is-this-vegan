@@ -66,9 +66,7 @@
     <Compile Include="Backend\Ingredient List\IngredientListBackendTest.cs" />
     <Compile Include="Backend\Ingredient List\IngredientListCollection.cs" />
     <Compile Include="Backend\Ingredient List\IngredientListHelperTest.cs" />
-    <Compile Include="Backend\Ingredient List\IngredientListTestingFascade.cs" />
-    <Compile Include="Backend\Ingredient List\SubingredientPipelineTest.cs" />
-    <Compile Include="Backend\Ingredient List\UserValidatedListCollection.cs" />
+    <Compile Include="Backend\Ingredient List\SecondaryCleanPipelineTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +87,7 @@
     <Content Include="Media\glam-glow_glow-lace-sheet-mask.jpg" />
     <Content Include="Media\jin_ramen.jpg" />
     <Content Include="Media\kate-sommerville_uncomplikated-spf-50.jpg" />
+    <Content Include="Media\kettle_sea-salt-and-vinegar-potato-chips.png" />
     <Content Include="Media\lightlife_smart-bacon.jpg" />
     <Content Include="Media\moroccanoil_blonde-perfecting-purple-shampoo.jpg" />
     <Content Include="Media\omorovicza_thermal-cleansing-balm.png" />
