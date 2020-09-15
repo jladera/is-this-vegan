@@ -10,6 +10,6 @@ namespace Is_This_Vegan__Net_.Backend.Interfaces
 {
     public interface IPipeline
     {
-        PipelineResultModel Execute<T>(ref T input, DataCleanEnum? type, double? meanConfidence);
+        PipelineResultModel Execute<T>(ref T input, DataCleanEnum? type, float? meanConfidence);
     }
 }
