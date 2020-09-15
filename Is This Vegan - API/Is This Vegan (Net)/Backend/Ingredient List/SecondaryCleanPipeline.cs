@@ -1,10 +1,8 @@
-﻿using Is_This_Vegan__Net_.Backend.Interfaces;
+using Is_This_Vegan__Net_.Backend.Interfaces;
 using Is_This_Vegan__Net_.Enums;
 using Is_This_Vegan__Net_.Models;
 using System;
-using System.CodeDom;
 using System.Collections.Generic;
-using System.Drawing.Text;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -95,7 +93,6 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
             return new PipelineResultModel() { isSuccessful = list.Length > 1 };
         }
 
-
         /// <summary>
         /// Finds all ingredients that have sub-ingredients
         /// </summary>
@@ -144,7 +141,6 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
 
             return result;
         }
-
 
         /// <summary>
         /// Finds all ingredients that have both a common and scientific name listed, removes them from the list,

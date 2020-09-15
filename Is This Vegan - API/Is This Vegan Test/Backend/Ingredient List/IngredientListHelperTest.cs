@@ -49,7 +49,7 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
                 var rawlist = GetIngredientList(testPhoto);
 
                 // act
-                var result = helper.Execute(ref rawlist, DataCleanEnum.ListPrimary, 100.00); // assume all extraction confidences are 100%
+                var result = helper.Execute(ref rawlist, DataCleanEnum.ListPrimary, (float?)100.00); // assume all extraction confidences are 100%
 
                 // assert
                 Assert.AreEqual(result.isSuccessful, list.Value.isSuccessful);

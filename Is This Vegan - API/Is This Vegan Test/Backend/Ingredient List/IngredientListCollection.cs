@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Author: Jake Ladera
  * Version: 1.0
  * 
