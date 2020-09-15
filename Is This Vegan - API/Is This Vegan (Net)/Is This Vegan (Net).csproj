@@ -199,10 +199,13 @@
     <Compile Include="Backend\Ingredient List\IngredientListHelper.cs" />
     <Compile Include="Backend\Ingredient List\PrimaryCleanPipeline.cs" />
     <Compile Include="Backend\Ingredient List\SecondaryCleanPipeline.cs" />
+    <Compile Include="Backend\Ingredient\IngredientLocalRepository.cs" />
+    <Compile Include="Backend\Interfaces\IDataAccessRepository.cs" />
     <Compile Include="Backend\Interfaces\IPipeline.cs" />
     <Compile Include="Controllers\IngredientListController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Enums\SecondaryCleanPipelineEnum.cs" />
     <Compile Include="Enums\EnumExtensions.cs" />
     <Compile Include="Enums\DataCleanEnum.cs" />
     <Compile Include="Enums\IngredientClassificationEnum.cs" />
@@ -210,6 +213,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ExtractionModel.cs" />
+    <Compile Include="Models\IngredientModel.cs" />
     <Compile Include="Models\IngredientListModel.cs" />
     <Compile Include="Models\PipelineResultModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -223,7 +227,10 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Media\IngredientDictionary.txt" />
+    <Content Include="Media\NonVeganIngredients.txt" />
     <Content Include="Media\test_ingredient_list_cropped.jpg" />
+    <Content Include="Media\UnclassifiedIngredients.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
