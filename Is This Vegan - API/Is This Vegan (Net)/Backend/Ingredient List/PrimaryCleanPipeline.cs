@@ -24,7 +24,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
         /// <param name="input"> Ingredient list extracted from photo using Tesseract </param>
         /// <param name="type"> Type of data cleaning; Is ignored in pipeline </param>
         /// <returns> A PipelineResult object indicating if the method completed successfully and its result </returns>
-        public PipelineResultModel Execute<T>(ref T input, DataCleanEnum? type, double? meanConfidence)
+        public PipelineResultModel Execute<T>(ref T input, DataCleanEnum? type, float? meanConfidence)
         {
             var list = input.ToString();
             PipelineResultModel result;
@@ -45,15 +45,17 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
         }
 
         /// <summary>
-        /// TODO:
         /// Determines if the initial ingredient list is valid. And ingredient list
         /// is considered invalid if the ingredient list contains 0 or 1 characters after
-        /// removing invalid characters.
-        /// 
-        /// It is worth noting that 
+        /// removing invalid characters, or if the mean confidence is less than or
+        /// equal to 70%.
         /// </summary>
         /// <param name="list"> Ingredient List in paragraph form</param>
-        /// <returns> True if valid, false otherwise </returns>
+        /// <param name="meanConfidence"> The mean confidence of Tesseract's text extraction </param>
+        /// <returns> 
+        ///     A PipelineResultModel object with its isSuccessful property set to true if valid,
+        ///     false otherwise 
+        /// </returns>
         public PipelineResultModel IsValid(string list, double? meanConfidence)
         {
             if (meanConfidence <= 70.00) 
