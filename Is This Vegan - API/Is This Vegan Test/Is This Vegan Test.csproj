@@ -67,6 +67,7 @@
     <Compile Include="Backend\Ingredient List\IngredientListCollection.cs" />
     <Compile Include="Backend\Ingredient List\IngredientListHelperTest.cs" />
     <Compile Include="Backend\Ingredient List\SecondaryCleanPipelineTest.cs" />
+    <Compile Include="Backend\Ingredient\IngredientLocalRepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +77,7 @@
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
+    <Folder Include="Testing Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Is This Vegan %28Net%29\Is This Vegan %28Net%29.csproj">
@@ -88,10 +90,14 @@
     <Content Include="Media\jin_ramen.jpg" />
     <Content Include="Media\kate-sommerville_uncomplikated-spf-50.jpg" />
     <Content Include="Media\kettle_sea-salt-and-vinegar-potato-chips.png" />
+    <Content Include="Media\kroger_classic-trail-mix-with-m&amp;ms-cookie.png" />
+    <Content Include="Media\kroger_kaleidos-original-chocolate-sandwich-cookies.png" />
     <Content Include="Media\lightlife_smart-bacon.jpg" />
     <Content Include="Media\moroccanoil_blonde-perfecting-purple-shampoo.jpg" />
+    <Content Include="Media\nutella-and-go_hazelnut-spread-and-breadsticks.png" />
     <Content Include="Media\omorovicza_thermal-cleansing-balm.png" />
     <Content Include="Media\belvita_vanilla-cookie.jpg" />
+    <Content Include="Media\simple-truth-organic_wavy-cheddar-sour-cream-potato-chips.png" />
     <Content Include="Media\too-faced_better-than-sex-mascara.jpg" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
