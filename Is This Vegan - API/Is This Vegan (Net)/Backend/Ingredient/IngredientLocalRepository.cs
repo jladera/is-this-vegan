@@ -97,7 +97,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient
         /// </returns>
         public bool IsNonVegan(string name)
         {
-            var ingredients = File.ReadAllText(mediaPath + "\\NonVeganIngredients.txt");
+            var ingredients = File.ReadAllText(mediaPath + "NonVeganIngredients.txt");
 
             if (ingredients.Contains(name))
             {
@@ -117,7 +117,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient
         /// </returns>
         public bool Exists(string name)
         {
-            var ingredients = File.ReadAllText(mediaPath + "\\IngredientDictionary.txt");
+            var ingredients = File.ReadAllText(mediaPath + "IngredientDictionary.txt");
 
             if (ingredients.Contains(name))
             {
@@ -137,7 +137,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient
         /// </returns>
         public bool IsUnclassified(string name)
         {
-            var ingredients = File.ReadAllText(mediaPath + "\\UnclassifiedIngredients.txt");
+            var ingredients = File.ReadAllText(mediaPath + "UnclassifiedIngredients.txt");
 
             if (ingredients.Contains(name))
             {
@@ -157,9 +157,9 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient
             try
             {
                 // Waits until file is not in use
-                while (FileIsInUse(mediaPath + "\\UnclassifiedIngredients.txt")) { }
+                while (FileIsInUse(mediaPath + "UnclassifiedIngredients.txt")) { }
 
-                File.AppendAllText(mediaPath + "\\UnclassifiedIngredients.txt", name + "\n");
+                File.AppendAllText(mediaPath + "UnclassifiedIngredients.txt", name + "\n");
                 return true;
             }
             catch

@@ -1,12 +1,12 @@
 ﻿using Is_This_Vegan__Net_.Backend.Ingredient_List;
 using Is_This_Vegan__Net_.Enums;
 using Is_This_Vegan__Net_.Models;
+using Is_This_Vegan_Test.Testing_Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
-using System.Drawing;
 using System.IO;
 using System.Linq;
+using static Is_This_Vegan_Test.Testing_Helpers.IngredientListHelperCollection;
 
 namespace Is_This_Vegan_Test.Backend.Ingredient_List
 {
@@ -41,62 +41,19 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
         public void Execute_Should_Pass()
         {
             // arrange
-            var expected = new IngredientListCollection();
-
-            foreach(var list in expected.pcpExpected)
-            {
-                var testPhoto = list.Key;
-                var rawlist = GetIngredientList(testPhoto);
-
-                // act
-                var result = helper.Execute(ref rawlist, DataCleanEnum.ListPrimary, (float?)100.00); // assume all extraction confidences are 100%
-
-                // assert
-                Assert.AreEqual(result.isSuccessful, list.Value.isSuccessful);
-                Assert.AreEqual(result.result, list.Value.result);
-            }
-        }
-
-        [TestMethod]
-        public void Remove_Belvita_Vanilla_Cookie_Should_Pass()
-        {
-            // arrange
-            var rawlist = GetIngredientList("belvita_vanilla-cookie.jpg");
-            var expected = "wpe erera paresis  INGREDIENTS: WHOLE GRAIN WHEAT FLOUR, ENRICHED FLOUR [WHEAT FLOUR, NIACIN, REDUCED IRON, THIAMIN MONONITRATE (VITAMIN B1), RIBOFLAVIN (VITAMIN B2), FOLIC ACID}, SUGAR, CANOLA OIL, WHOLE GRAIN ROLLED OATS, WHOLE GRAIN RYE FLOUR, BAKING SODA, DISODIUM PYROPHOSPHATE, SALT, SOY LECITHIN, DATEM, NATURAL FLAVOR, FERRIC ORTHOPHOSPHATE (IRON), NIACINAMIDE,  PYRIDOXINE HYDROCHLORIDE (VITAMIN B6), RIBOFLAVIN (VITAMIN B2),  THIAMIN MONONITRATE (VITAMIN B1).";
+            var testingHelper = new Execute();
 
             // act
-            var result = helper.Remove(rawlist);
+            foreach (TestingModel ingredientList in testingHelper.IngredientLists)
+            {
+                var input = ingredientList.Input;
+                var result = helper.Execute(ref input, DataCleanEnum.ListPrimary, (float?)100.00); // assume all extraction confidences are 100%
+                var expected = (PipelineResultModel)ingredientList.Expected;
 
-            // assert
-            Assert.AreEqual(result, expected);
-            
-        }
-
-        /// <summary>
-        /// Performs text extraction through the use of IngredientListBackend
-        /// </summary>
-        /// <param name="filename"> Test image filename in Media folder ex. "belvita_vanilla-cookie.jpg" </param>
-        /// <returns> Extracted text from </returns>
-        public string GetIngredientList(string filename)
-        {
-            // extract text
-            backend.list = new IngredientListModel();
-            backend.ExtractFromImageTest(new Bitmap(mediaFolderPath + filename));
-            var result = backend.list.ingredientListRaw;
-
-            BackendReset();
-
-            return result;
-        }
-
-        /// <summary>
-        /// Resets IngredientListBackend class properties that would be changed as a result of text extraction.
-        /// </summary>
-        public void BackendReset()
-        {
-            backend.list = null;
-            backend.extraction = null;
-            backend.exception = null;
+                // assert
+                Assert.AreEqual(result.isSuccessful, expected.isSuccessful);
+                Assert.AreEqual(result.result, expected.result);
+            }
         }
     }
 }

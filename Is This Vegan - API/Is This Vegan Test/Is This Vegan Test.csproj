@@ -63,12 +63,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Backend\Ingredient List\DataCleanFacadeTest.cs" />
     <Compile Include="Backend\Ingredient List\IngredientListBackendTest.cs" />
     <Compile Include="Backend\Ingredient List\IngredientListCollection.cs" />
+    <Compile Include="Backend\Ingredient List\PrimaryCleanPipelineTest.cs" />
     <Compile Include="Backend\Ingredient List\IngredientListHelperTest.cs" />
     <Compile Include="Backend\Ingredient List\SecondaryCleanPipelineTest.cs" />
     <Compile Include="Backend\Ingredient\IngredientLocalRepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Testing Helpers\SecondaryCleanPipelineCollection.cs" />
+    <Compile Include="Testing Helpers\PrimaryCleanPipelineCollection.cs" />
+    <Compile Include="Testing Helpers\IngredientListHelperCollection.cs" />
+    <Compile Include="Testing Helpers\IngredientListBackendCollection.cs" />
+    <Compile Include="Testing Helpers\TesseractHelper.cs" />
+    <Compile Include="Testing Helpers\TestCollection.cs" />
+    <Compile Include="Models\TestingModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -76,8 +85,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
-    <Folder Include="Testing Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Is This Vegan %28Net%29\Is This Vegan %28Net%29.csproj">

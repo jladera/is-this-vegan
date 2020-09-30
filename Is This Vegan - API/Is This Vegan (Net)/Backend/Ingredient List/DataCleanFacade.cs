@@ -18,9 +18,12 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
     {
         // Data cleaning pipeline
         public IPipeline pipeline { get; set; }
+        public float? meanConfidence { get; set; }
 
-        public DataCleanFacade(DataCleanEnum? type)
+        public DataCleanFacade(DataCleanEnum? type, float? confidence)
         {
+            meanConfidence = confidence;
+
             if (type == DataCleanEnum.ListPrimary)
             {
                 pipeline = new PrimaryCleanPipeline();
@@ -37,7 +40,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
 
         public PipelineResultModel Clean<T>(ref T input)
         {
-            var result = pipeline.Execute(ref input, null, null);
+            var result = pipeline.Execute(ref input, null, meanConfidence);
             return result;
         }
     }
