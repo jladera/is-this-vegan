@@ -1,5 +1,6 @@
 ﻿using Is_This_Vegan__Net_.Backend.Ingredient_List;
 using Is_This_Vegan__Net_.Models;
+using Is_This_Vegan_Test.Testing_Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -65,19 +66,39 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
         // TODO
         // Add more test photos that will have ingredients with subingredients
         [TestMethod]
+        public void ExtractDualNamedIngredients_Should_Pass()
+        {
+            // arrange
+            var collection = new SecondaryCleanPipelineCollection.ExtractDualNamedIngredients();
+            TestingModel testCase = collection.IngredientLists.First(product => product.Filename.Equals("too-faced_better-than-sex-mascara.jpg"));
+
+            // act
+            string result = pipeline.ExtractDualNamedIngredients((string)testCase.Input);
+            var isNotNullOrEmpty = !string.IsNullOrEmpty(result);
+            var isNotNullOrWhiteSpace = !string.IsNullOrWhiteSpace(result);
+
+            // assert
+            Assert.IsTrue(isNotNullOrEmpty && isNotNullOrWhiteSpace);
+            Assert.AreEqual((string)testCase.Expected, result);
+        }
+
+        // TODO
+        // Add more test photos that will have ingredients with subingredients
+        [TestMethod]
         public void FindSubingredients_Should_Pass()
         {
-            // Arrange
-            List<string> uvLists = IngredientListCollection.uvLists.Select(list => list.Value).ToList();
-            var expected = "enriched flour [wheat flour, niacin, reduced iron, thiamin mononitrate (vitamin b1), riboflavin (vitamin b2), folic acid}";
-            var uvList = IngredientListCollection.uvLists.First(product => product.Key.Equals("belvita_vanilla-cookie.jpg")).Value;
+            // arrange
+            var collection = new SecondaryCleanPipelineCollection.ReplaceSubingredients();
+            TestingModel testCase = collection.IngredientLists.First(product => product.Filename.Equals("belvita_vanilla-cookie.jpg"));
 
-            // Act
-            var results = pipeline.FindSubingredients(uvList);
+            // act
+            string result = pipeline.ReplaceSubingredients((string)testCase.Input);
+            var isNotNullOrEmpty = !string.IsNullOrEmpty(result);
+            var isNotNullOrWhiteSpace = !string.IsNullOrWhiteSpace(result);
 
-            // Assert
-            Assert.AreEqual(results.Count, 1);
-            Assert.AreEqual(results[0].ToString(), expected);
+            // assert
+            Assert.IsTrue(isNotNullOrEmpty && isNotNullOrWhiteSpace);
+            Assert.AreEqual((string)testCase.Expected, result);
         }
 
         // TODO
@@ -134,42 +155,6 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
 
             // Assert
             Assert.AreEqual(result, expected);
-        }
-
-        // TODO
-        // Add more test photos that will have ingredients with subingredients
-        [TestMethod]
-        public void ExtractDualNamedIngredients_Should_Pass()
-        {
-            // Arrange
-            string input = pipeline.ReplaceSubingredients(
-                                IngredientListCollection.uvLists
-                                .First(photo => photo.Key.Equals("belvita_vanilla-cookie.jpg"))
-                                .Value
-                           );
-            List<string> expectedDualNamedIngredients = new List<string>()
-                                                        {
-                                                            "thiamin mononitrate (vitamin b1)",
-                                                            "riboflavin (vitamin b2)",
-                                                            "ferric orthophosphate (iron)",
-                                                            "pyridoxine hydrochloride (vitamin b6)",
-                                                            "riboflavin (vitamin b2)",
-                                                            "thiamin mononitrate (vitamin b1)"
-                                                         };
-            string expectedList = "whole grain wheat flour, wheat flour, niacin, reduced iron,,, folic acid, sugar, canola oil, whole grain rolled oats, whole grain rye flour, baking soda, disodium pyrophosphate, salt, soy lecithin, datem, natural flavor,, niacinamide,,,.";
-            // Act
-            var result = pipeline.ExtractDualNamedIngredients(input);
-
-            // Assert
-            Assert.AreEqual(pipeline.DualNamedIngredients.Count, expectedDualNamedIngredients.Count);
-            foreach (Match dualNamedIngredient in pipeline.DualNamedIngredients)
-            {
-                Assert.IsTrue(expectedDualNamedIngredients.Contains(dualNamedIngredient.Value.Trim()));
-            }
-            Assert.AreEqual(result, expectedList);
-
-            // Reset
-            PipelineReset();
         }
 
         // TODO

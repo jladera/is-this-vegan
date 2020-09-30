@@ -38,9 +38,9 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
             {
                 result = IsValid(list);
 
-                list = ReplaceSubingredients(list);
-                list = ExtractDualNamedIngredients(list);
                 list = ExtractIntermediateCommaIngredients(list);
+                list = ExtractDualNamedIngredients(list);
+                list = ReplaceSubingredients(list);
 
                 result.result = RemoveDuplictes(list);
                 result.isSuccessful = true;
@@ -67,11 +67,11 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
         /// </summary>
         /// <param name="list"> Ingredient list received from user </param>
         /// <returns> Ingredient list with all parent ingredients replaced by their subingredients </returns>
-        public string ReplaceSubingredients(string list)
+        public string ReplaceSubingredients(string extractDualNamedIngredientResult)
         {
-            var toReplace = FindSubingredients(list);
-            var subingredients = ExtractSubingredients(list);
-            var result = ReplaceParentIngredient(list, toReplace, subingredients);
+            var toReplace = FindSubingredients(extractDualNamedIngredientResult);
+            var subingredients = ExtractSubingredients(extractDualNamedIngredientResult);
+            var result = ReplaceParentIngredient(extractDualNamedIngredientResult, toReplace, subingredients);
             return result;
         }
 
@@ -100,7 +100,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
         /// <returns> Ingredients that have sub-ingredients </returns>
         public MatchCollection FindSubingredients(string input)
         {
-            var matches = Regex.Matches(input, @"(?<=\s)(\w|\s)*(\[|\{)(\w*|\s|\,|\(|\))*(\]|\})");
+            var matches = Regex.Matches(input, @"(?<=\s)(\w|\s)*(\[|\{|\()(\w*|\s|\,)*(\]|\}|\))");
             return matches;
         }
 
@@ -115,7 +115,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
         /// <returns></returns>
         public MatchCollection ExtractSubingredients(string input)
         {
-            var subingredients = Regex.Matches(input, @"(?<=\[|\{)(\w*|\s|\,|\(|\))*(?=\}|\])");
+            var subingredients = Regex.Matches(input, @"(?<=\[|\{|\()(\w*|\s|\,)*(?=\}|\]|\))");
             return subingredients;
         }
 
@@ -149,10 +149,10 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
         /// </summary>
         /// <param name="replaceSubingredientsResult"> Ingredient list output from ReplaceSubingredients function </param>
         /// <returns> Ingredients list without dual named ingredients </returns>
-        public string ExtractDualNamedIngredients(string replaceSubingredientsResult)
+        public string ExtractDualNamedIngredients(string initialList)
         {
-            DualNamedIngredients = Regex.Matches(replaceSubingredientsResult, @"[A-Za-z\s]*\((\w|\s|,|-)*\)*");
-            var result = Regex.Replace(replaceSubingredientsResult, @"[\w\s]*\((\w|\s|,|-)*\)*", "");
+            DualNamedIngredients = Regex.Matches(initialList, @"(\w|\s)*\(((\w+)|\.|(\s)|(\d,\d-\w+))+\)(?=\,|\.|$)");
+            var result = Regex.Replace(initialList, @"(\w|\s)*\(((\w+)|\.|(\s)|(\d,\d-\w+))+\)(\,|\.|$)", "");
 
             return result;
         }
