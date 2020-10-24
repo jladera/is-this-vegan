@@ -63,32 +63,33 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
             }
         }
 
-        // TODO
-        // Add more test photos that will have ingredients with subingredients
         [TestMethod]
         public void ExtractDualNamedIngredients_Should_Pass()
         {
             // arrange
             var collection = new SecondaryCleanPipelineCollection.ExtractDualNamedIngredients();
-            TestingModel testCase = collection.IngredientLists.First(product => product.Filename.Equals("too-faced_better-than-sex-mascara.jpg"));
 
             // act
-            string result = pipeline.ExtractDualNamedIngredients((string)testCase.Input);
-            var isNotNullOrEmpty = !string.IsNullOrEmpty(result);
-            var isNotNullOrWhiteSpace = !string.IsNullOrWhiteSpace(result);
+            foreach (TestingModel testCase in collection.IngredientLists)
+            {
+                string result = pipeline.ExtractDualNamedIngredients((string)testCase.Input);
+                var isNotNullOrEmpty = !string.IsNullOrEmpty(result);
+                var isNotNullOrWhiteSpace = !string.IsNullOrWhiteSpace(result);
 
-            // assert
-            Assert.IsTrue(isNotNullOrEmpty && isNotNullOrWhiteSpace);
-            Assert.AreEqual((string)testCase.Expected, result);
+                // assert
+                Assert.IsTrue(isNotNullOrEmpty && isNotNullOrWhiteSpace);
+                Assert.AreEqual((string)testCase.Expected, result);
+            }
         }
 
         // TODO
-        // Add more test photos that will have ingredients with subingredients
+        // Replace current Input with current Expected values in collection
+        // Ensure extraction works on all test cases
         [TestMethod]
         public void FindSubingredients_Should_Pass()
         {
             // arrange
-            var collection = new SecondaryCleanPipelineCollection.ReplaceSubingredients();
+            var collection = new SecondaryCleanPipelineCollection.FindIngredients();
             TestingModel testCase = collection.IngredientLists.First(product => product.Filename.Equals("belvita_vanilla-cookie.jpg"));
 
             // act
