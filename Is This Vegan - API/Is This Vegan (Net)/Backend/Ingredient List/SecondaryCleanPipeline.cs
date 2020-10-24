@@ -100,7 +100,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
         /// <returns> Ingredients that have sub-ingredients </returns>
         public MatchCollection FindSubingredients(string input)
         {
-            var matches = Regex.Matches(input, @"(?<=\s)(\w|\s)*(\[|\{|\()(\w*|\s|\,)*(\]|\}|\))");
+            var matches = Regex.Matches(input, @"(?<=\s)(\w|\s)*(\[|\{|\()(\w*|\s|\,)*(\]|\}|\))(?=,)");
             return matches;
         }
 
