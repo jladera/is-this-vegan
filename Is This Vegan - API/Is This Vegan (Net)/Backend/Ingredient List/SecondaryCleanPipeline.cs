@@ -69,10 +69,77 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
         /// <returns> Ingredient list with all parent ingredients replaced by their subingredients </returns>
         public string ReplaceSubingredients(string extractDualNamedIngredientResult)
         {
-            var toReplace = FindSubingredients(extractDualNamedIngredientResult);
-            var subingredients = ExtractSubingredients(extractDualNamedIngredientResult);
-            var result = ReplaceParentIngredient(extractDualNamedIngredientResult, toReplace, subingredients);
-            return result;
+            Stack<string> sections = new Stack<string>();
+            var finalIngredients = "";
+            string section = "";
+            foreach (char c in extractDualNamedIngredientResult)
+            {
+                if (Char.IsLetter(c) || Char.IsWhiteSpace(c))
+                {
+                    section += c;
+                }
+                else if (IsOpenParen(c))
+                {
+                    section += c;
+                    sections.Push((section));
+                    section = "";
+                }
+                else if (IsClosedParen(c))
+                {
+                    section = RemoveParentIngredient(sections.Pop()) + section;
+                }
+                else if (c.Equals(',') &&
+                         sections.Count == 0)
+                {
+                    finalIngredients += section + c;
+                    section = "";
+                }
+                else
+                {
+                    section += c;
+                }
+            }
+            finalIngredients += finalIngredients + section;
+            return finalIngredients;
+        }
+
+        /// <summary>
+        /// Determines if a character is an open parenthesis/bracket
+        /// </summary>
+        /// <param name="c"> Character to check </param>
+        /// <returns> True if c matches, false otherwise </returns>
+        public bool IsOpenParen(char c)
+        {
+            return c.Equals('(') || c.Equals('[') || c.Equals('{');
+        }
+
+        /// <summary>
+        /// Determines if a character is a closed parenthesis/bracket
+        /// </summary>
+        /// <param name="c"> Character to check </param>
+        /// <returns> True if c matches, false otherwise </returns>
+        public bool IsClosedParen(char c)
+        {
+            return c.Equals(')') || c.Equals(']') || c.Equals('}');
+        }
+
+        /// <summary>
+        /// After a closed bracket is reached, remove the parent ingredient that the subingredients
+        /// belong to
+        /// </summary>
+        /// <param name="poppedSection"> Ingredients that preceding subingredients </param>
+        /// <returns> poppedSection without the last ingredient </returns>
+        public string RemoveParentIngredient(string poppedSection)
+        {
+            var index = poppedSection.Length - 2;
+            while (index >= 0 &&
+                  (Char.IsLetterOrDigit(poppedSection[index]) || Char.IsWhiteSpace(poppedSection[index])))
+            {
+                index--;
+            }
+
+            var ret = poppedSection.Substring(0, index + 1);
+            return ret;
         }
 
         /// <summary>
