@@ -14,7 +14,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
     public class SecondaryCleanPipeline : IPipeline
     {
         // Cleaned ingredient list. Populated upon Execute method's completion
-        public MatchCollection DualNamedIngredients { get; set; }
+        public Match[] DualNamedIngredients { get; set; }
         public MatchCollection IntermediateCommaIngredients { get; set; }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
                     section += c;
                 }
             }
-            finalIngredients += finalIngredients + section;
+            finalIngredients += section;
             return finalIngredients;
         }
 
@@ -218,8 +218,13 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
         /// <returns> Ingredients list without dual named ingredients </returns>
         public string ExtractDualNamedIngredients(string initialList)
         {
-            DualNamedIngredients = Regex.Matches(initialList, @"(\w|\s)*\(((\w+)|\.|(\s)|(\d,\d-\w+))+\)(?=\,|\.|$)");
+            MatchCollection endWithDualName = Regex.Matches(initialList, @"(\w|\s)*\(((\w+)|\.|(\s)|(\d,\d-\w+))+\)(?=\,|\.|$)");
+            MatchCollection intermediateDualName = Regex.Matches(initialList, @"(?<=^|,)(\w|\s)+(\(|\[|\{)(\w|\s)+(\)|\]|\})(\w|\s)+");
+            DualNamedIngredients = new Match[endWithDualName.Count + intermediateDualName.Count];
+            endWithDualName.CopyTo(DualNamedIngredients, 0);
+            intermediateDualName.CopyTo(DualNamedIngredients, endWithDualName.Count);
             var result = Regex.Replace(initialList, @"(\w|\s)*\(((\w+)|\.|(\s)|(\d,\d-\w+))+\)(\,|\.|$)", "");
+            result = Regex.Replace(result, @"(?<=^|,)(\w|\s)+(\(|\[|\{)(\w|\s)+(\)|\]|\})(\w|\s)+", "");
 
             return result;
         }
