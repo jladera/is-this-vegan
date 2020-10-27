@@ -222,13 +222,6 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
             DualNamedIngredients = new Match[matches.Count];
             matches.CopyTo(DualNamedIngredients, 0);
             var result = Regex.Replace(initialList, @"(?<=^|,)(\w|\s|\d|\.|-)+(\(|\[|\{)(\w|\s|\d|\.|-)+(\)|\]|\}).*?(,|$)", "");
-            //MatchCollection endWithDualName = Regex.Matches(initialList, @"(\w|\s)*\(((\w+)|\.|(\s)|(\d,\d-\w+))+\)(?=\,|\.|$)");
-            //MatchCollection intermediateDualName = Regex.Matches(initialList, @"(?<=^|,)(\w|\s)+(\(|\[|\{)(\w|\s)+(\)|\]|\})(\w|\s)+");
-            //DualNamedIngredients = new Match[endWithDualName.Count + intermediateDualName.Count];
-            //endWithDualName.CopyTo(DualNamedIngredients, 0);
-            //intermediateDualName.CopyTo(DualNamedIngredients, endWithDualName.Count);
-            //var result = Regex.Replace(initialList, @"(\w|\s)*\(((\w+)|\.|(\s)|(\d,\d-\w+))+\)(\,|\.|$)", "");
-            //result = Regex.Replace(result, @"(?<=^|,)(\w|\s)+(\(|\[|\{)(\w|\s)+(\)|\]|\})(\w|\s)+", "");
 
             return result;
         }
