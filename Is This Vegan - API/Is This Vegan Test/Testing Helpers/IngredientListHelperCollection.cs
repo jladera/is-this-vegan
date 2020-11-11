@@ -61,7 +61,7 @@ namespace Is_This_Vegan_Test.Testing_Helpers
                     Expected = new PipelineResultModel()
                     {
                         isSuccessful = false,
-                        result = ""
+                        result = "Ingredient list must be longer than 1 character and text extraction confidence must be over 70%."
                     }
                 });
 
@@ -121,7 +121,7 @@ namespace Is_This_Vegan_Test.Testing_Helpers
                     Expected = new PipelineResultModel()
                     {
                         isSuccessful = false,
-                        result = ""
+                        result = "Ingredient list must be longer than 1 character and text extraction confidence must be over 70%."
                     }
 
                 });

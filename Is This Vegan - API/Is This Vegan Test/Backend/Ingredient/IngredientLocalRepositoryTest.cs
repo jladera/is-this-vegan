@@ -14,7 +14,6 @@ namespace Is_This_Vegan_Test.Backend.Ingredient
     [TestClass]
     public class IngredientLocalRepositoryTest
     {
-        string generalTestImagePath;
         IngredientLocalRepository IngredientLocalRepository;
 
         public IngredientLocalRepositoryTest()

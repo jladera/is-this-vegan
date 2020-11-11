@@ -2,6 +2,7 @@
 using Is_This_Vegan__Net_.Models;
 using Is_This_Vegan_Test.Testing_Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace Is_This_Vegan_Test.Backend.Ingredient_List
 {
@@ -68,6 +69,7 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void IsValid_Valid_List_And_Invalid_Confidence_Is_Null_Should_Not_Pass()
         {
             // arrange
@@ -78,9 +80,7 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
             PipelineResultModel result = pipeline.IsValid(testList, testConfidence);
 
             // assert
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result is PipelineResultModel);
-            Assert.IsFalse(result.isSuccessful);
+            Assert.IsNull(result);
         }
 
         [TestMethod]
@@ -116,6 +116,7 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void IsValid_Invalid_List_Is_Empty_And_Valid_Confidence_Should_Not_Pass()
         {
             // arrange
@@ -123,15 +124,14 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
             float? testConfidence = 70.1f;
 
             // act
-            PipelineResultModel result = pipeline.IsValid(testList, testConfidence);
+            var result = pipeline.IsValid(testList, testConfidence);
 
             // assert
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result is PipelineResultModel);
-            Assert.IsFalse(result.isSuccessful);
+            Assert.IsNull(result);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void IsValid_Invalid_List_Is_Whitespace_And_Valid_Confidence_Should_Not_Pass()
         {
             // arrange
@@ -142,9 +142,7 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
             PipelineResultModel result = pipeline.IsValid(testList, testConfidence);
 
             // assert
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result is PipelineResultModel);
-            Assert.IsFalse(result.isSuccessful);
+            Assert.IsNull(result);
         }
 
         [TestMethod]

@@ -41,7 +41,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
             {
                 result = new PipelineResultModel();
                 result.isSuccessful = false;
-                result.result = e.ToString();
+                result.result = e.Message;
             }
 
             return result;
@@ -66,7 +66,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
                 meanConfidence is null ||
                 float.IsNaN((float)meanConfidence))
             {
-                return new PipelineResultModel() { isSuccessful = false, result = "" };
+                throw new ArgumentException("Ingredient list must be longer than 1 character and text extraction confidence must be over 70%.");
             }
             else if (meanConfidence <= 70.00) 
             {
