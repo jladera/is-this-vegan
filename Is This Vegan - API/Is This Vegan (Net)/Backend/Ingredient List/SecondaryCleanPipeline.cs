@@ -50,7 +50,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
             {
                 result = new PipelineResultModel();
                 result.isSuccessful = false;
-                result.result = e.ToString();
+                result.result = e.Message;
             }
             
             return result;
@@ -157,7 +157,12 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
         /// </returns>
         public PipelineResultModel IsValid(string list)
         {
-            return new PipelineResultModel() { isSuccessful = list.Length > 1 };
+            if (list.Length <= 1)
+            {
+                throw new ArgumentException("List of ingredients must be longer than 1 character.");
+            }
+
+            return new PipelineResultModel() { isSuccessful = true };
         }
 
         /// <summary>

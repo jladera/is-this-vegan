@@ -2,6 +2,7 @@
 using Is_This_Vegan__Net_.Models;
 using Is_This_Vegan_Test.Testing_Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -141,6 +142,25 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
                 }
                 PipelineReset();
             }
+        }
+
+        [TestMethod]
+        public void Execute_Should_Not_Pass()
+        {
+            // arrange
+            var input = "*";
+            var expected = "List of ingredients must be longer than 1 character.";
+
+            // act
+            PipelineResultModel result = pipeline.Execute(ref input, null, null);
+
+            // assert
+            Assert.IsNotNull(result);
+            Assert.IsFalse(result.isSuccessful);
+            Assert.AreEqual(expected, result.result);
+
+            // reset
+            PipelineReset();
         }
 
         /// <summary>
