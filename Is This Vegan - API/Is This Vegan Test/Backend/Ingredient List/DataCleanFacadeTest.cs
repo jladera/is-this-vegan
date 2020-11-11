@@ -1,4 +1,5 @@
 ﻿using Is_This_Vegan__Net_.Backend.Ingredient_List;
+using Is_This_Vegan__Net_.Enums;
 using Is_This_Vegan__Net_.Models;
 using Is_This_Vegan_Test.Testing_Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -12,12 +13,12 @@ using static Is_This_Vegan_Test.Testing_Helpers.IngredientListBackendCollection;
 namespace Is_This_Vegan_Test.Backend.Ingredient_List
 {
     [TestClass]
-    public class IngredientListBackendTest
+    public class DataCleanFacadeTest
     {
         string mediaPath;
         IngredientListBackend backend;
 
-        public IngredientListBackendTest()
+        public DataCleanFacadeTest()
         {
             // Set tessdata path
             var curentDirectoryPathArray = Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()).Split('\\');
@@ -32,61 +33,66 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
         }
 
         [TestMethod]
-        public void ExtractFromImage_Should_Pass()
+        public void Constructor_Pipeline_Should_Be_Null_Should_Pass()
         {
             // arrange
-            var testImage = Bitmap.FromFile(mediaPath + "belvita_vanilla-cookie.jpg");
-            var byteArray = ImageToByte(testImage);
-            var imageAsString = Convert.ToBase64String(byteArray);
-            var ingredientListModel = new IngredientListModel() { imageAsString = imageAsString};
+            float? meanConfidence = 80.0f;
 
             // act
-            var result = backend.ExtractFromImage(ingredientListModel);
+            var facade = new DataCleanFacade(null, meanConfidence);
 
             // assert
-            Assert.IsTrue(result);
-
-            // reset
-            BackendReset();
+            Assert.IsNotNull(facade);
+            Assert.IsNull(facade.pipeline);
         }
 
         [TestMethod]
-        public void ExtractFromImageTest_Image_Not_Null_Should_Pass()
+        public void Constructor_Pipeline_Should_Be_PrimaryCleanPipeline_Should_Pass()
         {
             // arrange
-            var testHelper = new ExtractFromImageTest();
-            backend.list = new IngredientListModel();
+            float? meanConfidence = 80.0f;
 
             // act 
-            foreach (TestingModel ingredientList in testHelper.IngredientLists)
-            {
-                var bitmap = new Bitmap(mediaPath + ingredientList.Filename);
-                var result = backend.ExtractFromImageTest(bitmap);
+            var facade = new DataCleanFacade(DataCleanEnum.ListPrimary, meanConfidence);
 
-                // assert
-                Assert.IsTrue(result);
-                Assert.AreEqual(backend.list.ingredientListRaw, ingredientList.Expected);
-
-                // reset
-                BackendReset();
-            }
+            // assert
+            Assert.IsNotNull(facade);
+            Assert.IsTrue(facade.pipeline is PrimaryCleanPipeline);
         }
 
         [TestMethod]
-        public void ExtractFromImageTest_Image_Null_Should_Not_Pass()
+        public void Constructor_Pipeline_Should_Be_SecondaryCleanPipeline_Should_Pass()
         {
             // arrange
-            backend.list = new IngredientListModel();
+            float? meanConfidence = 80.0f;
 
             // act
-            var result = backend.ExtractFromImageTest();
+            var facade = new DataCleanFacade(DataCleanEnum.ListSecondary, meanConfidence);
 
             // assert
-            Assert.IsFalse(result);
-            Assert.IsNotNull(backend.exception);
+            Assert.IsNotNull(facade);
+            Assert.IsTrue(facade.pipeline is SecondaryCleanPipeline);
+        }
 
-            // reset
-            BackendReset();
+        [TestMethod]
+        public void Clean_PrimaryCleanPipeline_Should_Pass()
+        {
+            // arrange
+            float? meanConfidence = 80.0f;
+            var facade = new DataCleanFacade(DataCleanEnum.ListPrimary, meanConfidence);
+            var testCases = new IngredientListHelperCollection.Execute();
+
+            // act
+            foreach (var testCase in testCases.IngredientLists)
+            {
+                var expected = (PipelineResultModel) testCase.Expected;
+                PipelineResultModel result = facade.Clean(ref testCase.Input);
+
+                // assert
+                Assert.IsNotNull(result);
+                Assert.AreEqual(result.isSuccessful, expected.isSuccessful);
+                Assert.AreEqual(result.result, expected.result);
+            }
         }
 
         public byte[] ImageToByte(Image img)

@@ -30,9 +30,12 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
             PipelineResultModel result;
             try
             {
-                list = PrimaryCleanPipeline.Remove(list);
+                list = Remove(list);
                 result = IsValid(list, meanConfidence);
-                result.result = list.ToLower();
+                if (result.isSuccessful)
+                {
+                    result.result = list.ToLower();
+                }
             }
             catch (Exception e)
             {
@@ -56,15 +59,22 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
         ///     A PipelineResultModel object with its isSuccessful property set to true if valid,
         ///     false otherwise 
         /// </returns>
-        public PipelineResultModel IsValid(string list, double? meanConfidence)
+        public PipelineResultModel IsValid(string list, float? meanConfidence)
         {
-            if (meanConfidence <= 70.00) 
+            if (string.IsNullOrEmpty(list) ||
+                string.IsNullOrWhiteSpace(list) ||
+                meanConfidence is null ||
+                float.IsNaN((float)meanConfidence))
             {
-                return new PipelineResultModel() { isSuccessful = false };
+                return new PipelineResultModel() { isSuccessful = false, result = "" };
+            }
+            else if (meanConfidence <= 70.00) 
+            {
+                return new PipelineResultModel() { isSuccessful = false, result = "" };
             }
             else if (list.Length <= 1)
             {
-                return new PipelineResultModel() { isSuccessful = false };
+                return new PipelineResultModel() { isSuccessful = false, result = "" };
             }
             else
             {
@@ -77,7 +87,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
         /// </summary>
         /// <param name="rawList"> Raw ingredient list (done after text extraction) </param>
         /// <returns> The ingredient list without invalid characters </returns>
-        public static string Remove(string rawList)
+        public string Remove(string rawList)
         {
             // Key = text to remove
             // Value = replacement text

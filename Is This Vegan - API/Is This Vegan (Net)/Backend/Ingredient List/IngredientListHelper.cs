@@ -50,63 +50,8 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient_List
 
         public PipelineResultModel Execute<T>(ref T input, DataCleanEnum? type, float? meanConfidence)
         {
-            var dataCleanFacade = new DataCleanFacade(type);
+            var dataCleanFacade = new DataCleanFacade(type, meanConfidence);
             var result = dataCleanFacade.Clean(ref input);
-            return result;
-        }
-
-        /// <summary>
-        /// Removes unnecessary characters, newlines, etc. from an ingredient list.
-        /// </summary>
-        /// <param name="rawList"> Raw ingredient list (done after text extraction) </param>
-        /// <returns> The ingredient list without invalid characters </returns>
-        public string Remove(string rawList)
-        {
-            // Key = text to remove
-            // Value = replacement text
-            var toRemoveList = new List<KeyValuePair<string, string>>()
-            {
-                new KeyValuePair<string, string>("\n", " "),
-                new KeyValuePair<string, string>("\t", " "),
-                new KeyValuePair<string, string>("_", ""),
-                new KeyValuePair<string, string>("|", "")
-            };
-
-            foreach (var toRemove in toRemoveList)
-            {
-                rawList = rawList.Replace(toRemove.Key, toRemove.Value);
-            }
-
-            rawList = rawList.Trim();
-
-            return rawList;
-        }
-
-        /// <summary>
-        /// Converts a cleaned list string into a list of ingredients as strings
-        /// </summary>
-        /// <param name="cleanedList"> 
-        ///     Ingredients list after removing invalid characters, breaking compound 
-        ///     ingredients to base ingredients, and converting list to lowercase.
-        /// </param>
-        /// <returns> 
-        ///     A list of ingredients. If there are no ingredients, then returns
-        ///     an empty list.
-        /// </returns>
-        public List<string> ToList(string cleanedList)
-        {
-            var result = new List<string>();
-            var matches = Regex.Matches(cleanedList, @"(?<=,)[^,]+|(?<=:)[^,]+(?=,)");
-
-            foreach (Match match in matches)
-            {
-                var ingredient = match.Value.Trim();
-                if (!result.Contains(ingredient))
-                {
-                    result.Add(match.Value.Trim());
-                }
-            }
-
             return result;
         }
     }

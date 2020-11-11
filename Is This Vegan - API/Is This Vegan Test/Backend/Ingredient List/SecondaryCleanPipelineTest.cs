@@ -1,13 +1,11 @@
 ﻿using Is_This_Vegan__Net_.Backend.Ingredient_List;
 using Is_This_Vegan__Net_.Models;
+using Is_This_Vegan_Test.Testing_Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text.RegularExpressions;
 
 namespace Is_This_Vegan_Test.Backend.Ingredient_List
 {
@@ -62,192 +60,107 @@ namespace Is_This_Vegan_Test.Backend.Ingredient_List
             }
         }
 
-        // TODO
-        // Add more test photos that will have ingredients with subingredients
-        [TestMethod]
-        public void FindSubingredients_Should_Pass()
-        {
-            // Arrange
-            List<string> uvLists = IngredientListCollection.uvLists.Select(list => list.Value).ToList();
-            var expected = "enriched flour [wheat flour, niacin, reduced iron, thiamin mononitrate (vitamin b1), riboflavin (vitamin b2), folic acid}";
-            var uvList = IngredientListCollection.uvLists.First(product => product.Key.Equals("belvita_vanilla-cookie.jpg")).Value;
-
-            // Act
-            var results = pipeline.FindSubingredients(uvList);
-
-            // Assert
-            Assert.AreEqual(results.Count, 1);
-            Assert.AreEqual(results[0].ToString(), expected);
-        }
-
-        // TODO
-        // Add more test photos that will have ingredients with subingredients
-        [TestMethod]
-        public void ExtractSubingredients_Should_Pass()
-        {
-            // Arrange
-            var expected = "wheat flour, niacin, reduced iron, thiamin mononitrate (vitamin b1), riboflavin (vitamin b2), folic acid";
-            var uvList = IngredientListCollection.uvLists.First(product => product.Key.Equals("belvita_vanilla-cookie.jpg")).Value;
-
-            // Act
-            var results = pipeline.ExtractSubingredients(uvList);
-
-            // Assert
-            Assert.AreEqual(results.Count, 1);
-            Assert.AreEqual(results[0].ToString(), expected);
-        }
-
-        // TODO
-        // Add more test photos that will have ingredients with subingredients
-        [TestMethod]
-        public void ReplaceParentIngredient_Should_Pass()
-        {
-            // Arrange
-            string uvList = IngredientListCollection.uvLists.First(product => product.Key.Equals("belvita_vanilla-cookie.jpg")).Value;
-            MatchCollection toReplace = pipeline.FindSubingredients(uvList);
-            MatchCollection subingredients = pipeline.ExtractSubingredients(uvList);
-            string expected = "whole grain wheat flour, wheat flour, niacin, reduced iron, thiamin mononitrate (vitamin b1), riboflavin (vitamin b2), folic acid, sugar, canola oil, whole grain rolled oats, whole grain rye flour, baking soda, disodium pyrophosphate, salt, soy lecithin, datem, natural flavor, ferric orthophosphate (iron), niacinamide,  pyridoxine hydrochloride (vitamin b6), riboflavin (vitamin b2),  thiamin mononitrate (vitamin b1).";
-
-            // Act
-            string result = pipeline.ReplaceParentIngredient(uvList, toReplace, subingredients);
-
-            // Assert
-            Assert.AreEqual(result, expected);
-
-            // These bracket types indicate a subingredient set in ingredient list standardized formatting
-            Assert.IsFalse(result.Contains("["));
-            Assert.IsFalse(result.Contains("]"));
-            Assert.IsFalse(result.Contains("{"));
-            Assert.IsFalse(result.Contains("}"));
-        }
-
-        // TODO
-        // Add more test photos that will have ingredients with subingredients
-        [TestMethod]
-        public void ReplaceSubingredients_Should_Pass()
-        {
-            // Arrange
-            string input = IngredientListCollection.uvLists.First(photo => photo.Key.Equals("belvita_vanilla-cookie.jpg")).Value;
-            string expected = "whole grain wheat flour, wheat flour, niacin, reduced iron, thiamin mononitrate (vitamin b1), riboflavin (vitamin b2), folic acid, sugar, canola oil, whole grain rolled oats, whole grain rye flour, baking soda, disodium pyrophosphate, salt, soy lecithin, datem, natural flavor, ferric orthophosphate (iron), niacinamide,  pyridoxine hydrochloride (vitamin b6), riboflavin (vitamin b2),  thiamin mononitrate (vitamin b1).";
-            // Act
-            var result = pipeline.ReplaceSubingredients(input);
-
-            // Assert
-            Assert.AreEqual(result, expected);
-        }
-
-        // TODO
-        // Add more test photos that will have ingredients with subingredients
         [TestMethod]
         public void ExtractDualNamedIngredients_Should_Pass()
         {
-            // Arrange
-            string input = pipeline.ReplaceSubingredients(
-                                IngredientListCollection.uvLists
-                                .First(photo => photo.Key.Equals("belvita_vanilla-cookie.jpg"))
-                                .Value
-                           );
-            List<string> expectedDualNamedIngredients = new List<string>()
-                                                        {
-                                                            "thiamin mononitrate (vitamin b1)",
-                                                            "riboflavin (vitamin b2)",
-                                                            "ferric orthophosphate (iron)",
-                                                            "pyridoxine hydrochloride (vitamin b6)",
-                                                            "riboflavin (vitamin b2)",
-                                                            "thiamin mononitrate (vitamin b1)"
-                                                         };
-            string expectedList = "whole grain wheat flour, wheat flour, niacin, reduced iron,,, folic acid, sugar, canola oil, whole grain rolled oats, whole grain rye flour, baking soda, disodium pyrophosphate, salt, soy lecithin, datem, natural flavor,, niacinamide,,,.";
-            // Act
-            var result = pipeline.ExtractDualNamedIngredients(input);
+            // arrange
+            var collection = new SecondaryCleanPipelineCollection.ExtractDualNamedIngredients();
 
-            // Assert
-            Assert.AreEqual(pipeline.DualNamedIngredients.Count, expectedDualNamedIngredients.Count);
-            foreach (Match dualNamedIngredient in pipeline.DualNamedIngredients)
+            // act
+            foreach (TestingModel testCase in collection.IngredientLists)
             {
-                Assert.IsTrue(expectedDualNamedIngredients.Contains(dualNamedIngredient.Value.Trim()));
-            }
-            Assert.AreEqual(result, expectedList);
+                string result = pipeline.ExtractDualNamedIngredients((string)testCase.Input);
+                var isNotNullOrEmpty = !string.IsNullOrEmpty(result);
+                var isNotNullOrWhiteSpace = !string.IsNullOrWhiteSpace(result);
 
-            // Reset
-            PipelineReset();
+                // assert
+                Assert.IsTrue(isNotNullOrEmpty && isNotNullOrWhiteSpace);
+                Assert.AreEqual((string)testCase.Expected, result);
+            }
         }
 
-        // TODO
-        // Add more test photos that will have ingredients with intermediate commas
+
+        [TestMethod]
+        public void ReplaceSubingredients_Should_Pass()
+        {
+            // arrange
+            var collection = new SecondaryCleanPipelineCollection.ReplaceSubingredients();
+
+            // act
+            foreach (TestingModel testCase in collection.IngredientLists)
+            {
+                string result = pipeline.ReplaceSubingredients((string)testCase.Input);
+                var isNotNullOrEmpty = !string.IsNullOrEmpty(result);
+                var isNotNullOrWhiteSpace = !string.IsNullOrWhiteSpace(result);
+
+                // assert
+                Assert.IsTrue(isNotNullOrEmpty && isNotNullOrWhiteSpace);
+                Assert.AreEqual((string)testCase.Expected, result);
+            }
+        }
+
         [TestMethod]
         public void ExtractIntermediateCommaIngredients_Should_Pass()
         {
-            // Arrange
-            string input = pipeline.ExtractDualNamedIngredients(
-                                pipeline.ReplaceSubingredients(
-                                    IngredientListCollection.uvLists
-                                    .First(photo => photo.Key.Equals("belvita_vanilla-cookie.jpg"))
-                                    .Value
-                           ));
+            // arrange
+            var collection = new SecondaryCleanPipelineCollection.ExtractIntermediateCommaIngredients();
 
-            List<string> expectedIntermediateCommaIngredients = new List<string>();
-            string expectedList = "whole grain wheat flour, wheat flour, niacin, reduced iron,,, folic acid, sugar, canola oil, whole grain rolled oats, whole grain rye flour, baking soda, disodium pyrophosphate, salt, soy lecithin, datem, natural flavor,, niacinamide,,,.";
-            // Act
-            var result = pipeline.ExtractIntermediateCommaIngredients(input);
+            // act
+            foreach (TestingModel testCase in collection.IngredientLists)
+            {
+                string result = pipeline.ExtractIntermediateCommaIngredients((string)testCase.Input);
+                var isNotNullOrEmpty = !string.IsNullOrEmpty(result);
+                var isNotNullOrWhiteSpace = !string.IsNullOrWhiteSpace(result);
 
-            // Assert
-            Assert.AreEqual(pipeline.IntermediateCommaIngredients.Count, expectedIntermediateCommaIngredients.Count);
-            Assert.AreEqual(result, expectedList);
+                // assert
+                Assert.IsTrue(isNotNullOrEmpty && isNotNullOrWhiteSpace);
+                Assert.AreEqual((string)testCase.Expected, result);
+            }
 
-            // Reset
+            // reset
             PipelineReset();
         }
 
-        // TODO
-        // Add more test photos that will have ingredients with intermediate commas
         [TestMethod]
-        public void RemoveDuplictes_Should_Pass()
+        public void Execute_Should_Pass()
         {
-            // Arrange 
-            // Performs operations in the same order as in SecondaryCleanPipeline Execute function
-            string input = pipeline.ExtractIntermediateCommaIngredients(
-                                pipeline.ExtractDualNamedIngredients(
-                                    pipeline.ReplaceSubingredients(
-                                        IngredientListCollection.uvLists
-                                        .First(photo => photo.Key.Equals("belvita_vanilla-cookie.jpg"))
-                                        .Value
-                                    )
-                                )
-                            );
+            // arrange
+            var collection = new SecondaryCleanPipelineCollection.Execute();
 
-            List<string> expectedIngredientList = new List<string>()
-                                                  {
-                                                    "whole grain wheat flour",
-                                                    "wheat flour",
-                                                    "niacin",
-                                                    "reduced iron",
-                                                    "folic acid",
-                                                    "sugar",
-                                                    "canola oil",
-                                                    "whole grain rolled oats",
-                                                    "whole grain rye flour",
-                                                    "baking soda",
-                                                    "disodium pyrophosphate",
-                                                    "salt",
-                                                    "soy lecithin",
-                                                    "datem",
-                                                    "natural flavor",
-                                                    "niacinamide",
-                                                    "thiamin mononitrate (vitamin b1)",
-                                                    "riboflavin (vitamin b2)",
-                                                    "ferric orthophosphate (iron)",
-                                                    "pyridoxine hydrochloride (vitamin b6)"
-                                                  };
-            
-            // Act
-            var result = pipeline.RemoveDuplictes(input);
-
-            // Assert
-            Assert.AreEqual(result.Count, expectedIngredientList.Count);
-            foreach (var ingredient in result)
+            // act
+            foreach (TestingModel testCase in collection.IngredientLists)
             {
-                Assert.IsTrue(expectedIngredientList.Contains(ingredient));
+                var input = (string)testCase.Input;
+                PipelineResultModel result = pipeline.Execute(ref input, null, null);
+                List<string> expected = (List<string>)((PipelineResultModel)testCase.Expected).result;
+
+                // assert
+                Assert.IsNotNull(result);
+                Assert.AreEqual(expected.Count, ((List<string>)result.result).Count);
+                foreach (int i in Enumerable.Range(0, expected.Count)){
+                    Assert.AreEqual(expected[i], ((List<string>)result.result)[i]);
+                }
+                PipelineReset();
             }
+        }
+
+        [TestMethod]
+        public void Execute_Should_Not_Pass()
+        {
+            // arrange
+            var input = "*";
+            var expected = "List of ingredients must be longer than 1 character.";
+
+            // act
+            PipelineResultModel result = pipeline.Execute(ref input, null, null);
+
+            // assert
+            Assert.IsNotNull(result);
+            Assert.IsFalse(result.isSuccessful);
+            Assert.AreEqual(expected, result.result);
+
+            // reset
+            PipelineReset();
         }
 
         /// <summary>
