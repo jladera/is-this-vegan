@@ -505,7 +505,7 @@ namespace Is_This_Vegan_Test.Testing_Helpers
                 IngredientLists.Add(new TestingModel()
                 {
                     Filename = "glam-glow_glow-lace-sheet-mask.jpg",
-                    Input = "water\\aqua\\eau, butylene glycol, methypropanediol, 1,2-hexanediol, sodium hyaluronate, camellia sinensis (green tea) leaf extract, caffeine, coffea arabica (coffee) seed extract, glycerin, trehalose, panthenol, arginine, dipotassium glycyrrhizate, ethylhexylglycerin, dimethicone, dimethicone/peg-10/15 crosspolymer, glycereth-26, epigallocatechin gallate, tocophersolan, xanthan gum, decyl glucoside, trideceth-6, carbomer poloxamer 235, ploxamer 338, dipropylene glycol, propanediol, ethylhexyl stearate, sodium polyacrylate, ammonium acryloydimethyltaurate/vp copolymer, peg-40 hydrogenated castor oil, fragrance (parfum), hexylcinnamal, disodium edta, phenoxyethanol <iln46462>",
+                    Input = "water\\aqua\\eau, butylene glycol, methypropanediol, 1,2-hexanediol, 1,2-hexanediol, sodium hyaluronate, camellia sinensis (green tea) leaf extract, caffeine, coffea arabica (coffee) seed extract, glycerin, trehalose, panthenol, arginine, dipotassium glycyrrhizate, ethylhexylglycerin, dimethicone, dimethicone/peg-10/15 crosspolymer, glycereth-26, epigallocatechin gallate, tocophersolan, xanthan gum, decyl glucoside, trideceth-6, carbomer poloxamer 235, ploxamer 338, dipropylene glycol, propanediol, ethylhexyl stearate, sodium polyacrylate, ammonium acryloydimethyltaurate/vp copolymer, peg-40 hydrogenated castor oil, fragrance (parfum), hexylcinnamal, disodium edta, phenoxyethanol <iln46462>",
                     Expected = new PipelineResultModel()
                     {
                         isSuccessful = true,
