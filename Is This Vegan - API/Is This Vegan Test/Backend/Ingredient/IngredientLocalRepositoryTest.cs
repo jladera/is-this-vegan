@@ -8,6 +8,7 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Policy;
 
 namespace Is_This_Vegan_Test.Backend.Ingredient
 {
@@ -58,6 +59,16 @@ namespace Is_This_Vegan_Test.Backend.Ingredient
             Assert.IsNotNull(result);
             Assert.AreEqual(result.Classification, expected.Classification);
             Assert.AreEqual(expected.Name, result.Name);
+        }
+
+        public string GetInitialList(string filename)
+        {
+            return File.ReadAllText(IngredientLocalRepository.mediaPath + "UnclassifiedIngredients.txt");
+        }
+
+        public void ResetInitialList(string filename, string content)
+        {
+            File.WriteAllText(IngredientLocalRepository.mediaPath + filename, content);
         }
     }
 }
