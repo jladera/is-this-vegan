@@ -61,12 +61,33 @@ namespace Is_This_Vegan_Test.Backend.Ingredient
             Assert.AreEqual(expected.Name, result.Name);
         }
 
-        public string GetInitialList(string filename)
+        [TestMethod]
+        public void Read_MaybeVegan_Ingredient_Should_Pass()
+        {
+            // arrange
+            var input = "propanediol";
+            IngredientModel expected = new IngredientModel() { Classification = IngredientClassificationEnum.MaybeVegan, Name = "propanediol" };
+            var resetContent = GetList("UnclassifiedIngredients.txt");
+
+            // act
+            var result = IngredientLocalRepository.Read(input);
+
+            // assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(result.Classification, expected.Classification);
+            Assert.AreEqual(expected.Name, result.Name);
+            Assert.IsTrue(GetList("UnclassifiedIngredients.txt").Contains(input));
+
+            // reset
+            ResetList("UnclassifiedIngredients.txt", resetContent);
+        }
+
+        public string GetList(string filename)
         {
             return File.ReadAllText(IngredientLocalRepository.mediaPath + "UnclassifiedIngredients.txt");
         }
 
-        public void ResetInitialList(string filename, string content)
+        public void ResetList(string filename, string content)
         {
             File.WriteAllText(IngredientLocalRepository.mediaPath + filename, content);
         }
