@@ -29,7 +29,7 @@ namespace Is_This_Vegan_Test.Backend.Ingredient
         }
 
         [TestMethod]
-        public void Read_Should_Pass()
+        public void Read_Vegan_Ingredient_Should_Pass()
         {
             // arrange
             var input = "niacin";
@@ -42,6 +42,22 @@ namespace Is_This_Vegan_Test.Backend.Ingredient
             Assert.IsNotNull(result);
             Assert.AreEqual(result.Classification, expected.Classification);
             Assert.AreEqual(result.Name, expected.Name);
+        }
+
+        [TestMethod]
+        public void Read_NonVegan_Ingredient_Should_Pass()
+        {
+            // arrange
+            var input = "carmine";
+            IngredientModel expected = new IngredientModel() { Classification = IngredientClassificationEnum.NotVegan, Name = "carmine" };
+
+            // act
+            var result = IngredientLocalRepository.Read(input);
+
+            // assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(result.Classification, expected.Classification);
+            Assert.AreEqual(expected.Name, result.Name);
         }
     }
 }

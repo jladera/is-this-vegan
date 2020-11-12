@@ -99,7 +99,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient
         {
             var ingredients = File.ReadAllText(mediaPath + "NonVeganIngredients.txt");
 
-            if (ingredients.Contains(name))
+             if (ingredients.Contains(name))
             {
                 return true;
             }
