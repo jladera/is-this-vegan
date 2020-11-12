@@ -20,16 +20,10 @@ namespace Is_This_Vegan_Test.Backend.Ingredient
         {
             // Get path to current directory
             var curentDirectoryPathArray = Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()).Split('\\');
-            
-            // Remove last two directories (bin and this project) and add directories for API project and tessdata
-            var tessdataArray = curentDirectoryPathArray.Take((int)curentDirectoryPathArray.Count() - 2).Append("Is This Vegan (Net)\\tessdata");
-            
-            // Join to form valid string path
-            var tessdataPath = string.Join("\\", tessdataArray);
 
-            // Set general test image path
-            var mediaPathArray = curentDirectoryPathArray.Take((int)curentDirectoryPathArray.Count() - 2).Append("Is This Vegan (Net)\\Media\\");
-            var mediaPath = string.Join("\\", mediaPathArray);
+            // Set Media directory path
+            var temporaryGeneralTestImagePathArray = curentDirectoryPathArray.Take((int)curentDirectoryPathArray.Count() - 2).Append("Is This Vegan (Net)\\Media\\");
+            var mediaPath = string.Join("\\", temporaryGeneralTestImagePathArray);
 
             IngredientLocalRepository = new IngredientLocalRepository(mediaPath);
         }
