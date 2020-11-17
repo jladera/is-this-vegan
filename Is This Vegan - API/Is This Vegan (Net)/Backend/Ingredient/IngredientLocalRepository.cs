@@ -147,27 +147,6 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient
         }
 
         /// <summary>
-        /// Adds a new ingredient to the UnclassifiedIngredients.txt file
-        /// </summary>
-        /// <param name="name"> Ingredient name </param>
-        /// <returns> </returns>
-        public bool AddToUnclassified(string name)
-        {
-            try
-            {
-                // Waits until file is not in use
-                while (FileIsInUse(mediaPath + "UnclassifiedIngredients.txt")) { }
-
-                File.AppendAllText(mediaPath + "UnclassifiedIngredients.txt", name + "\n");
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
         /// Checks if file is currently in use by another process
         /// </summary>
         /// <param name="filename"></param>
