@@ -103,6 +103,17 @@ namespace Is_This_Vegan_Test.Backend.Ingredient
             ResetList("UnclassifiedIngredients.txt", resetContent);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void Update_Should_Not_Pass()
+        {
+            // arrange
+            var input = new IngredientModel();
+
+            // act
+            IngredientLocalRepository.Update(input);
+        }
+
         public string GetList(string filename)
         {
             return File.ReadAllText(IngredientLocalRepository.mediaPath + filename);
