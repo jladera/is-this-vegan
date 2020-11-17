@@ -105,7 +105,7 @@ namespace Is_This_Vegan_Test.Backend.Ingredient
 
         public string GetList(string filename)
         {
-            return File.ReadAllText(IngredientLocalRepository.mediaPath + "UnclassifiedIngredients.txt");
+            return File.ReadAllText(IngredientLocalRepository.mediaPath + filename);
         }
 
         public void ResetList(string filename, string content)
