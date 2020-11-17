@@ -70,7 +70,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient
             }
             else if (IsUnclassified(name))
             {
-                result = new IngredientModel() { Name = name, Classification = IngredientClassificationEnum.NotRecognized };
+                result = new IngredientModel() { Name = name, Classification = IngredientClassificationEnum.Unclassified };
             }
             else if (Exists(name))
             {
