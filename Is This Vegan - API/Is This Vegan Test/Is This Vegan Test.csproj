@@ -71,6 +71,7 @@
     <Compile Include="Backend\Ingredient List\SecondaryCleanPipelineTest.cs" />
     <Compile Include="Backend\Ingredient\IngredientLocalRepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Testing Helpers\IngredientLocalRepositoryCollection.cs" />
     <Compile Include="Testing Helpers\SecondaryCleanPipelineCollection.cs" />
     <Compile Include="Testing Helpers\PrimaryCleanPipelineCollection.cs" />
     <Compile Include="Testing Helpers\IngredientListHelperCollection.cs" />

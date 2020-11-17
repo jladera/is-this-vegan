@@ -33,11 +33,10 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient
         {
             try
             {
-                File.AppendAllText(mediaPath + "\\UnclassifiedIngredients.txt", ingredient.Name);
+                // Waits until file is not in use
+                while (FileIsInUse(mediaPath + "UnclassifiedIngredients.txt")) { }
 
-                // For testing:
-                var ingredients = File.ReadAllText(mediaPath + "\\UnclassifiedIngredients.txt");
-
+                File.AppendAllText(mediaPath + "UnclassifiedIngredients.txt", ingredient.Name + "\n");
                 return true;
             }
             catch
@@ -70,7 +69,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient
             }
             else if (IsUnclassified(name))
             {
-                result = new IngredientModel() { Name = name, Classification = IngredientClassificationEnum.NotRecognized };
+                result = new IngredientModel() { Name = name, Classification = IngredientClassificationEnum.Unclassified };
             }
             else if (Exists(name))
             {
@@ -81,7 +80,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient
                 result = new IngredientModel() { Name = name, Classification = IngredientClassificationEnum.MaybeVegan };
 
                 // Add to new ingredients
-                AddToUnclassified(name);
+                Create(result);
             }
 
             return result;
@@ -99,7 +98,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient
         {
             var ingredients = File.ReadAllText(mediaPath + "NonVeganIngredients.txt");
 
-            if (ingredients.Contains(name))
+             if (ingredients.Contains(name))
             {
                 return true;
             }
@@ -145,27 +144,6 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient
             }
 
             return false;
-        }
-
-        /// <summary>
-        /// Adds a new ingredient to the UnclassifiedIngredients.txt file
-        /// </summary>
-        /// <param name="name"> Ingredient name </param>
-        /// <returns> </returns>
-        public bool AddToUnclassified(string name)
-        {
-            try
-            {
-                // Waits until file is not in use
-                while (FileIsInUse(mediaPath + "UnclassifiedIngredients.txt")) { }
-
-                File.AppendAllText(mediaPath + "UnclassifiedIngredients.txt", name + "\n");
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
         }
 
         /// <summary>
