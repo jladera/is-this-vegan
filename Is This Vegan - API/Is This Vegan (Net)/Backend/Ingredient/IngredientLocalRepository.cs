@@ -33,11 +33,10 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient
         {
             try
             {
-                File.AppendAllText(mediaPath + "\\UnclassifiedIngredients.txt", ingredient.Name);
+                // Waits until file is not in use
+                while (FileIsInUse(mediaPath + "UnclassifiedIngredients.txt")) { }
 
-                // For testing:
-                var ingredients = File.ReadAllText(mediaPath + "\\UnclassifiedIngredients.txt");
-
+                File.AppendAllText(mediaPath + "UnclassifiedIngredients.txt", ingredient.Name + "\n");
                 return true;
             }
             catch
@@ -81,7 +80,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient
                 result = new IngredientModel() { Name = name, Classification = IngredientClassificationEnum.MaybeVegan };
 
                 // Add to new ingredients
-                AddToUnclassified(name);
+                Create(result);
             }
 
             return result;
