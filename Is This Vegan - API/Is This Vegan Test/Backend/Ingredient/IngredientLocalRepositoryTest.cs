@@ -114,6 +114,17 @@ namespace Is_This_Vegan_Test.Backend.Ingredient
             IngredientLocalRepository.Update(input);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void Delete_Should_Not_Pass()
+        {
+            // arrange
+            var input = new IngredientModel();
+
+            // act
+            IngredientLocalRepository.Delete(input);
+        }
+
         public string GetList(string filename)
         {
             return File.ReadAllText(IngredientLocalRepository.mediaPath + filename);
