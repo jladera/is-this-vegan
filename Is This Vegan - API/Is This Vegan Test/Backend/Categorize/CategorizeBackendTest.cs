@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Is_This_Vegan__Net_.Backend.Categorize;
 using Is_This_Vegan__Net_.Backend.Ingredient;
+using Is_This_Vegan__Net_.Backend.Interfaces;
 using Is_This_Vegan__Net_.Enums;
 using Is_This_Vegan__Net_.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace Is_This_Vegan_Test.Backend.Categorize
 {
@@ -241,6 +244,76 @@ namespace Is_This_Vegan_Test.Backend.Categorize
             Assert.IsNotNull(result);
             Assert.AreEqual(expected.IsSuccessful, result.IsSuccessful);
             Assert.AreEqual(expected.ProductCategory, result.ProductCategory);
+        }
+
+        [TestMethod]
+        public void CheckIngredients_Belvita_Vegan_Should_Pass()
+        {
+            // arrange
+            var input = new PipelineResultModel()
+            {
+                isSuccessful = true,
+                meanConfidence = 0,
+                result = new List<string>()
+                    {
+                        "whole grain wheat flour",
+                        "wheat flour",
+                        "niacin",
+                        "reduced iron",
+                        "folic acid",
+                        "sugar",
+                        "canola oil",
+                        "whole grain rolled oats",
+                        "whole grain rye flour",
+                        "baking soda",
+                        "disodium pyrophosphate",
+                        "salt",
+                        "soy lecithin",
+                        "datem",
+                        "natural flavor",
+                        "niacinamide",
+                        "thiamin mononitrate (vitamin b1)",
+                        "riboflavin (vitamin b2)",
+                        "ferric orthophosphate (iron)",
+                        "pyridoxine hydrochloride (vitamin b6)"
+                    }
+            };
+            var expectedCategories = new List<IngredientClassificationEnum>()
+            {
+                IngredientClassificationEnum.Vegan,
+                IngredientClassificationEnum.Vegan,
+                IngredientClassificationEnum.Unclassified,
+                IngredientClassificationEnum.Unclassified,
+                IngredientClassificationEnum.Unclassified,
+                IngredientClassificationEnum.Vegan,
+                IngredientClassificationEnum.Unclassified,
+                IngredientClassificationEnum.Vegan,
+                IngredientClassificationEnum.Vegan,
+                IngredientClassificationEnum.Unclassified,
+                IngredientClassificationEnum.Unclassified,
+                IngredientClassificationEnum.Unclassified,
+                IngredientClassificationEnum.Vegan,
+                IngredientClassificationEnum.Unclassified,
+                IngredientClassificationEnum.Vegan,
+                IngredientClassificationEnum.Unclassified,
+                IngredientClassificationEnum.Unclassified,
+                IngredientClassificationEnum.Unclassified,
+                IngredientClassificationEnum.Unclassified,
+                IngredientClassificationEnum.Unclassified,
+            };
+
+            // act
+            var result = backend.CheckIngredients(input.result, new ProductModel() { IsSuccessful = true });
+
+            // assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.IsSuccessful);
+            Assert.AreEqual(expectedCategories.Count, result.Ingredients.Count);
+            foreach (int i in Enumerable.Range(0, 20))
+            {
+                Assert.AreEqual(expectedCategories[i], result.Ingredients[i].Classification);
+            }
+            Assert.AreEqual(IngredientClassificationEnum.MaybeVegan, result.ProductCategory);
         }
     }
 }

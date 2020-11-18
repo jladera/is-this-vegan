@@ -3,6 +3,8 @@ using Is_This_Vegan__Net_.Backend.Ingredient_List;
 using Is_This_Vegan__Net_.Backend.Interfaces;
 using Is_This_Vegan__Net_.Enums;
 using Is_This_Vegan__Net_.Models;
+using System;
+using System.Collections.Generic;
 
 namespace Is_This_Vegan__Net_.Backend.Categorize
 {
@@ -28,6 +30,32 @@ namespace Is_This_Vegan__Net_.Backend.Categorize
                 // otherwise use local ingredients files
                 DataAccess = new IngredientLocalRepository(mediaPath);
             }
+        }
+
+        public ProductModel CheckIngredients(object pipelineResult, ProductModel result)
+        {
+            var ingredientModelList = new List<IngredientModel>();
+            var ingredients = (List<string>)pipelineResult;
+
+            ingredients.Sort();
+
+            foreach (string ingredient in ingredients)
+            {
+                try
+                {
+                    IngredientModel im = DataAccess.Read(ingredient);
+                    ingredientModelList.Add(im);
+                    result = UpdateCategory(result, im.Classification);
+                }
+                catch (Exception)
+                {
+                    result.IsSuccessful = false;
+                    return result;
+                }
+            }
+
+            result.Ingredients = ingredientModelList;
+            return result;
         }
 
         /// <summary>
