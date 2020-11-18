@@ -97,8 +97,9 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient
         public bool IsNonVegan(string name)
         {
             var ingredients = File.ReadAllText(mediaPath + "NonVeganIngredients.txt");
+            var ingredientList = ingredients.Split('\n');
 
-             if (ingredients.Contains(name))
+            if (ingredientList.Contains(name))
             {
                 return true;
             }
@@ -117,6 +118,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient
         public bool Exists(string name)
         {
             var ingredients = File.ReadAllText(mediaPath + "IngredientDictionary.txt");
+            var ingredientList = ingredients.Split('\n');
 
             if (ingredients.Contains(name))
             {
@@ -137,6 +139,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient
         public bool IsUnclassified(string name)
         {
             var ingredients = File.ReadAllText(mediaPath + "UnclassifiedIngredients.txt");
+            var ingredientList = ingredients.Split('\n');
 
             if (ingredients.Contains(name))
             {
