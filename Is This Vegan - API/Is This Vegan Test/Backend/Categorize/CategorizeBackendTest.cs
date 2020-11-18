@@ -315,5 +315,48 @@ namespace Is_This_Vegan_Test.Backend.Categorize
             }
             Assert.AreEqual(IngredientClassificationEnum.MaybeVegan, result.ProductCategory);
         }
+
+        [TestMethod]
+        public void CategorizeProduct_Belvita_Vegan_Should_Pass()
+        {
+            // arrange
+            var input = "whole grain wheat flour, enriched flour[wheat flour, niacin, reduced iron, thiamin mononitrate(vitamin b1), riboflavin(vitamin b2), folic acid}, sugar, canola oil, whole grain rolled oats, whole grain rye flour, baking soda, disodium pyrophosphate, salt, soy lecithin, datem, natural flavor, ferric orthophosphate(iron), niacinamide,  pyridoxine hydrochloride(vitamin b6), riboflavin(vitamin b2),  thiamin mononitrate(vitamin b1)";
+            var expectedCategories = new List<IngredientClassificationEnum>()
+            {
+                IngredientClassificationEnum.Vegan,
+                IngredientClassificationEnum.Vegan,
+                IngredientClassificationEnum.Unclassified,
+                IngredientClassificationEnum.Unclassified,
+                IngredientClassificationEnum.Unclassified,
+                IngredientClassificationEnum.Vegan,
+                IngredientClassificationEnum.Unclassified,
+                IngredientClassificationEnum.Vegan,
+                IngredientClassificationEnum.Vegan,
+                IngredientClassificationEnum.Unclassified,
+                IngredientClassificationEnum.Unclassified,
+                IngredientClassificationEnum.Unclassified,
+                IngredientClassificationEnum.Vegan,
+                IngredientClassificationEnum.Unclassified,
+                IngredientClassificationEnum.Vegan,
+                IngredientClassificationEnum.Unclassified,
+                IngredientClassificationEnum.Unclassified,
+                IngredientClassificationEnum.Unclassified,
+                IngredientClassificationEnum.Unclassified,
+                IngredientClassificationEnum.Unclassified,
+            };
+
+            // act
+            var result = backend.CategorizeProduct(input);
+
+            // assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.IsSuccessful);
+            Assert.AreEqual(expectedCategories.Count, result.Ingredients.Count);
+            foreach (int i in Enumerable.Range(0, 20))
+            {
+                Assert.AreEqual(expectedCategories[i], result.Ingredients[i].Classification);
+            }
+            Assert.AreEqual(IngredientClassificationEnum.MaybeVegan, result.ProductCategory);
+        }
     }
 }

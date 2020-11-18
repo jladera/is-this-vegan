@@ -32,6 +32,36 @@ namespace Is_This_Vegan__Net_.Backend.Categorize
             }
         }
 
+        /// <summary>
+        /// Driver to categorize a product as Vegan/NotVegan/MaybeVegan based on its ingredients
+        /// </summary>
+        /// <param name="ingredientsList"> Single string of the ingredients in a product </param>
+        /// <returns> A ProductModel object representing the Product and its categorization </returns>
+        public ProductModel CategorizeProduct(string ingredientsList)
+        {
+            var result = new ProductModel() { IsSuccessful = true };
+
+            PipelineResultModel pipelineResult = Pipeline.Execute(ref ingredientsList, Enums.DataCleanEnum.ListSecondary, null);
+            if (!pipelineResult.isSuccessful)
+            {
+                result.IsSuccessful = pipelineResult.isSuccessful;
+                return result;
+            }
+
+            result = CheckIngredients(pipelineResult.result, result);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Driver that checks each ingredient and its category
+        /// </summary>
+        /// <param name="pipelineResult"> The pipeline result object which contains a list of the extracted ingredients </param>
+        /// <param name="result"> The ProductModel object which will represent the product and its category. </param>
+        /// <returns>
+        ///     The ProductModel object which will represent the product and its category. This will ultimately be sent
+        ///     to the end-user 
+        /// </returns>
         public ProductModel CheckIngredients(object pipelineResult, ProductModel result)
         {
             var ingredientModelList = new List<IngredientModel>();
