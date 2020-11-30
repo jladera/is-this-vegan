@@ -11,7 +11,7 @@ namespace Is_This_Vegan__Net_.Controllers
 
         public CategorizeController()
         {
-            mediaPath = System.Web.HttpContext.Current.Request.MapPath("~\\Media");
+            mediaPath = System.Web.HttpContext.Current.Request.MapPath("~\\Media\\");
             backend = new CategorizeBackend(mediaPath);
         }
 

@@ -77,7 +77,7 @@ namespace Is_This_Vegan__Net_.Backend.Categorize
                     ingredientModelList.Add(im);
                     result = UpdateCategory(result, im.Classification);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     result.IsSuccessful = false;
                     return result;
