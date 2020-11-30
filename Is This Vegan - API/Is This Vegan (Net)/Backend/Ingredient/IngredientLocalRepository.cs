@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 using System.Web.Razor.Generator;
 using Is_This_Vegan__Net_.Enums;
 using System.Xml;
+using System.Text.RegularExpressions;
 
 namespace Is_This_Vegan__Net_.Backend.Ingredient
 {
@@ -97,8 +98,11 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient
         public bool IsNonVegan(string name)
         {
             var ingredients = File.ReadAllText(mediaPath + "NonVeganIngredients.txt");
+            ingredients = ingredients.Replace("\r", string.Empty);
 
-             if (ingredients.Contains(name))
+            var ingredientList = ingredients.Split('\n');
+
+            if (ingredientList.Contains(name))
             {
                 return true;
             }
@@ -117,6 +121,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient
         public bool Exists(string name)
         {
             var ingredients = File.ReadAllText(mediaPath + "IngredientDictionary.txt");
+            var ingredientList = ingredients.Split('\n');
 
             if (ingredients.Contains(name))
             {
@@ -137,6 +142,7 @@ namespace Is_This_Vegan__Net_.Backend.Ingredient
         public bool IsUnclassified(string name)
         {
             var ingredients = File.ReadAllText(mediaPath + "UnclassifiedIngredients.txt");
+            var ingredientList = ingredients.Split('\n');
 
             if (ingredients.Contains(name))
             {
