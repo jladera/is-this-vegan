@@ -13,8 +13,8 @@ namespace Is_This_Vegan.Enums
         /// <summary>
         /// Use Scenario: Ingredient does not exist in database
         /// </summary>
-        [Description("Not Recognized")]
-        NotRecognized = 0,
+        [Description("Unclassified")]
+        Unclassified = 0,
 
         /// <summary>
         /// Use Scenario: Ingredient exists in database and is classified as Vegan
