@@ -1,4 +1,6 @@
-﻿using SkiaSharp;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,5 +32,23 @@ namespace Is_This_Vegan.Models
         /// </summary>
         [DisplayName("Ingredients")]
         public List<string> ingredientListClean { get; set; }
+
+        public IngredientListModel() { }
+
+        public IngredientListModel(string json = null)
+        {
+            if (!string.IsNullOrEmpty(json) && !string.IsNullOrWhiteSpace(json))
+            {
+                JObject jObjIngredientListModel = JObject.Parse(json);
+                imageAsString = (string)jObjIngredientListModel["imageAsString"];
+                ingredientListRaw = (string) jObjIngredientListModel["ingredientListRaw"];
+                var cleanedList = ((string)jObjIngredientListModel["ingredientListClean"]);
+                if (!string.IsNullOrWhiteSpace(cleanedList) && !string.IsNullOrEmpty(cleanedList))
+                {
+                    ingredientListClean = new List<string>();
+                    ingredientListClean.AddRange(cleanedList.Split());
+                }
+            }
+        }
     }
 }
