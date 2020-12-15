@@ -14,7 +14,12 @@ namespace Is_This_Vegan.Backend.API
 {
     class TextExtractor
     {
-        public string response { get; private set; }
+        public string ErrorMessage { get; private set; }
+
+        /// <summary>
+        /// The result of text extraction from PostImageAsync
+        /// </summary>
+        public IngredientListModel result;
 
         public bool useTest { get; set; }
 
@@ -25,6 +30,8 @@ namespace Is_This_Vegan.Backend.API
 
         public async System.Threading.Tasks.Task<bool> PostImageAsync(Byte[] image = null)
         {
+            IRestResponse response; // Will hold response from call to web API
+
             // Use test image
             if (image is null)
             {
@@ -33,7 +40,6 @@ namespace Is_This_Vegan.Backend.API
             }
 
             var imageAsString = Convert.ToBase64String(image);
-
             var ingredientListJson = JsonConvert.SerializeObject(new IngredientListModel() { imageAsString = imageAsString });
 
             var client = new RestClient("http://is-this-vegan.azurewebsites.net/api/ingredientlist");
@@ -42,16 +48,19 @@ namespace Is_This_Vegan.Backend.API
             request.AddHeader("Content-Type", "application/json");
             request.AddHeader("Cookie", "ARRAffinity=96267d732e65ca0d29c035444c65e39a9da9a9cd4ec07e02900087916e850fb3");
             request.AddParameter("application/json", ingredientListJson, ParameterType.RequestBody);
-            IRestResponse response = client.Execute(request);
-            Console.WriteLine(response.Content);
+            try
+            {
+                response = client.Execute(request);
+
+            } catch (Exception ex)
+            {
+                ErrorMessage = ex.Message;
+                return false;
+            }
+            result = new IngredientListModel(response.Content);
 
             return true;
 
         }
-    }
-
-    public class Ingredients
-    {
-        public string image { get; set; }
     }
 }
