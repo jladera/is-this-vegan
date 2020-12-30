@@ -13,17 +13,13 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
-            <!-- v1 white_home_text1.png -->
-            <!-- v2 white-home-text.png -->
-            <!-- v3 home_text_green_inner.png -->
-            <!-- v4 home_text_outer_stroke.png choice!! -->
-            <Image Source="{local:ImageResource Is This Vegan.SharedMedia.home_text_outer_stroke.png}"
+            <Image Source="{local:ImageResource Is_This_Vegan.SharedMedia.home_text_outer_stroke.png}"
                    Grid.Row="0" 
                    Grid.Column="0"
                    HorizontalOptions="Start"
                    HeightRequest="30"/>
 
-            <Image Source="{local:ImageResource Is This Vegan.SharedMedia.increased-tracking-home-text.png}"
+            <Image Source="{local:ImageResource Is_This_Vegan.SharedMedia.increased-tracking-home-text.png}"
                    Grid.Row="0" 
                    Grid.Column="0"
                    HorizontalOptions="End"
@@ -79,7 +75,7 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Image x:Name="Logo" 
-                               Source="{local:ImageResource Is This Vegan.SharedMedia.logo.png}"
+                               Source="{local:ImageResource Is_This_Vegan.SharedMedia.logo.png}"
                                Grid.Row="0"
                                Grid.Column="0"
                                Aspect="AspectFit"
@@ -133,17 +129,17 @@
                         <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
                     <ImageButton x:Name="Are_These_Vegan_Text"
-                           Source="{local:ImageResource Is This Vegan.SharedMedia.Are these Vegan text.png}"
+                           Source="{local:ImageResource Is_This_Vegan.SharedMedia.are_these_vegan_title.png}"
                            Clicked="Are_These_Vegan_Text_Clicked"
                            Grid.Row="0"
                            Grid.ColumnSpan="3"
                            Aspect="Fill"
                            HorizontalOptions="Center"
                            BackgroundColor="Transparent"
-                           Margin="0, 0, 0, 0"
+                           Margin="20, 0, 20, 0"
                            Padding="0, 0, 0, 0"/>
 
-                    <Image Source="{local:ImageResource Is This Vegan.SharedMedia.circle.png}"
+                    <Image Source="{local:ImageResource Is_This_Vegan.SharedMedia.circle.png}"
                                  Grid.Row="1"
                                  Grid.Column="0"
                                  Aspect="AspectFit"
@@ -156,7 +152,7 @@
                            HorizontalOptions="Center"
                            VerticalOptions="End" />
 
-                    <Image Source="{local:ImageResource Is This Vegan.SharedMedia.circle.png}" 
+                    <Image Source="{local:ImageResource Is_This_Vegan.SharedMedia.circle.png}" 
                                Grid.Row="1"
                                Grid.Column="1"
                                Aspect="AspectFit"
@@ -169,7 +165,7 @@
                                HorizontalOptions="Center"
                                VerticalOptions="End" />
 
-                    <Image Source="{local:ImageResource Is This Vegan.SharedMedia.circle.png}"
+                    <Image Source="{local:ImageResource Is_This_Vegan.SharedMedia.circle.png}"
                                Grid.Row="1"
                                Grid.Column="2"
                                Aspect="AspectFit"
@@ -223,13 +219,13 @@
                     </Grid.ColumnDefinitions>
 
                     <Image x:Name="VoteCircle" 
-                               Source="{local:ImageResource Is This Vegan.SharedMedia.vote.png}"
+                               Source="{local:ImageResource Is_This_Vegan.SharedMedia.vote.png}"
                                Grid.Row="0"
                                Grid.Column="0"
                                Aspect="AspectFit"
                                HorizontalOptions="Start"/>
                     <Image x:Name="ScanCircle" 
-                               Source="{local:ImageResource Is This Vegan.SharedMedia.scan.png}"
+                               Source="{local:ImageResource Is_This_Vegan.SharedMedia.scan.png}"
                                Grid.Row="1"
                                Grid.Column="1"
                                Aspect="AspectFit"
@@ -251,7 +247,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Image x:Name="buttonGradients" 
-                               Source="{local:ImageResource Is This Vegan.SharedMedia.button-gradients.png}"
+                               Source="{local:ImageResource Is_This_Vegan.SharedMedia.button-gradients.png}"
                                Grid.Row="0"
                                Grid.Column="0"
                                Aspect="AspectFill"
