@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Is This Vegan.Views
+namespace Is_This_Vegan.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 public partial class ConfirmExtraction : ContentPage
